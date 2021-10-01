@@ -6,5 +6,7 @@ public class test {
 		System.out.println("HIHIHIHIHIHIHI~~");
 		System.out.println("�翭");
 		System.out.println("재웅");  
+		System.out.println("ㅇㅅ");
 	}
+	
 }
