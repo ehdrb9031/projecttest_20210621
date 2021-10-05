@@ -8,4 +8,8 @@
 		SELECT ID, NAME, ADDRESS, EMAIL, PHONE, ENABLED, ROLE 
 		FROM JOINUSER WHERE ID=#{id} AND PASSWORD=#{password} AND ENABLED='Y'
 	</select>
+	<insert id="insertUser" parameterType="JoinUserDto">
+		INSERT INTO JOINUSER (ID,NAME,PASSWORD,ADDRESS,PHONE,EMAIL,ROLE,DNAME,ENABLED,REGDATE) VALUES 
+		(#{id},#{name},#{password},#{address},#{phone},#{email},#{role},#{dname},'Y',SYSDATE)
+	</insert>
 </mapper>
