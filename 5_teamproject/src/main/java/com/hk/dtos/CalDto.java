@@ -1,7 +1,5 @@
 package com.hk.dtos;
 
-import java.util.Date;
-
 public class CalDto {
 	
 	private int to_seq;
