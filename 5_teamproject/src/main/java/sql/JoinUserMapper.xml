@@ -2,11 +2,15 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hk.joinuser">
+	<insert id="">	
+	</insert>
 	<select id="getLogin" resultType="JoinUserDto" parameterType="Map" >
 		SELECT ID, NAME, ADDRESS, PHONE, EMAIL, ROLE, DNAME, ENABLED 
 		FROM JOINUSER WHERE ID=#{id} AND PASSWORD=#{password} AND ENABLED='Y'
 	</select>
 	
+
+
 	<insert id="insertUser" parameterType="JoinUserDto">
 		INSERT INTO JOINUSER (ID,NAME,PASSWORD,ADDRESS,PHONE,EMAIL,ROLE,DNAME,ENABLED,REGDATE) VALUES 
 		(#{id},#{name},#{password},#{address},#{phone},#{email},#{role},#{dname},'Y',SYSDATE)
