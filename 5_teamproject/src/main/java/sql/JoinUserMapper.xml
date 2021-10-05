@@ -3,7 +3,7 @@
 
 <mapper namespace="com.hk.joinuser">
 	<select id="getLogin" resultType="JoinUserDto" parameterType="Map" >
-		SELECT ID, NAME, ADDRESS, EMAIL, PHONE, ENABLED, ROLE 
+		SELECT ID, NAME, ADDRESS, PHONE, EMAIL, ROLE, DNAME, ENABLED 
 		FROM JOINUSER WHERE ID=#{id} AND PASSWORD=#{password} AND ENABLED='Y'
 	</select>
 	
