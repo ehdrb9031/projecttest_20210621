@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 	DB 접속정보 파일 설정 -->
+	<properties resource="sql/db.properties"/>
+	
+<!-- 	변수설정 -->
+	<typeAliases>
+		<typeAlias type="com.hk.dtos.CalDto" alias="calDto"/>
+		<typeAlias type="com.hk.dtos.JoinUserDto" alias="joinuserDto"/>
+		<typeAlias type="com.hk.dtos.NoticeDto" alias="noticeDto"/>
+		<typeAlias type="com.hk.dtos.OffDto" alias="offDto"/>
+<!-- 		<typeAlias type="com.hk.dtos.HkDto2" alias="HkDto2"/> -->
+<!-- 		<typeAlias type="com.hk.dtos.HkDto3" alias="HkDto3"/> -->
+<!-- 		<typeAlias type="com.hk.dtos.HkDto4" alias="HkDto4"/> -->
+	</typeAliases>
+	
+<!-- 	DB접속 정보 셋팅 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource="sql/CalMapper.xml"/>
+		<mapper resource="sql/JoinUserMapper.xml"/>
+		<mapper resource="sql/NoticeMapper.xml"/>
+		<mapper resource="sql/OffMapper.xml"/>
+<!-- 		<mapper resource="sql/DataMapper2.xml"/> -->
+<!-- 		<mapper resource="sql/DataMapper3.xml"/> -->
+	</mappers>
+</configuration>
+
+
+
