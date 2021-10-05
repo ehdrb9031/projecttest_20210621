@@ -5,15 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	p{
-		color: red;
-	}
-</style>
+<title></title>
 </head>
 <body>
-<h1>테스트 입니다.</h1>
-<p>하이</p>
+<h1> 쌍따봉!!</h1>
 </body>
-</html> 
+</html>
