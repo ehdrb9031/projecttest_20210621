@@ -17,7 +17,7 @@
 </style>
 </head>
 <%
-	List<JoinUserDto>list=(List<JoinUserDto>)session.getAttribute("list");
+	List<JoinUserDto>list=(List<JoinUserDto>)request.getAttribute("list");
 // 	JoinUserDao dao = new JoinUserDao();
 //  	List<JoinUserDto> list = dao.getUserList();
  	
