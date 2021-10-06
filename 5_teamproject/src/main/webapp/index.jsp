@@ -32,7 +32,7 @@
 			<div class="tr">
 				<div class="td colspan">
 					<input type="submit" value="로그인"/>
-					<input type="button" value="회원가입"/>
+					<input type="button" value="회원가입"/>  
 				</div>
 			</div>
 		</div>
