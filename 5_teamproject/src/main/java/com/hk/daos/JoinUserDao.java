@@ -79,9 +79,15 @@ public class JoinUserDao extends SqlMapConfig {
 	
 		try {
 			sqlSession=getSqlSessionFactory().openSession(true);
-			Map<String, String[]>map=new HashMap<String, String[]>();
-			map.put("seqs", seqs);
-			count=sqlSession.update(namespace+"delList", map);
+			//Map<String, String[]>map=new HashMap<String, String[]>();
+			for(int i=0; i < seqs.length; i++) {
+				String seq=seqs[i];
+				sqlSession.delete(namespace+"delList", seq);
+			}
+			//map.put("seqs", seqs);
+			//count=sqlSession.update(namespace+"delList", map);
+			count=1;
+			sqlSession.commit();
 		} catch (Exception e) {
 			System.out.println("JDBC실패:deleteList()"+getClass());
 			e.printStackTrace();
