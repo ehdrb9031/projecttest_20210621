@@ -26,13 +26,13 @@
 <div class="box">
 <nav class="navbar navbar-light bg-light">
   <form class="container-fluid justify-content-start">
-    <button class="btn btn-outline-success me-2" type="button" onclick="href='JoinUserController.do?command=alluserlist'">간호사전체조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="href='JoinUserController.do?command=userlist'">재직간호사조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="href='JoinUserController.do?command=insertschedule'">근무표작성</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="href='JoinUserController.do?command=workchangelist'">휴가/근무변경조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="href='JoinUserController.do?command=addnotice'">공지사항등록</button>
+    <button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=alluserlist'">간호사전체조회</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=userlist'">재직간호사조회</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=insertschedule'">근무표작성</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=workchangelist'">휴가/근무변경조회</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=addnotice'">공지사항등록</button>
 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=userinfo'">나의정보</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="href='JoinUserController.do?command=logout'">로그아웃</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=logout'">로그아웃</button>
   </form>
 </nav>
 </div>
