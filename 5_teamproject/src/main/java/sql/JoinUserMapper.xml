@@ -17,7 +17,7 @@
 	</select>
 	
 	<delete id="delList" parameterType="Map" >
-		DELETE FROM JOINUSER WHERE SEQ = #{seq};
+		DELETE FROM JOINUSER WHERE SEQ = #{seq} 
 	</delete>
 	
 </mapper>
