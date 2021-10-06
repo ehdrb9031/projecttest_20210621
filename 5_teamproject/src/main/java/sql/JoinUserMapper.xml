@@ -16,7 +16,7 @@
 	SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME ,ROLE ,ENABLED  FROM JOINUSER  
 	</select>
 	
-	<delete id="delList" parameterType="Map" >
+	<delete id="deleteList" parameterType="Map" >
 		DELETE FROM JOINUSER WHERE SEQ = #{seq} 
 	</delete>
 	
