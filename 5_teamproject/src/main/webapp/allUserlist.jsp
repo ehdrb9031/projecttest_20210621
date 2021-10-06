@@ -22,6 +22,27 @@
 			chks[i].checked=bool;
 		}
 	}
+	onload = function(){
+		var chks=document.getElementsByName("chk");
+		
+		for(var i=0; i< chks; i++){
+			chks[i].onclick=function(){
+				var count=0;
+				for(var i =0; i <chks.length; i++){
+					if(chks[i].checked){
+						count++;
+					}
+				}
+				if(count == chks.length){
+					a = document.getElementsByName("all")[0];
+					a.checked = true;
+				}else{
+					b = document.getElementsByName("all")[0];
+					b.checked = false;
+				}
+			}
+		}
+	}
 </script>
 </head>
 <%
