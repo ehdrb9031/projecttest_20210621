@@ -53,6 +53,14 @@ public class JoinUserController extends HttpServlet {
 			List<JoinUserDto> list=dao.getUserList();
 			request.setAttribute("list", list);
 			dispatch("allUserlist.jsp", request, response);
+		}else if(command.equals("muldel")) {
+			String[] chks=request.getParameterValues("chk");
+			boolean isS=dao.deleteList(chks);
+			if(isS) { 
+				response.sendRedirect("JoinUserController.do?command=allUserlist");
+			}else {
+				response.sendRedirect("error.jsp");
+			}
 		}
 	}
 
