@@ -13,11 +13,21 @@
 	</insert>
 	
 	<select id="getUserList" resultType="JoinUserDto" >
-	SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME ,ROLE ,ENABLED  FROM JOINUSER  
+		SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME ,ROLE ,ENABLED  FROM JOINUSER  
 	</select>
+
 	
-	<delete id="delList" parameterType="Map" >
+	<delete id="deleteList" parameterType="String" >
 		DELETE FROM JOINUSER WHERE SEQ = #{seq} 
 	</delete>
-	
+   
+   <update id="updateList" parameterType="String" >
+   		UPDATE JOINUSER SET ENABLED = 'N' WHERE SEQ =#{seq}
+   </update>
+   
+	<select id="getPreUserList" resultType="JoinUserDto">
+   		SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME , ROLE ,ENABLED  FROM JOINUSER 
+  		WHERE ENABLED = 'Y'
+   </select>
+
 </mapper>

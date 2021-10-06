@@ -10,7 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.hk.config.SqlMapConfig;
 import com.hk.dtos.JoinUserDto;
-
+ 
 
 
 
@@ -73,16 +73,30 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return list;
 	}
-	
-	public boolean deleteList(String[] seqs) {
+	public boolean updateList(String[] seqs) {
 		int count=0;
 		SqlSession sqlSession=null;
-	
+		   
 		try {
-			sqlSession=getSqlSessionFactory().openSession(true);
-			Map<String, String[]>map=new HashMap<String, String[]>();
-			map.put("seqs", seqs);
-			count=sqlSession.update(namespace+"delList", map);
+
+		sqlSession=getSqlSessionFactory().openSession(false);
+		
+		for(int i=0; i < seqs.length; i++) {
+			String seq=seqs[i];
+			sqlSession.delete(namespace+"updateList", seq);
+		 }
+
+
+			sqlSession=getSqlSessionFactory().openSession(false);
+			//Map<String, String[]>map=new HashMap<String, String[]>();
+			for(int i=0; i < seqs.length; i++) {
+				String seq=seqs[i];
+				sqlSession.delete(namespace+"deleteList", seq);
+			}
+			//map.put("seqs", seqs);
+			//count=sqlSession.update(namespace+"delList", map);
+			count=1;
+			sqlSession.commit();
 		} catch (Exception e) {
 			System.out.println("JDBC실패:deleteList()"+getClass());
 			e.printStackTrace();
@@ -91,6 +105,7 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return count>0?true:false;
 	}
+
 	     
 	
 	
@@ -113,5 +128,25 @@ public class JoinUserDao extends SqlMapConfig {
 		return dto;
 	}
 	
-	
+	  
+
+	   
+ 
+	//재직중인 유저목록 조회
+    public List<JoinUserDto> getPreUserList() {
+       List<JoinUserDto> list=new ArrayList<JoinUserDto>();
+       SqlSession sqlSession=null;
+       
+       try {
+          SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+          sqlSession=sqlSessionFactory.openSession(true);
+          list=sqlSession.selectList(namespace+"getPreUserList");
+       } catch (Exception e) {
+          System.out.println("JDBC실패:getPreUserList():"+getClass());
+       }finally {
+          sqlSession.close();
+       }
+       return list;
+    }
 }
+  
