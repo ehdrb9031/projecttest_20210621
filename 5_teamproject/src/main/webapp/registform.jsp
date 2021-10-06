@@ -21,31 +21,52 @@
 			</div> 
 			<br/>
 			<div class="col-md-6 mb-3"> 
-				<label for="nickname">비밀번호</label> 
-				<input type="text" class="form-control" name="pw" placeholder="" required> 
-			</div> 
-			<br/>
-			<div class="col-md-6 mb-3"> 
 				<label for="name">이름</label> 
 				<input type="text" class="form-control" name="name" placeholder=""required> 
 			</div> 
 			<br/>
+			<div class="col-md-6 mb-3"> 
+				<label for="nickname">비밀번호</label> 
+				<input type="text" class="form-control" name="pw" placeholder="" required> 
+			</div> 
+			<br/>
 		</div> 
+		<div class="mb-3"> 
+			<label for="address">주소</label> 
+			<input type="text" class="form-control" name="address" placeholder="서울특별시 강남구" required> 
+		</div> 
+		<br/>
 		<div class="mb-3"> 
 			<label for="email">이메일</label> 
 			<input type="email" class="form-control" name="email" placeholder="you@example.com" required> 
 		</div> 
 		<br/>
 		<div class="mb-3"> 
-			<label for="address">주소</label> 
-			<input type="text" class="form-control" name="address" placeholder="서울특별시 강남구" required> 
+			<label for="email">핸드폰</label> 
+			<input type="email" class="form-control" name="phone" required> 
 		</div> 
 		<br/>
 		<div class="row"> 
 			<div class="col-md-8 mb-3"> 
+				<label for="root">직급</label> 
+				<select class="custom-select d-block w-100" name="role"> 
+					<option value=""></option> 
+					<option>간호부장</option> 
+					<option>수간호사</option> 
+					<option>책임간호사</option> 
+					<option>평간호사</option> 
+				</select> 
+			</div> 
+			<br/>	
+			<div class="col-md-8 mb-3"> 
 				<label for="root">부서</label> 
 				<select class="custom-select d-block w-100" name="dname"> 
 					<option value=""></option> 
+					<option>소아과</option> 
+					<option>신경과</option> 
+					<option>성형회과</option> 
+					<option>이비인후과</option> 
+					<option>정형외과</option> 
 					<option>통합진료과</option> 
 					<option>비뇨기과</option> 
 				</select> 
