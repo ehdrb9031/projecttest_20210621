@@ -57,7 +57,7 @@ public class JoinUserController extends HttpServlet {
 			String[] chks=request.getParameterValues("chk");
 			boolean isS=dao.deleteList(chks);
 			if(isS) { 
-				response.sendRedirect("JoinUserController.do?command=allUserlist");
+				response.sendRedirect("JoinUserController.do?command=alluserlist");
 			}else {
 				response.sendRedirect("error.jsp");
 			}
