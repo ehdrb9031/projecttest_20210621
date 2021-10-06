@@ -14,8 +14,8 @@
 		(#{id},#{name},#{password},#{address},#{phone},#{email},'USER',#{dname},'Y',SYSDATE)
 	</insert>
 	
-	<select id="getlist" resultType="JoinUserDto" >
-	SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME ,"ROLE" ,ENABLED  FROM JOINUSER  
+	<select id="getUserList" resultType="JoinUserDto" >
+	SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME ,ROLE ,ENABLED  FROM JOINUSER  
 	</select>
 	
 </mapper>
