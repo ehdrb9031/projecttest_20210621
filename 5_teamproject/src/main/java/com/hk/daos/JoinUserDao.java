@@ -91,6 +91,7 @@ public class JoinUserDao extends SqlMapConfig {
 		return count>0?true:false;
 	}
 	
+
 	//재직중인 유저목록 조회
     public List<JoinUserDto> getPreUserList() {
        List<JoinUserDto> list=new ArrayList<JoinUserDto>();
