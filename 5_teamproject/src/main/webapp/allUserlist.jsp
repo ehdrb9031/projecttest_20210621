@@ -22,25 +22,19 @@
 			chks[i].checked=bool;
 		}
 	}
-	onload = function(){
+	function isChecked(){
+		var count=0;
 		var chks=document.getElementsByName("chk");
-		
-		for(var i=0; i< chks; i++){
-			chks[i].onclick=function(){
-				var count=0;
-				for(var i =0; i <chks.length; i++){
-					if(chks[i].checked){
-						count++;
-					}
-				}
-				if(count == chks.length){
-					a = document.getElementsByName("all")[0];
-					a.checked = true;
-				}else{
-					b = document.getElementsByName("all")[0];
-					b.checked = false;
-				}
-			}
+		for(var i =0; i < chks.length; i++){
+		   if(chks[i].checked){
+		      count++;
+		   }
+		}
+		if(count == 0){
+		   alert("최소 하나 선택하세요");
+		   return false;
+		}else{
+		   return true;
 		}
 	}
 </script>
@@ -68,6 +62,8 @@
 <div id="tablebox">
 <h1>관리자 페이지</h1>
 <h2>간호사 전체조회</h2>
+<form action="JoinUserController.do" method="post" onsubmit="return isChecked()">
+<input type="hidden" name="command" value="muldel" >
 <table class="table table-hover">
    <tr>
       <th><input type="checkbox" name = "all" onclick="allSel(this.checked)"/></th>
@@ -98,9 +94,12 @@
 	<%
 		}
 	%>
-			
-			
-   
+	<tr>
+      <td colspan="9">
+         <input class="btn btn-primary" type="submit" value="삭제"/>
+      </td>
+   </tr>
 </table>
+</form>
 </div>
 </html> 
