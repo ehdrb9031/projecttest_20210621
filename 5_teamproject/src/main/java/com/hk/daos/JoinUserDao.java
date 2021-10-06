@@ -16,7 +16,7 @@ import com.hk.dtos.JoinUserDto;
 public class JoinUserDao extends SqlMapConfig {
 	private String namespace="com.hk.joinuser.";
 	
-//로그인
+	//로그인
 	public JoinUserDto getLogin(String id, String password) {
 		JoinUserDto dto=null;
 		SqlSession sqlSession=null;
@@ -36,8 +36,8 @@ public class JoinUserDao extends SqlMapConfig {
 	}
 
 	
-// 회원가입 
-public boolean insertUser(JoinUserDto dto) {
+	// 회원가입 
+	public boolean insertUser(JoinUserDto dto) {
 		
 		int count=0;
 		SqlSession sqlSession=null;
@@ -56,20 +56,20 @@ public boolean insertUser(JoinUserDto dto) {
 	}
 
 
-//유저목록 조회
-public List<JoinUserDto> getUserList() {
-	List<JoinUserDto> list=new ArrayList<JoinUserDto>();
-	SqlSession sqlSession=null;
-	
-	try {
-		SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
-		sqlSession=sqlSessionFactory.openSession(true);
-		list=sqlSession.selectList(namespace+"getUserList");
-	} catch (Exception e) {
-		System.out.println("JDBC실패:getUserList():"+getClass());
-	}finally {
-		sqlSession.close();
-	}
-	return list;
+	//유저목록 조회
+	public List<JoinUserDto> getUserList() {
+		List<JoinUserDto> list=new ArrayList<JoinUserDto>();
+		SqlSession sqlSession=null;
+		
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			list=sqlSession.selectList(namespace+"getUserList");
+		} catch (Exception e) {
+			System.out.println("JDBC실패:getUserList():"+getClass());
+		}finally {
+			sqlSession.close();
+		}
+		return list;
 	}
 }

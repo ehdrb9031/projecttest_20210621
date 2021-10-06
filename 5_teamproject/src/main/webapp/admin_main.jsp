@@ -17,60 +17,27 @@
 </style>
 </head>
 <%
-	JoinUserDao dao = new JoinUserDao();
- 	List<JoinUserDto> list = dao.getUserList();
- %>
+	JoinUserDto ldto=(JoinUserDto)session.getAttribute("ldto"); 
+	if(ldto==null){
+		pageContext.forward("index.jsp");
+	}
+%>
 <body>
+<h1>관리자 페이지</h1>
+<div>
+	<span><%=ldto.getId() %></span>님 반갑습니다.
+</div> 
 <div class="box">
 <nav class="navbar navbar-light bg-light">
   <form class="container-fluid justify-content-start">
-    <button class="btn btn-outline-success me-2" type="button" onclick="">간호사전체조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="">재직간호사조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="">근무표작성</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="">휴가/근무변경조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="">공지사항등록</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="">로그아웃</button>
+    <button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=alluserlist&id=<%=ldto.getId()%>'">간호사전체조회</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=userlist&id=<%=ldto.getId()%>''">재직간호사조회</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=insertschedule'">근무표작성</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=workchangelist'">휴가/근무변경조회</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=addnotice'">공지사항등록</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=userinfo'">나의정보</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=logout'">로그아웃</button>
   </form>
 </nav>
-</div>
-<div id="tablebox">
-<h1>관리자 페이지</h1>
-<h2>간호사 전체조회</h2>
-<table class="table table-hover">
-   <tr>
-      <th><input type="checkbox" name = "all" onclick="allSel(this.checked)"/></th>
-      <th>번호</th>
-      <th>이름</th>
-      <th>전화번호</th>
-      <th>EMAIL</th>
-      <th>주소</th>
-      <th>부서</th>
-      <th>직급</th>
-      <th>재직</th>
-   </tr>
-   <%
-		for(int i=0;i<list.size();i++){
-			JoinUserDto dto=list.get(i);//list[dto,dto,dto...]--> 순차적으로 하나씩 꺼낸다(dto)
-	%>  
-	
-	<tr>
-				<td><input type="checkbox" name="chk" value="<%=dto.getSeq() %>" /></td>
-				<td><%=dto.getSeq()%></td>
-				<td><%=dto.getName()%></td>
-				<td><%=dto.getPhone()%></td>
-			 	<td><%=dto.getEmail()%></td>
-				<td><%=dto.getAddress()%></td>
-				<td><%=dto.getDname()%></td>
-				<td><%=dto.getRole()%></td>
-				<td><%=dto.getEnabled()%></td>  
-				
-			</tr>
-			<%
-		}
-	%>
-			
-			
-   
-</table>
 </div>
 </html> 

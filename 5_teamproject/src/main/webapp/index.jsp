@@ -13,7 +13,7 @@
 </head>
 <body>
 <div id="container">
-	<h1 style="text-align: center;">로그인</h1>
+	<h1 style="text-align: center;">로그인</h1> 
 	<form action="JoinUserController.do" method="post">
 		<input type="hidden" name="command" value="login"/>
 		<div class="form-group"> 
