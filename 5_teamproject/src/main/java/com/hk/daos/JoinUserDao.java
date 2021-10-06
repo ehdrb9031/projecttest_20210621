@@ -10,7 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.hk.config.SqlMapConfig;
 import com.hk.dtos.JoinUserDto;
-
+ 
 
 
 public class JoinUserDao extends SqlMapConfig {
@@ -77,12 +77,23 @@ public class JoinUserDao extends SqlMapConfig {
 		SqlSession sqlSession=null;
 		   
 		try {
+
 		sqlSession=getSqlSessionFactory().openSession(false);
 		
 		for(int i=0; i < seqs.length; i++) {
 			String seq=seqs[i];
 			sqlSession.delete(namespace+"updateList", seq);
 		 }
+
+
+			sqlSession=getSqlSessionFactory().openSession(false);
+			//Map<String, String[]>map=new HashMap<String, String[]>();
+			for(int i=0; i < seqs.length; i++) {
+				String seq=seqs[i];
+				sqlSession.delete(namespace+"deleteList", seq);
+			}
+			//map.put("seqs", seqs);
+			//count=sqlSession.update(namespace+"delList", map);
 			count=1;
 			sqlSession.commit();
 		} catch (Exception e) {
