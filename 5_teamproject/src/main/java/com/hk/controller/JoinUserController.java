@@ -61,6 +61,10 @@ public class JoinUserController extends HttpServlet {
 			}else {
 				response.sendRedirect("error.jsp");
 			}
+		}else if(command.equals("userlist")) {
+			List<JoinUserDto> list=dao.getPreUserList();
+			request.setAttribute("list", list);
+			dispatch("userlist.jsp", request, response);
 		}
 	}
 
