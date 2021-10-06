@@ -72,6 +72,8 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return list;
 	}
+	
+	//삭제
 	public boolean deleteList(String[] seqs) {
 		int count=0;
 		SqlSession sqlSession=null;
@@ -79,13 +81,11 @@ public class JoinUserDao extends SqlMapConfig {
 		try {
 
 			sqlSession=getSqlSessionFactory().openSession(false);
-			//Map<String, String[]>map=new HashMap<String, String[]>();
+
 			for(int i=0; i < seqs.length; i++) {
 				String seq=seqs[i];
 				sqlSession.delete(namespace+"deleteList", seq);
 			}
-			//map.put("seqs", seqs);
-			//count=sqlSession.update(namespace+"delList", map);
 			count=1;
 			sqlSession.commit();
 		} catch (Exception e) {

@@ -18,11 +18,6 @@
 
 	
 	<delete id="deleteList" parameterType="String" >
-		DELETE FROM JOINUSER WHERE SEQ = #{seq} 
-	</delete>
-
-	
-	<delete id="deleteList" parameterType="String" >
       DELETE FROM JOINUSER WHERE SEQ = #{seq} 
    </delete>
 

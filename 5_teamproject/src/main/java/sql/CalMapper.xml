@@ -3,6 +3,9 @@
 
 <mapper namespace="com.hk.cal">
 	<select id="getCalboardList" parameterType="Map" resultType="calDto">
-	SELECT 
+	SELECT CSEQ, ID, WDATE
+	FROM TOTALCAL
+	WHERE ID=#{id} AND SUBSTR(WDATE,1,8) = #{ymd}
+	ORDER BY WDATE
 	</select>
 </mapper>
