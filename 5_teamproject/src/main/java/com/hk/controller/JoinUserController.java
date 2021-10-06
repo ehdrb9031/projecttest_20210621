@@ -39,6 +39,8 @@ public class JoinUserController extends HttpServlet {
 					response.sendRedirect("user_main.jsp");
 				}
 			}
+		}else if(command.equals("registform")) {
+			response.sendRedirect("registform.jsp");
 		}
 	}
 
