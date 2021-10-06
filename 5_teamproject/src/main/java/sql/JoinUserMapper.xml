@@ -15,10 +15,17 @@
 	<select id="getUserList" resultType="JoinUserDto" >
 	SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME ,ROLE ,ENABLED  FROM JOINUSER  
 	</select>
+
 	
 	<delete id="deleteList" parameterType="String" >
 		DELETE FROM JOINUSER WHERE SEQ = #{seq} 
 	</delete>
+
+	
+	<delete id="deleteList" parameterType="String" >
+      DELETE FROM JOINUSER WHERE SEQ = #{seq} 
+   </delete>
+
 	<select id="getPreUserList" resultType="JoinUserDto">
    SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME , ROLE ,ENABLED  FROM JOINUSER 
    WHERE ENABLED = 'Y'
