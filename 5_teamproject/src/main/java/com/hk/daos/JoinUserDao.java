@@ -1,9 +1,12 @@
 package com.hk.daos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.hk.config.SqlMapConfig;
 import com.hk.dtos.JoinUserDto;
@@ -13,7 +16,7 @@ import com.hk.dtos.JoinUserDto;
 public class JoinUserDao extends SqlMapConfig {
 	private String namespace="com.hk.joinuser.";
 	
-	//로그인
+//로그인
 	public JoinUserDto getLogin(String id, String password) {
 		JoinUserDto dto=null;
 		SqlSession sqlSession=null;
@@ -33,7 +36,7 @@ public class JoinUserDao extends SqlMapConfig {
 	}
 
 	
-	// 회원가입 
+// 회원가입 
 public boolean insertUser(JoinUserDto dto) {
 		
 		int count=0;
@@ -50,5 +53,23 @@ public boolean insertUser(JoinUserDto dto) {
 			sqlSession.close();
 		}
 		return count>0?true:false;
+	}
+
+
+//유저목록 조회
+public List<JoinUserDto> getUserList() {
+	List<JoinUserDto> list=new ArrayList<JoinUserDto>();
+	SqlSession sqlSession=null;
+	
+	try {
+		SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+		sqlSession=sqlSessionFactory.openSession(true);
+		list=sqlSession.selectList(namespace+"getUserList");
+	} catch (Exception e) {
+		System.out.println("JDBC실패:getUserList():"+getClass());
+	}finally {
+		sqlSession.close();
+	}
+	return list;
 	}
 }
