@@ -63,8 +63,8 @@
 	 	<td><%=dto.getEmail()%></td>
 		<td><%=dto.getAddress()%></td>
 		<td><%=dto.getDname()%></td>
-		<td><%=dto.getRole()%></td>
-		<td><%=dto.getEnabled()%></td>  	
+		<td><%=dto.getRole().equals("USER")?"간호사":"관리자"%></td>
+		<td><%=dto.getEnabled().equals("Y")?"재직":"퇴직"%></td>  	
 	</tr>
 	<%
 		}
