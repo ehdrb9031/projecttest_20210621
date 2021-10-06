@@ -16,23 +16,7 @@
 	<h1 style="text-align: center;">로그인</h1>
 	<form action="JoinUserController.do" method="post">
 		<input type="hidden" name="command" value="login"/>
-		<div class="table">
-			<div class="tr">
-				<div class="td">아이디</div>
-				<div class="td"><input type="text" name="id" value="hk1"/></div>
-			</div>
-			<div class="tr">
-				<div class="td">비밀번호</div>
-				<div class="td"><input type="password" name="pw" value="hk1" /></div>
-			</div>
-			<div class="tr">
-				<div class="td colspan">
-					<input type="submit" value="로그인"/>
-					<input type="button" value="회원가입"/>  
-				</div>
-			</div>
-	<input type="hidden" name="command" value="login"/>
-		<div class="form-group">
+		<div class="form-group"> 
 			<input type="text" class="form-control" placeholder="아이디"  name="id" required="required">
 		</div>
 		<div class="form-group">
