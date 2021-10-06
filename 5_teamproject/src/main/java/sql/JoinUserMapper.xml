@@ -19,4 +19,9 @@
 	<delete id="delList" parameterType="Map" >
 		DELETE FROM JOINUSER WHERE SEQ = #{seq} 
 	</delete>
+	<select id="getPreUserList" resultType="JoinUserDto">
+   SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME , ROLE ,ENABLED  FROM JOINUSER 
+   WHERE ENABLED = 'Y'
+   </select>
+
 </mapper>
