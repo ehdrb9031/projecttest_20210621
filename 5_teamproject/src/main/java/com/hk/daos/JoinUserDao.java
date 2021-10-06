@@ -13,6 +13,7 @@ import com.hk.dtos.JoinUserDto;
 
 
 
+
 public class JoinUserDao extends SqlMapConfig {
 	private String namespace="com.hk.joinuser.";
 	
@@ -90,4 +91,27 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return count>0?true:false;
 	}
+	     
+	
+	
+	public JoinUserDto getUser(String id){
+		JoinUserDto dto =new JoinUserDto();       
+		
+		StringBuffer sb=new StringBuffer();
+		sb.append(" SELECT ID,NAME,ADDRESS,PHONE,EMAIL,ENABLED,ROLE,REGDATE ");
+		sb.append(" FROM USERINFO WHERE ENABLED='Y' AND ID=? ");
+		
+		try {
+			
+		} catch (Exception e) {
+			System.out.println("getUser():"+getClass());
+			e.printStackTrace();
+		}finally {      
+		  
+		}
+		
+		return dto;
+	}
+	
+	
 }
