@@ -15,6 +15,14 @@
 		border: 1px solid red;
 	}
 </style>
+<script type="text/javascript">
+	function allSel(bool){
+		var chks=document.getElementsByName("chk");
+		for(var i = 0; i< chks.length; i++){
+			chks[i].checked=bool;
+		}
+	}
+</script>
 </head>
 <%
 	List<JoinUserDto>list=(List<JoinUserDto>)request.getAttribute("list");
