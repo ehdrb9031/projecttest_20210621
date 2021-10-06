@@ -90,4 +90,5 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return count>0?true:false;
 	}
+	
 }
