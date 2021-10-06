@@ -35,6 +35,7 @@
       <th>번호</th>
       <th>이름</th>
       <th>전화번호</th>
+      <th>EMAIL</th>
       <th>주소</th>
       <th>부서</th>
       <th>직급</th>
