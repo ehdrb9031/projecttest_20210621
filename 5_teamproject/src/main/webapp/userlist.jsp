@@ -1,3 +1,4 @@
+<%@include file="header.jsp" %> 
 <%@page import="com.hk.dtos.JoinUserDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>

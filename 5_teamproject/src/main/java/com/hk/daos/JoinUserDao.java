@@ -72,7 +72,7 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return list;
 	}
-	public boolean deleteList(String[] seqs) {
+	public boolean updateList(String[] seqs) {
 		int count=0;
 		SqlSession sqlSession=null;
 		   
@@ -81,7 +81,7 @@ public class JoinUserDao extends SqlMapConfig {
 		
 		for(int i=0; i < seqs.length; i++) {
 			String seq=seqs[i];
-			sqlSession.delete(namespace+"deleteList", seq);
+			sqlSession.delete(namespace+"updateList", seq);
 		 }
 			count=1;
 			sqlSession.commit();
