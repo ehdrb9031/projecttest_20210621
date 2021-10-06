@@ -3,6 +3,7 @@ package com.hk.dtos;
 import java.util.Date;
 
 public class JoinUserDto {
+	private int seq;
 	private String id;
 	private String name;
 	private String password;
@@ -18,9 +19,10 @@ public class JoinUserDto {
 		super();
 	}
 
-	public JoinUserDto(String id, String name, String password, String address, String phone, String email, String role,
+	public JoinUserDto(int seq , String id, String name, String password, String address, String phone, String email, String role,
 			String dname, String enabled, Date regdate) {
 		super();
+		this.seq = seq;
 		this.id = id;
 		this.name = name;
 		this.password = password;
@@ -33,6 +35,14 @@ public class JoinUserDto {
 		this.regdate = regdate;
 	}
 
+	public int getSeq() {
+		return seq;
+	}
+
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -43,7 +53,7 @@ public class JoinUserDto {
 
 	public String getName() {
 		return name;
-	}
+	}   
 
 	public void setName(String name) {
 		this.name = name;
@@ -115,9 +125,9 @@ public class JoinUserDto {
 
 	@Override
 	public String toString() {
-		return "JoinUserDto [id=" + id + ", name=" + name + ", password=" + password + ", address=" + address
-				+ ", phone=" + phone + ", email=" + email + ", role=" + role + ", dname=" + dname + ", enabled="
-				+ enabled + ", regdate=" + regdate + "]";
+		return "JoinUserDto [seq=" + seq + ", id=" + id + ", name=" + name + ", password=" + password + ", address="
+				+ address + ", phone=" + phone + ", email=" + email + ", role=" + role + ", dname=" + dname
+				+ ", enabled=" + enabled + ", regdate=" + regdate + "]";
 	}
 	
 	
