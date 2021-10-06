@@ -8,11 +8,14 @@
 		SELECT ID, NAME, ADDRESS, PHONE, EMAIL, ROLE, DNAME, ENABLED 
 		FROM JOINUSER WHERE ID=#{id} AND PASSWORD=#{password} AND ENABLED='Y'
 	</select>
-	
-
 
 	<insert id="insertUser" parameterType="JoinUserDto">
 		INSERT INTO JOINUSER (ID,NAME,PASSWORD,ADDRESS,PHONE,EMAIL,ROLE,DNAME,ENABLED,REGDATE) VALUES 
 		(#{id},#{name},#{password},#{address},#{phone},#{email},'USER',#{dname},'Y',SYSDATE)
 	</insert>
+	
+	<select id="getlist" resultType="JoinUserDto" >
+	SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME ,"ROLE" ,ENABLED  FROM JOINUSER  
+	</select>
+	
 </mapper>
