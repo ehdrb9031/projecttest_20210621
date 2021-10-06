@@ -90,4 +90,22 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return count>0?true:false;
 	}
+	
+	//재직중인 유저목록 조회
+    public List<JoinUserDto> getPreUserList() {
+       List<JoinUserDto> list=new ArrayList<JoinUserDto>();
+       SqlSession sqlSession=null;
+       
+       try {
+          SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+          sqlSession=sqlSessionFactory.openSession(true);
+          list=sqlSession.selectList(namespace+"getPreUserList");
+       } catch (Exception e) {
+          System.out.println("JDBC실패:getPreUserList():"+getClass());
+       }finally {
+          sqlSession.close();
+       }
+       return list;
+    }
+
 }
