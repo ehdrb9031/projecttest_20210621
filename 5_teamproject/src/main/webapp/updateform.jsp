@@ -30,6 +30,8 @@ response.setContentType("text/html; charset=UTF-8");
 <body>
 	<h1>정보수정</h1>
 	<form action="JoinUserController.do" method="post" >
+	<input type="hidden" name="command" value="after_updateform" >
+	<input type="hidden" name="id" value="<%=dto.getId()%>" >
 	<table border="1" class="table table-hover"> 
 		<tr>
 			<th>아이디</th>
@@ -81,8 +83,7 @@ response.setContentType("text/html; charset=UTF-8");
 
 		<tr>
 			<td colspan="2">
-				<button class="btn btn-primary"
-					onclick="location.href='JoinUserController.do?command=userinfo'">수정완료</button>
+				<button type="submit" class="btn btn-primary">수정완료</button>
 				<button class="btn btn-danger"
 					onclick="deleteUser('<%=dto.getId()%>')">탈퇴</button>
 				<button class="btn btn-info"

@@ -36,11 +36,9 @@ public class JoinUserController extends HttpServlet {
 				session.setAttribute("ldto", ldto);
 				session.setMaxInactiveInterval(10*60);
 				
-				if(ldto.getRole().toUpperCase().equals("ADMIN")) {
+				if(ldto.getRole().toUpperCase().equals("HEAD")) {
 					response.sendRedirect("admin_main.jsp");
-				}else if(ldto.getRole().toUpperCase().equals("MANAGER")) {
-					response.sendRedirect("user_main.jsp");
-				}else if(ldto.getRole().toUpperCase().equals("USER")) {
+				}else{
 					response.sendRedirect("user_main.jsp");
 				}
 			}
@@ -94,10 +92,33 @@ public class JoinUserController extends HttpServlet {
 	        request.setAttribute("dto", dto); 
 	        dispatch("userinfo.jsp", request, response);
 		}else if(command.equals("updateform")) {
-			String id=request.getParameter("id");
-			JoinUserDto dto= dao.getUser(id);   
+			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+			if(ldto==null){
+				response.sendRedirect("index.jsp");
+			} 
+			JoinUserDto dto= dao.getUser(ldto.getId());   
 	        request.setAttribute("dto", dto); 
 	        dispatch("updateform.jsp", request, response);
+		}else if(command.equals("after_updateform")) {
+			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+			if(ldto==null){
+				response.sendRedirect("index.jsp");
+			} 
+			String id=request.getParameter("id");
+			String phone=request.getParameter("phone");
+			String email=request.getParameter("email");
+			String address=request.getParameter("address");
+			String role=request.getParameter("role");
+			String dname=request.getParameter("dname");
+			
+			boolean isS=dao.updateUser(new JoinUserDto(id,address,phone,email,role,dname));
+			if(isS) { 
+				JoinUserDto dto= dao.getUser(ldto.getId());   
+		        request.setAttribute("dto", dto); 
+		        dispatch("userinfo.jsp", request, response);
+			}else {
+				response.sendRedirect("error.jsp");
+			}
 		}
 	}
 

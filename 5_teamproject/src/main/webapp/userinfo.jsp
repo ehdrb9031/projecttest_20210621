@@ -56,7 +56,7 @@
    
    <tr>
       <td colspan="2">
-         <button class="btn btn-primary" onclick="location.href='JoinUserController.do?command=updateform&id=<%=dto.getId()%>'">수정</button>
+         <button class="btn btn-primary" onclick="location.href='JoinUserController.do?command=updateform'">수정</button>
          <button class="btn btn-danger" onclick="deleteUser('<%=dto.getId()%>')">탈퇴</button>
          <button class="btn btn-info" onclick="location.href='admin_main.jsp'">메인</button> 
       </td>

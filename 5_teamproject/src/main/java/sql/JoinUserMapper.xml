@@ -28,6 +28,10 @@
         SELECT ID, NAME, ADDRESS, PHONE, EMAIL, ROLE, DNAME
      	FROM JOINUSER WHERE ID=#{id} AND ENABLED='Y'
    </select>
-   
+   <update id="updateUser" parameterType="JoinUserDto">
+   		UPDATE JOINUSER 
+   		SET ADDRESS =#{address},PHONE =#{phone},EMAIL =#{email},ROLE =#{role},DNAME =#{dname}
+		WHERE ID =#{id}
+   </update>
 
 </mapper>
