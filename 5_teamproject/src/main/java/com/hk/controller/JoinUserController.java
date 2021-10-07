@@ -86,11 +86,18 @@ public class JoinUserController extends HttpServlet {
 			response.sendRedirect("CalController.do?command=insertschedule");
 		}else if(command.equals("userinfo")) {
 			
-			String id=request.getParameter("id"); 
-	        JoinUserDto dto= dao.getUser(id);   
-	        request.setAttribute("dto", dto);
+			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+			if(ldto==null){
+				response.sendRedirect("index.jsp");
+			} 
+	        JoinUserDto dto= dao.getUser(ldto.getId());   
+	        request.setAttribute("dto", dto); 
 	        dispatch("userinfo.jsp", request, response);
-
+		}else if(command.equals("updateform")) {
+			String id=request.getParameter("id");
+			JoinUserDto dto= dao.getUser(id);   
+	        request.setAttribute("dto", dto); 
+	        dispatch("updateform.jsp", request, response);
 		}
 	}
 

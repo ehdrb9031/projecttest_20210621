@@ -53,8 +53,11 @@ public class CalController extends HttpServlet {
 			
 			List<JoinUserDto> list=jDao.getPreUserList();
 			request.setAttribute("list", list);
+			request.setAttribute("year", year);
+			request.setAttribute("month", month);
+			request.setAttribute("date", date);
 			dispatch("addschedule.jsp", request, response); 
-			response.sendRedirect("addschedule.jsp?year="+year+"&month="+month+"&date="+date); 
+//			response.sendRedirect("addschedule.jsp?year="+year+"&month="+month+"&date="+date); 
 		}
 	}
 

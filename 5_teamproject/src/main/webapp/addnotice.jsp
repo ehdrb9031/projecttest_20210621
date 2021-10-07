@@ -36,7 +36,7 @@
          <tr>
             <td colspan="2">
                <input type="submit" value="등록하기" class="btn btn-primary">
-               <input type="button" value="취소" class="btn btn-primary"
+               <input type="button" value="취소" class="btn btn-danger"
                onclick="location.href='NoticeController.do?command=admin&id=${dto.id}'"/>
             </td>
          </tr>

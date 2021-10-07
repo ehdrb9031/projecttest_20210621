@@ -24,7 +24,7 @@
 
 <body>
 <h1>나의정보</h1>
-<table border="1">
+<table border="1" class="table table-hover">
    <tr>
       <th>아이디</th>
       <td><%=dto.getId()%></td>
@@ -56,9 +56,9 @@
    
    <tr>
       <td colspan="2">
-         <button onclick="updateForm('<%=dto.getId()%>')">수정</button>
-         <button onclick="deleteUser('<%=dto.getId()%>')">탈퇴</button>
-         <button onclick="location.href='admin_main.jsp'">메인</button> 
+         <button class="btn btn-primary" onclick="location.href='JoinUserController.do?command=updateform&id=<%=dto.getId()%>'">수정</button>
+         <button class="btn btn-danger" onclick="deleteUser('<%=dto.getId()%>')">탈퇴</button>
+         <button class="btn btn-info" onclick="location.href='admin_main.jsp'">메인</button> 
       </td>
    </tr>
 </table>
