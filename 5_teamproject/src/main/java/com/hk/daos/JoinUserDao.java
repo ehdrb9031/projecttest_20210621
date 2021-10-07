@@ -85,20 +85,12 @@ public class JoinUserDao extends SqlMapConfig {
          String seq=seqs[i];
          sqlSession.delete(namespace+"updateList", seq);
        }
-
-
-         sqlSession=getSqlSessionFactory().openSession(false);
-         //Map<String, String[]>map=new HashMap<String, String[]>();
-         for(int i=0; i < seqs.length; i++) {
-            String seq=seqs[i];
-            sqlSession.delete(namespace+"deleteList", seq);
-         }
          //map.put("seqs", seqs);
          //count=sqlSession.update(namespace+"delList", map);
          count=1;
          sqlSession.commit();
       } catch (Exception e) {
-         System.out.println("JDBC실패:deleteList()"+getClass());
+         System.out.println("JDBC실패:updateList()"+getClass());
          e.printStackTrace();
       }finally {
          sqlSession.close();
@@ -128,10 +120,7 @@ public class JoinUserDao extends SqlMapConfig {
       return dto;
    }
    
-     
-
-      
- 
+  
    //재직중인 유저목록 조회
     public List<JoinUserDto> getPreUserList() {
        List<JoinUserDto> list=new ArrayList<JoinUserDto>();
