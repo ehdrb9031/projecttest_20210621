@@ -31,7 +31,7 @@ public class CalController extends HttpServlet {
 		
 		if(command.equals("insertschedule")) {
 			if(session.getAttribute("ldto")==null) {
-				response.sendRedirect("index.jsp?msg="+URLEncoder.encode("濡쒓렇�씤�씠 �븘�슂�빀�땲�떎","utf-8"));
+				response.sendRedirect("index.jsp");
 			}else {
 				JoinUserDto dto=(JoinUserDto)session.getAttribute("ldto");
 				
