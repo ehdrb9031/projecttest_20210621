@@ -18,6 +18,19 @@ public class JoinUserDto {
 	public JoinUserDto() {
 		super();
 	}
+	
+	public JoinUserDto(String id, String name, String password, String address, String phone, String email, String role,
+			String dname) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.address = address;
+		this.phone = phone;
+		this.email = email;
+		this.role = role;
+		this.dname = dname;
+	}
 
 	public JoinUserDto(int seq , String id, String name, String password, String address, String phone, String email, String role,
 			String dname, String enabled, Date regdate) {

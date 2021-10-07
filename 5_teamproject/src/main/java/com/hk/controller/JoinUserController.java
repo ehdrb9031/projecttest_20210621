@@ -46,6 +46,23 @@ public class JoinUserController extends HttpServlet {
 			}
 		}else if(command.equals("registform")) {
 			response.sendRedirect("registform.jsp");
+		}else if(command.equals("after_registform")){
+			String id = request.getParameter("id");
+			String name = request.getParameter("name");
+			String password = request.getParameter("pw");
+			String address = request.getParameter("address");
+			String email = request.getParameter("email");
+			String phone = request.getParameter("phone");
+			String role = request.getParameter("role");
+			String dname = request.getParameter("dname");
+			
+			boolean isS = dao.insertUser(new JoinUserDto(id,name,password,address,email,phone,role,dname)); 
+			
+			if(isS){ 
+			  response.sendRedirect("index.jsp");
+			}else{
+			  response.sendRedirect("error.jsp");
+			}
 		}else if(command.equals("logout")) {
 			request.getSession().invalidate();
 			response.sendRedirect("index.jsp");
@@ -65,6 +82,8 @@ public class JoinUserController extends HttpServlet {
 			List<JoinUserDto> list=dao.getPreUserList();
 			request.setAttribute("list", list);
 			dispatch("userlist.jsp", request, response); 
+		}else if(command.equals("insertschedule")) {
+			response.sendRedirect("CalController.do?command=insertschedule");
 		}
 	}
 
