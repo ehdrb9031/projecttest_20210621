@@ -1,3 +1,4 @@
+<%@page import="com.hk.utils.Util"%>
 <%@page import="com.hk.dtos.JoinUserDto"%>
 <%@page import="java.util.List"%>
 <%@include file="header.jsp" %>
@@ -41,39 +42,12 @@
 			String dname="";
 			String role="";
 			JoinUserDto dto=list.get(i);
-			if(dto.getRole()!="HEAD"){
-				if(dto.getDname()=="PEDIATRIC"){
-					dname="소아과";
-				}else if(dto.getDname()=="NEUROLOGY"){
-					dname="신경과";
-				}else if(dto.getDname()=="PLASTIC"){
-					dname="성형회과";
-				}else if(dto.getDname()=="EARNOSETHROAT"){
-					dname="이비인후과";
-				}else if(dto.getDname()=="ORTHOPEDICS"){
-					dname="정형외과";
-				}else if(dto.getDname()=="INTEGRATED"){
-					dname="통합진료과";
-				}else if(dto.getDname()=="UROLOGY"){
-					dname="비뇨기과";
-				}else{
-					dname="관리자";
-				}
-				if(dto.getRole()=="HEAD"){
-					dname="간호부장";
-				}else if(dto.getRole()=="CHIEF"){
-					dname="수간호사";
-				}else if(dto.getRole()=="RESPONSIBLE"){
-					dname="책임간호사";
-				}else{
-					dname="평간호사";
-				}
+			if(dto.getRole()!="HEAD"){		
 			%>
-			
 				<td><input type="checkbox" name="chk" value="<%=dto.getName() %>" /></td>
 				<td><%=dto.getName()%></td>
-				<td><%=dname%></td>
-				<td><%=role%></td>
+				<td><%=Util.dName(dto)%></td> 
+				<td><%=Util.rName(dto)%></td>
 			<%
 			}
 		}

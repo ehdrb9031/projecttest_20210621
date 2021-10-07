@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.hk.dtos.CalDto;
+import com.hk.dtos.JoinUserDto;
 
 public class Util {
 
@@ -49,4 +50,45 @@ public class Util {
 		return color;
 	}
 	
+	public static String dName(JoinUserDto dto) {
+		String dname;
+		if(dto.getDname()=="PEDIATRIC"){
+			dname="소아과";
+		}else if(dto.getDname()=="NEUROLOGY"){
+			dname="신경과";
+		}else if(dto.getDname()=="PLASTIC"){
+			dname="성형회과";
+		}else if(dto.getDname()=="EARNOSETHROAT"){
+			dname="이비인후과";
+		}else if(dto.getDname()=="ORTHOPEDICS"){
+			dname="정형외과";
+		}else if(dto.getDname()=="INTEGRATED"){
+			dname="통합진료과";
+		}else if(dto.getDname()=="UROLOGY"){
+			dname="비뇨기과";
+		}else{
+			dname="관리자";
+		}
+		return dname;
+	}
+	public static String rName(JoinUserDto dto) {
+		String role;
+		if(dto.getRole()=="HEAD"){
+			role="간호부장";
+		}else if(dto.getRole()=="CHIEF"){
+			role="수간호사";
+		}else if(dto.getRole()=="RESPONSIBLE"){
+			role="책임간호사";
+		}else{
+			role="평간호사";
+		}
+		return role;
+	}
 }
+
+
+
+
+
+
+

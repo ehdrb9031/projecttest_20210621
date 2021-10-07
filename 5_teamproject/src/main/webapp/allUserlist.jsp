@@ -1,3 +1,4 @@
+<%@page import="com.hk.utils.Util"%>
 <%@page import="com.hk.dtos.JoinUserDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.hk.daos.JoinUserDao"%>
@@ -108,8 +109,8 @@
 		<td><%=dto.getPhone()%></td>
 	 	<td><%=dto.getEmail()%></td>
 		<td><%=dto.getAddress()%></td>
-		<td><%=dto.getDname()%></td>
-		<td><%=dto.getRole().equals("USER")?"간호사":"관리자"%></td>
+		<td><%=Util.dName(dto)%></td>
+		<td><%=Util.rName(dto)%></td> 
 		<td><%=dto.getEnabled().equals("Y")?"재직":"퇴직"%></td>  	
 	</tr>
 	<%
