@@ -29,9 +29,11 @@
 		<%
 		for(int i=0;i<list.size();i++){
 			JoinUserDto dto=list.get(i);
+			if(dto.getName()!="HEAD"){
 			%>
-			<td><%=dto.getName()%></td>
+				<td><%=dto.getName()%></td>
 			<%
+			}
 		}
 		%>
 	</tr>
