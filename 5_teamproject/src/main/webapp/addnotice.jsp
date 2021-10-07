@@ -16,10 +16,10 @@
 %>
 <body>
 <div id="tablebox">
-<h1>게시판 수정하기</h1>
+<h1>공지사항</h1>
    <form action="NoticeController.do" method="post">
-      <input type="hidden" name="command" value="addnoticeform">
-      <input type="hidden" name="seq" value="${requestScope.dto.seq}">      
+      <input type="hidden" name="command" value="noticelist">
+<%--       <input type="hidden" name="seq" value="${requestScope.dto.no_seq}">       --%>
       <table class="table table-hover">
          <tr>
             <th>작성자</th>
@@ -37,7 +37,7 @@
             <td colspan="2">
                <input type="submit" value="등록하기" class="btn btn-primary">
                <input type="button" value="취소" class="btn btn-primary"
-               onclick="location.href='NoticeController.do?command=admin&seq=${dto.id}'"/>
+               onclick="location.href='NoticeController.do?command=admin&id=${dto.id}'"/>
             </td>
          </tr>
       </table>

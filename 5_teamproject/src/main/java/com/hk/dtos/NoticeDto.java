@@ -16,6 +16,14 @@ public class NoticeDto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public NoticeDto(String id, String title, String content) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+	}
 
 
 	public NoticeDto(int no_seq, String id, String title, String content, int readcount, Date regdate) {
