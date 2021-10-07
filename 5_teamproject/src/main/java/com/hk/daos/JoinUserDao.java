@@ -100,25 +100,23 @@ public class JoinUserDao extends SqlMapConfig {
 
         
    
-   
+   //상세정보 조회
    public JoinUserDto getUser(String id){
-      JoinUserDto dto =new JoinUserDto();       
+      JoinUserDto  dto=new JoinUserDto ();
+      SqlSession sqlSession=null;
       
-      StringBuffer sb=new StringBuffer();
-      sb.append(" SELECT ID,NAME,ADDRESS,PHONE,EMAIL,ENABLED,ROLE,REGDATE ");
-      sb.append(" FROM USERINFO WHERE ENABLED='Y' AND ID=? ");
-      
-      try {
-         
+      try {  
+         SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+         sqlSession=sqlSessionFactory.openSession(true);
+         dto=sqlSession.selectOne(namespace+"getUser",id);
       } catch (Exception e) {
-         System.out.println("getUser():"+getClass());
-         e.printStackTrace();
-      }finally {      
-        
+         System.out.println("JDBC실패:getUser():"+getClass());
+      }finally {
+         sqlSession.close();
       }
-      
       return dto;
    }
+
    
   
    //재직중인 유저목록 조회

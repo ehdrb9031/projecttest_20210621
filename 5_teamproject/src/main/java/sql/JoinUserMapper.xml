@@ -24,5 +24,10 @@
    		SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME , ROLE ,ENABLED  FROM JOINUSER 
   		WHERE ENABLED = 'Y'
    </select>
+   <select id="getUser" resultType="JoinUserDto" parameterType="String">
+        SELECT ID, NAME, ADDRESS, PHONE, EMAIL, ROLE, DNAME
+     	FROM JOINUSER WHERE ID=#{id} AND ENABLED='Y'
+   </select>
+   
 
 </mapper>
