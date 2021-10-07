@@ -23,9 +23,9 @@
 <h1><%=year%>년<%=month%>월<%=date%>일 근무표 작성</h1>
 <table class="table table-hover">
 	<tr>
-		<th>데이</th>
-		<th>나이트</th>
-		<th>이브</th>
+		<th><button>데이</button></th>
+		<th><button>나이트</button></th>
+		<th><button>이브</button></th> 
 	</tr>
 </table>
 <hr>
@@ -36,23 +36,23 @@
 		<th>부서</th>
 		<th>직책</th>
 	</tr>
-	<tr>
+	
 		<%
 		for(int i=0;i<list.size();i++){
-			String dname="";
-			String role="";
 			JoinUserDto dto=list.get(i);
 			if(dto.getRole()!="HEAD"){		
 			%>
+			<tr>
 				<td><input type="checkbox" name="chk" value="<%=dto.getName() %>" /></td>
 				<td><%=dto.getName()%></td>
 				<td><%=Util.dName(dto)%></td> 
 				<td><%=Util.rName(dto)%></td>
+			</tr>
 			<%
 			}
 		}
 		%>
-	</tr>
+	
 </table>
 </body>
 </html> 
