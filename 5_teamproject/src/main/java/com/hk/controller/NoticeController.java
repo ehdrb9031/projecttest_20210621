@@ -44,9 +44,16 @@ public class NoticeController extends HttpServlet {
 			List<NoticeDto> list = dao.getNoticeList();
 			request.setAttribute("list", list);
 			dispatch("notice.jsp",request,response);
+		}else if(command.equals("muldel")) {
+			String[] chks=request.getParameterValues("chk");
+			boolean isS=dao.delNotice(chks);
+			if(isS) { 
+				response.sendRedirect("NoticeController.do?command=getnotice");
+			}else {
+				response.sendRedirect("error.jsp");
+			}
 		}
-	}
-
+}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

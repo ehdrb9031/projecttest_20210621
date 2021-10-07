@@ -43,4 +43,24 @@ public class NoticeDao extends SqlMapConfig {
 	      }
 	      return list;
 	   }
+	
+	public boolean delNotice(String[] noseqs) {
+		int count=0;
+		SqlSession sqlSession=null;
+		try {
+			sqlSession=getSqlSessionFactory().openSession(false);
+			for(int i =0; i <noseqs.length; i++) {		
+				String seq=noseqs[i];
+				sqlSession.delete(namespace+"delnotice", seq);
+			}
+			count = 1;
+			sqlSession.commit();
+		} catch (Exception e) {
+			System.out.println("JDBC실패:delBorad():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
 }

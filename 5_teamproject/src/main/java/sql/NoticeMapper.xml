@@ -4,10 +4,14 @@
 <mapper namespace="com.hk.notice">
 	<insert id="insertNotice" parameterType="noticeDto">
 		INSERT INTO NOTICE VALUES
-		(NOTICE_NO_SEQ.NEXTVAL, #{id}, #{title}, #{content}, 1, SYSDATE)
+		(NOTICE_NO_SEQ.NEXTVAL, #{id}, #{title}, #{content}, NULL, SYSDATE)
 	</insert>
 	
 	<select id="getnoticelist" resultType="noticeDto" >
 		SELECT NO_SEQ,ID,TITLE,CONTENT,READCOUNT FROM NOTICE 
 	</select>
+	
+	<delete id="delnotice" parameterType="String">
+		DELETE FROM NOTICE WHERE NO_SEQ=#{no_seq}
+	</delete>
 </mapper>

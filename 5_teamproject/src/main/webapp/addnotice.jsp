@@ -7,6 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<style type="text/css">
+#a{
+	font-size: 20pt;
+}
+#b{
+	font-size: 17pt;
+}
+</style>
 </head>
 <%
 	JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
@@ -23,20 +31,20 @@
       <table class="table table-hover">
          <tr>
             <th>작성자</th>
-            <td>${ldto.id}</td>
+            <td id = b>${ldto.id}</td>
          </tr>
          <tr>
             <th>제목</th>
-            <td><input name="title" required="required" type="text"  class="form-control"></td>
+            <td id=a><input id=a name="title" required="required" type="text"  class="form-control"></td>
          </tr>
          <tr>
             <th>내용</th>
-            <td><textarea  name="content" required="required" rows="10" cols="60" class="form-control"></textarea></td>
+            <td><textarea  name="content" required="required" rows="20" cols="60" class="form-control"></textarea></td>
          </tr>
          <tr>
             <td colspan="2">
                <input type="submit" value="등록하기" class="btn btn-primary">
-               <input type="button" value="취소" class="btn btn-danger"
+               <input type="button" value="취소" class="btn btn-primary"
                onclick="location.href='NoticeController.do?command=admin&id=${dto.id}'"/>
             </td>
          </tr>
