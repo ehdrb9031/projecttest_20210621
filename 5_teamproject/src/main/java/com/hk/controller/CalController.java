@@ -1,6 +1,7 @@
 package com.hk.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.List;
@@ -58,6 +59,11 @@ public class CalController extends HttpServlet {
 			request.setAttribute("date", date);
 			dispatch("addschedule.jsp", request, response); 
 //			response.sendRedirect("addschedule.jsp?year="+year+"&month="+month+"&date="+date); 
+		}else if(command.equals("contentAjax")) {
+			String name=request.getParameter("name");
+			
+			PrintWriter pw=response.getWriter();
+			pw.print(name);
 		}
 	}
 
