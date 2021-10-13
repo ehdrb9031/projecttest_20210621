@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=UTF-8"); %>
+<%@include file="header.jsp" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,7 @@
 	}
 %>
 <body>
-<table border="1">
+<table class="table table-hover">
 	<tr>
 		<th>아이디</th>
 		<td><%=id%></td>

@@ -34,6 +34,7 @@ public class CalController extends HttpServlet {
 		CalDao cDao=new CalDao();
 		JoinUserDao jDao=new JoinUserDao();
 		
+		
 		if(command.equals("insertschedule")) {
 			if(session.getAttribute("ldto")==null) {
 				response.sendRedirect("index.jsp");
@@ -64,11 +65,12 @@ public class CalController extends HttpServlet {
 			dispatch("addschedule.jsp", request, response); 
 //			response.sendRedirect("addschedule.jsp?year="+year+"&month="+month+"&date="+date); 
 		}else if(command.equals("addnurse")) {
-			String[] seq=request.getParameterValues("seq");
+			String[] ids=request.getParameterValues("chk");
+			String wdate=request.getParameter("wdate");
 			
-			List<JoinUserDto> list=jDao.addNurseList(seq);
-			
-		
+//			wdate를 바로 넣는 게 아니라 year month date를 받아서 넣어야 한다. 
+//			그러므로 id와 wdate를 addschedule로 보내서 처리를 해야 한다.
+			response.sendRedirect("addnurseform.jsp");
 		}
 	}
 

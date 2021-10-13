@@ -2,10 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hk.cal">
-	<select id="getCalboardList" parameterType="Map" resultType="calDto">
-	SELECT CSEQ, ID, WDATE
-	FROM TOTALCAL
-	WHERE ID=#{id} AND SUBSTR(WDATE,1,8) = #{ymd}
-	ORDER BY WDATE
-	</select>
+	<insert id="">
+		INSERT INTO TOTALCAL VALUES (totalcal_to_seq.nextval,#{id},#{wdate});
+	</insert>
 </mapper>
