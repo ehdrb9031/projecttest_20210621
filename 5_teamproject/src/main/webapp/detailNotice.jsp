@@ -1,3 +1,4 @@
+<%@page import="com.hk.dtos.JoinUserDto"%>
 <%@page import="com.hk.dtos.NoticeDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
@@ -13,6 +14,12 @@
 </head>
 <%
 	NoticeDto dto=(NoticeDto)request.getAttribute("dto");
+
+	JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+	if(ldto==null){
+		pageContext.forward("index.jsp");
+	}
+	
 %>
 <body>
 <h1>공지사항 상세조회</h1>
@@ -34,9 +41,20 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<button onclick="updateBoard()">수정</button>
-			<button onclick="delBoard()">삭제</button>
-			<button onclick="boardList()">목록</button>
+			<%
+				if(dto.getId().equals(ldto.getId())){
+				%>					
+					<button onclick="updateBoard()" class="btn btn-primary">수정</button>
+					<button onclick="delBoard()" >삭제</button>
+					<button onclick="boardList()">목록</button>
+				<%
+				}else{
+				%>
+					<button onclick="delBoard()" >삭제</button>
+					<button onclick="boardList()">목록</button>
+				<%
+				}
+			%>
 		</td>
 	</tr>
 </table>

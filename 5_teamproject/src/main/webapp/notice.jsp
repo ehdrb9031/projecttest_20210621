@@ -76,7 +76,6 @@
       <th>번호</th>
       <th>아이디</th>
       <th>제목</th>
-      <th>내용</th>
       <th>조회수</th>
    </tr>
  <%
@@ -87,8 +86,7 @@
 		<td><input type="checkbox" name="chk" value="<%=dto.getNo_seq()%>" /></td>
 		<td><%=dto.getNo_seq()%></td>
 		<td><%=dto.getId()%></td>
-		<td><%=dto.getTitle()%></td>
-	 	<td><a href="NoticeController.do?command=detailnotice&seq=<%=dto.getNo_seq()%>"><%=dto.getContent()%></td>
+		<td><a href="NoticeController.do?command=detailnotice&seq=<%=dto.getNo_seq()%>"><%=dto.getTitle()%></td>
 		<td><%=dto.getReadcount()%></td>	
 	</tr>
 	<%

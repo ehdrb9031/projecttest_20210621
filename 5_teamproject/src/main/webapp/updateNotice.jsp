@@ -1,9 +1,10 @@
+<%@page import="com.hk.dtos.JoinUserDto"%>
 <%@page import="com.hk.dtos.NoticeDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=UTF-8"); %>
 <%request.setCharacterEncoding("utf-8"); %>
-<%response.setContentType("text/html; charset=UTF-8"); %>s
+<%response.setContentType("text/html; charset=UTF-8"); %>
 <%@include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -18,6 +19,11 @@
 </head>
 <%
 	NoticeDto dto = (NoticeDto)request.getAttribute("dto");
+
+	JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+	if(ldto==null){
+		pageContext.forward("index.jsp");
+	}
 %>
 <body>
 <h1>공지사항 수정</h1>
