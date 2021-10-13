@@ -14,4 +14,9 @@
 	<delete id="delnotice" parameterType="String">
 		DELETE FROM NOTICE WHERE NO_SEQ=#{no_seq}
 	</delete>
+	
+	<select id="detailnotice" parameterType="int" resultType="noticeDto">
+		SELECT NO_SEQ,ID,TITLE,CONTENT,READCOUNT FROM NOTICE
+		WHERE no_seq=#{no_seq}
+	</select>
 </mapper>

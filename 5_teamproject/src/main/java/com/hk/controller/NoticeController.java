@@ -3,6 +3,7 @@ package com.hk.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,6 +53,14 @@ public class NoticeController extends HttpServlet {
 			}else {
 				response.sendRedirect("error.jsp");
 			}
+		}else if(command.equals("detailnotice")) {
+			String seq=request.getParameter("seq");
+			int sseq=Integer.parseInt(seq);
+			NoticeDto dto= dao.detailNotice(sseq);
+			request.setAttribute("dto", dto);
+			
+			RequestDispatcher dispatch= request.getRequestDispatcher("detailNotice.jsp");
+			dispatch.forward(request, response);
 		}
 }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

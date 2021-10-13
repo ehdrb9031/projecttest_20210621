@@ -88,7 +88,7 @@
 		<td><%=dto.getNo_seq()%></td>
 		<td><%=dto.getId()%></td>
 		<td><%=dto.getTitle()%></td>
-	 	<td><a href="NoticeController.do?command=updateform&seq=<%=dto.getNo_seq()%>"><%=dto.getContent()%></td>
+	 	<td><a href="NoticeController.do?command=detailnotice&seq=<%=dto.getNo_seq()%>"><%=dto.getContent()%></td>
 		<td><%=dto.getReadcount()%></td>	
 	</tr>
 	<%

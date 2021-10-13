@@ -63,4 +63,19 @@ public class NoticeDao extends SqlMapConfig {
 		}
 		return count>0?true:false;
 	}
+	
+	public NoticeDto detailNotice(int seq) {
+		NoticeDto dto = new NoticeDto();
+		SqlSession sqlSession = null;
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			dto=sqlSession.selectOne(namespace+"detailnotice",seq);
+		}catch (Exception e) {
+			System.out.println("JDBC실패:detailNotice():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return dto;
+	}
 }
