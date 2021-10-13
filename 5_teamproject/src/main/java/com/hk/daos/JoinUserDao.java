@@ -151,4 +151,25 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return list;
 	}
+	
+	//체크된 간호사 리스트 구하기
+	public List<JoinUserDto> addNurseList(String[] seqs) {
+		List<JoinUserDto> list=new ArrayList<JoinUserDto>();
+		SqlSession sqlSession=null;
+
+		try {
+			sqlSession=getSqlSessionFactory().openSession(false);
+
+			for(int i=0; i < seqs.length; i++) {
+				String seq=seqs[i];
+				list=sqlSession.selectList(namespace+"addNurseList", seq);
+			}
+			sqlSession.commit();
+		} catch (Exception e) {
+			System.out.println("JDBC실패:addNurseList():"+getClass());
+		}finally {
+			sqlSession.close();
+		}
+		return list;
+	}
 }

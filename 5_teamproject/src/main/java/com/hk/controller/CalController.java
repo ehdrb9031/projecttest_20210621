@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +21,8 @@ import com.hk.daos.JoinUserDao;
 import com.hk.dtos.CalDto;
 import com.hk.dtos.JoinUserDto;
 import com.hk.utils.Util;
+
+import net.sf.json.JSONObject;
 
 @WebServlet("/CalController.do")
 public class CalController extends HttpServlet {
@@ -59,11 +63,12 @@ public class CalController extends HttpServlet {
 			request.setAttribute("date", date);
 			dispatch("addschedule.jsp", request, response); 
 //			response.sendRedirect("addschedule.jsp?year="+year+"&month="+month+"&date="+date); 
-		}else if(command.equals("contentAjax")) {
-			String name=request.getParameter("name");
+		}else if(command.equals("addnurse")) {
+			String[] seq=request.getParameterValues("seq");
 			
-			PrintWriter pw=response.getWriter();
-			pw.print(name);
+			List<JoinUserDto> list=jDao.addNurseList(seq);
+			
+		
 		}
 	}
 

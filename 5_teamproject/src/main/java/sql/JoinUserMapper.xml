@@ -33,5 +33,8 @@
    		SET ADDRESS =#{address},PHONE =#{phone},EMAIL =#{email},ROLE =#{role},DNAME =#{dname}
 		WHERE ID =#{id}
    </update>
-
+	<select id="addNurseList" parameterType="String" resultType="JoinUserDto">
+		SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME ,ROLE ,ENABLED  FROM JOINUSER  
+		WHERE SEQ=#{seq}
+	</select>
 </mapper>
