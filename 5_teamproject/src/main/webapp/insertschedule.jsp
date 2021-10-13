@@ -57,14 +57,13 @@
 	//month에 -1로 넣고 계산을 해야 0~11로 계산을 할 수 있다. 년 월은 바뀌지만 일은 1일로 같다.
 	cal.set(year, month-1, 1);// 2021-09-01로 셋팅한다.
 	int dayOfWeek=cal.get(Calendar.DAY_OF_WEEK);//일(1)~토(7) dayOfWeek-1을 하면 공뱁수를 구할 수 있다.
-//	System.out.println("현재 요일:"+dayOfWeek);
+	System.out.println("현재 요일:"+dayOfWeek);
 	
 	//2.해당 달의 마지막 날 구하기 --> 마지막날이 28일, 29일, 30일, 31일인지를 알기 위해
 	int lastDay=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 	
-	//한달 단위 일정 목록
-	List<CalDto>list=(List<CalDto>)request.getAttribute("list");
-
+	List<JoinUserDto>list=(List<JoinUserDto>)request.getAttribute("list");
+	
 	JoinUserDto ldto=(JoinUserDto)session.getAttribute("ldto"); 
 	if(ldto==null){
 		pageContext.forward("index.jsp");
@@ -96,21 +95,43 @@
 		<span><%=year%></span>년<span><%=month%></span>월
 		<a href="CalController.do?command=insertschedule&year=<%=year%>&month=<%=month+1%>">▶</a>
 		<a href="CalController.do?command=insertschedule&year=<%=year+1%>&month=<%=month%>">▷</a>
-		<button onclick="penChg()">pen</button>
 	</caption>
 	<tr style="width: 500px;">
-		<th>일</th>
-		<th>월</th>
-		<th>화</th>
-		<th>수</th>
-		<th>목</th>
-		<th>금</th>
-		<th>토</th>
+	<th>이름</th>
+	<th>부서</th>
+	<th>직위</th>
+	<%
+// 	for(int i=0;i<dayOfWeek-1;i++){
+// 		out.print("<td>&nbsp;</td>");//out은 jsp의 기본객체중에 하나임
+// 	}
+	for(int i=dayOfWeek;i<lastDay+dayOfWeek;i++){
+		String day="";
+		if(i%7==6){//6/7 -> 1
+			day="금";
+		}else if(i%7==0){
+			day="토";
+		}else if(i%7==1){
+			day="일";
+		}else if(i%7==2){
+			day="월";
+		}else if(i%7==3){
+			day="화";
+		}else if(i%7==4){
+			day="수";
+		}else if(i%7==5){
+			day="목";
+		}
+		%>
+		<th><%=day%></th>
+		<%
+		
+	}
+	%>
 	</tr>
 	<tr>
 		<%
 		//공백td출력하는 for문
-		for(int i=0;i<dayOfWeek-1;i++){
+		for(int i=0;i<3;i++){
 			out.print("<td>&nbsp;</td>");//out은 jsp의 기본객체중에 하나임
 		}
 		//날짜td출력하는 for문
@@ -121,19 +142,35 @@
 				href="CalController.do?command=addschedule&year=<%=year%>&month=<%=month%>&date=<%=i%>"><%=i%></a>
 			</td>
 			<%
-			// (현재날짜+공백수)%7==0 조건을 만족하는 요일은 토요일이다.
-			if((i+dayOfWeek-1)%7==0){//1주가 끝난 것
-				out.print("</tr><tr>");//tr을 통해 줄바꿈을 할 수 있다.
-			}
 		}
-		//달력의 나머지 공백수 출력하는 for문
-		int nbsp=(7-(lastDay+dayOfWeek-1)%7)%7;//나누어 떨어지는 달력일 때 한 칸 더 생기는 현상을 방지하기 위해 %7을 한 번 더 해서 처리를 해준다.
-		for(int i=1;i<=nbsp;i++){
-			out.print("<td>"+i+"</td>");
-		}
-		
 		%>
 	</tr>
+	 <%
+		for(int i=0;i<list.size();i++){
+			JoinUserDto dto=list.get(i);//list[dto,dto,dto...]--> 순차적으로 하나씩 꺼낸다(dto)
+	%>  	
+	<tr>
+		<td><%=dto.getName()%></td>
+		<td><%=Util.dName(dto)%></td>
+		<td><%=Util.rName(dto)%></td> 
+		<%
+		for(int j=1;j<=lastDay;j++){
+			%>
+		<td>
+			<input type="hidden" name="date" value="<%=j%>" >
+			<select class="custom-select d-block w-100" name="wdate" > 
+					<option value="day">데이</option> 
+					<option value="eve">이브</option> 
+					<option value="night">나이트</option> 
+			</select> 
+		</td> 
+		<%
+		}
+		%>
+	</tr>
+	<%
+		}
+	%>
 	
 </table>
 <%! //자바 메서드 선언부

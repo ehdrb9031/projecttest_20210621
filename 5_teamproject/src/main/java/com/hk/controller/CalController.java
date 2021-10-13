@@ -41,15 +41,19 @@ public class CalController extends HttpServlet {
 			}else {
 				JoinUserDto dto=(JoinUserDto)session.getAttribute("ldto");
 				
+				List<JoinUserDto> list=jDao.getPreUserList();
+				
 				String year=request.getParameter("year");
 				String month=request.getParameter("month");			
 				if(year==null) {
 					Calendar cal=Calendar.getInstance();
 					year=cal.get(Calendar.YEAR)+"";
-					month=cal.get(Calendar.MONTH)+1+"";
-					
+					month=cal.get(Calendar.MONTH)+1+"";					
 				}
-				response.sendRedirect("insertschedule.jsp?year="+year+"&month="+month);
+				request.setAttribute("list", list);
+				request.setAttribute("year", year);
+				request.setAttribute("month", month);
+				dispatch("insertschedule.jsp", request, response); 
 			}
 		}else if(command.equals("addschedule")) {
 			
