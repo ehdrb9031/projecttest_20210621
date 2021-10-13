@@ -1,5 +1,9 @@
 package com.hk.daos;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +18,12 @@ import com.hk.dtos.JoinUserDto;
 
 
 
+
 public class JoinUserDao extends SqlMapConfig {
 	private String namespace="com.hk.joinuser.";
-
+	
+	
+	
 	//로그인
 	public JoinUserDto getLogin(String id, String password) {
 		JoinUserDto dto=null;
@@ -55,6 +62,22 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return count>0?true:false;
 	}
+	
+	//아이디 중복체크: 가입할 아이디가 기존 DB에 존재하는 여부 체크-select문실행, 파리미터 : 가입할 ID
+		public String idChk(String id) {
+			String resultId=null;
+			SqlSession sqlSession=null;
+			try {
+
+				sqlSession=getSqlSessionFactory().openSession(false);
+				id=sqlSession.selectOne(namespace+"idChk", id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				sqlSession.close();
+			}
+			return id; 
+		}
 
 
 	//유저목록 조회

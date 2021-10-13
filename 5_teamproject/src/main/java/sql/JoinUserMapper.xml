@@ -37,4 +37,8 @@
 		SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME ,ROLE ,ENABLED  FROM JOINUSER  
 		WHERE SEQ=#{seq}
 	</select>
+	
+	<select id="idChk" resultType="String">
+		SELECT ID FROM JOINUSER WHERE ID=#{id}
+	</select>
 </mapper>
