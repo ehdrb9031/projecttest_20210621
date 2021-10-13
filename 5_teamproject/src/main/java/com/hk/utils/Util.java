@@ -52,19 +52,19 @@ public class Util {
 	
 	public static String dName(JoinUserDto dto) {
 		String dname;
-		if(dto.getDname()=="PEDIATRIC"){
+		if(dto.getDname().equals("PEDIATRIC")){
 			dname="소아과";
-		}else if(dto.getDname()=="NEUROLOGY"){
+		}else if(dto.getDname().equals("NEUROLOGY")){
 			dname="신경과";
-		}else if(dto.getDname()=="PLASTIC"){
+		}else if(dto.getDname().equals("PLASTIC")){
 			dname="성형회과";
-		}else if(dto.getDname()=="EARNOSETHROAT"){
+		}else if(dto.getDname().equals("EARNOSETHROAT")){
 			dname="이비인후과";
-		}else if(dto.getDname()=="ORTHOPEDICS"){
+		}else if(dto.getDname().equals("ORTHOPEDICS")){
 			dname="정형외과";
-		}else if(dto.getDname()=="INTEGRATED"){
+		}else if(dto.getDname().equals("INTEGRATED")){
 			dname="통합진료과";
-		}else if(dto.getDname()=="UROLOGY"){
+		}else if(dto.getDname().equals("UROLOGY")){
 			dname="비뇨기과";
 		}else{
 			dname="관리자";
@@ -73,13 +73,13 @@ public class Util {
 	}
 	public static String rName(JoinUserDto dto) {
 		String role;
-		if(dto.getRole()=="HEAD"){
+		if(dto.getRole().equals("HEAD")){
 			role="간호부장";
-		}else if(dto.getRole()=="CHIEF"){
+		}else if(dto.getRole().equals("CHIEF")){
 			role="수간호사";
-		}else if(dto.getRole()=="RESPONSIBLE"){
+		}else if(dto.getRole().equals("RESPONSIBLE")){
 			role="책임간호사";
-		}else{
+		}else{ 
 			role="평간호사";
 		}
 		return role;
