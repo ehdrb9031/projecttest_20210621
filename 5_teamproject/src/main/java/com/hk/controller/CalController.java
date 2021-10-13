@@ -31,6 +31,7 @@ public class CalController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String command=request.getParameter("command");
 		HttpSession session=request.getSession();
+		
 		CalDao cDao=new CalDao();
 		JoinUserDao jDao=new JoinUserDao();
 		
@@ -60,14 +61,20 @@ public class CalController extends HttpServlet {
 			String year=request.getParameter("year");
 			String month=request.getParameter("month");
 			String date=request.getParameter("date");
+			String yyyyMMdd=year+Util.isTwo(month)+Util.isTwo(date);//"20211013"
+			String wdate=yyyyMMdd+request.getParameter("wdate");
+			String seq=request.getParameter("seq");
+		
+			//seq값을 통해 id를 구해온다.
+			String id=jDao.getUserId(seq);
 			
-			List<JoinUserDto> list=jDao.getPreUserList();
-			request.setAttribute("list", list);
-			request.setAttribute("year", year);
-			request.setAttribute("month", month);
-			request.setAttribute("date", date);
-			dispatch("addschedule.jsp", request, response); 
-//			response.sendRedirect("addschedule.jsp?year="+year+"&month="+month+"&date="+date); 
+			//totalcal DB에 넣어준다.
+			boolean isS=cDao.insertCal(new CalDto(id,wdate));
+			if(isS) {
+				response.sendRedirect("JoinUserController.do?command=admin_main");
+			}else {
+				response.sendRedirect("error.jsp");
+			}
 		}else if(command.equals("addnurse")) {
 			String[] ids=request.getParameterValues("chk");
 			String wdate=request.getParameter("wdate");

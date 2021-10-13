@@ -15,6 +15,12 @@ public class CalDto {
 		this.id = id;
 		this.wdate = wdate;
 	}
+	
+	public CalDto(String id, String wdate) {
+		super();
+		this.id = id;
+		this.wdate = wdate;
+	}
 	public int getTo_seq() {
 		return to_seq;
 	}

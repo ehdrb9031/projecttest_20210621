@@ -195,4 +195,21 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return list;
 	}
+	
+	//seq를 통해 id가져오기(근무표작성시 필요)
+	public String getUserId(String seq) {
+		String id="";
+		SqlSession sqlSession=null;
+
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			id=sqlSession.selectOne(namespace+"getUserId",seq);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:getUserId():"+getClass());
+		}finally {
+			sqlSession.close();
+		}
+		return id;
+	}
 }

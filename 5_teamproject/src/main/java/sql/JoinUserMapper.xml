@@ -41,4 +41,7 @@
 	<select id="idChk" resultType="String">
 		SELECT ID FROM JOINUSER WHERE ID=#{id}
 	</select>
+	 <select id="getUserId" resultType="String" parameterType="String">
+        SELECT ID FROM JOINUSER WHERE SEQ =#{seq}
+   </select>
 </mapper>

@@ -61,6 +61,8 @@ public class JoinUserController extends HttpServlet {
 			}else{
 			  response.sendRedirect("error.jsp");
 			}
+		}else if(command.equals("admin_main")){
+			response.sendRedirect("admin_main.jsp");
 		}else if(command.equals("logout")) {
 			request.getSession().invalidate();
 			response.sendRedirect("index.jsp");

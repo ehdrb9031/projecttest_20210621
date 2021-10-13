@@ -88,6 +88,8 @@
 </nav>
 </div>
 <h1>근무표 작성</h1>
+<form action="CalController.do" method="post">
+<input type="hidden" name="command" value="addschedule" >
 <table border="1" class="table table-hover">
 	<caption> 
 		<a href="CalController.do?command=insertschedule&year=<%=year-1%>&month=<%=month%>">◁</a>
@@ -101,9 +103,6 @@
 	<th>부서</th>
 	<th>직위</th>
 	<%
-// 	for(int i=0;i<dayOfWeek-1;i++){
-// 		out.print("<td>&nbsp;</td>");//out은 jsp의 기본객체중에 하나임
-// 	}
 	for(int i=dayOfWeek;i<lastDay+dayOfWeek;i++){
 		String day="";
 		if(i%7==6){//6/7 -> 1
@@ -137,9 +136,8 @@
 		//날짜td출력하는 for문
 		for(int i=1;i<=lastDay;i++){
 			%>
-			<td>
-				<a class="countA" style="color:<%=Util.fontColor(dayOfWeek,i)%>"
-				href="CalController.do?command=addschedule&year=<%=year%>&month=<%=month%>&date=<%=i%>"><%=i%></a>
+			<td class="countA" style="color:<%=Util.fontColor(dayOfWeek,i)%>">
+				<%=i%>
 			</td>
 			<%
 		}
@@ -148,6 +146,7 @@
 	 <%
 		for(int i=0;i<list.size();i++){
 			JoinUserDto dto=list.get(i);//list[dto,dto,dto...]--> 순차적으로 하나씩 꺼낸다(dto)
+			if (!dto.getRole().equals("HEAD")) {
 	%>  	
 	<tr>
 		<td><%=dto.getName()%></td>
@@ -157,11 +156,15 @@
 		for(int j=1;j<=lastDay;j++){
 			%>
 		<td>
+			<input type="hidden" name="year" value="<%=year%>" >
+			<input type="hidden" name="month" value="<%=month%>" >
 			<input type="hidden" name="date" value="<%=j%>" >
+			<input type="hidden" name="name" value="<%=dto.getSeq()%>" >
 			<select class="custom-select d-block w-100" name="wdate" > 
 					<option value="day">데이</option> 
 					<option value="eve">이브</option> 
 					<option value="night">나이트</option> 
+					<option value="off">오프</option> 
 			</select> 
 		</td> 
 		<%
@@ -169,23 +172,15 @@
 		%>
 	</tr>
 	<%
+			}
 		}
 	%>
-	
+	<tr>
+      <td colspan="<%=lastDay+3%>">
+         <input class="btn btn-primary" type="submit" value="저장"/>
+      </td>
+   </tr>
 </table>
-<%! //자바 메서드 선언부
-	//요일별 날짜 색깔 적용하기
-	public String fontColor(int dayOfWeek,int i){
-		String color="";
-		if((i+dayOfWeek-1)%7==0){//토요일
-			color="blue";
-		}else if((i+dayOfWeek-1)%7==1){//일요일
-			color="red";
-		}else{//평일
-			color="black";
-		}
-		return color;
-	}
-%>
+</form>
 </body>
 </html>
