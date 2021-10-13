@@ -18,6 +18,14 @@ public class NoticeDto {
 	}
 	
 
+	public NoticeDto(int no_seq, String title, String content) {
+		super();
+		this.no_seq = no_seq;
+		this.title = title;
+		this.content = content;
+	}
+
+
 	public NoticeDto(String id, String title, String content) {
 		super();
 		this.id = id;

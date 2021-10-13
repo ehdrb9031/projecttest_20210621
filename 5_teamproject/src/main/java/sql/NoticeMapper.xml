@@ -19,4 +19,10 @@
 		SELECT NO_SEQ,ID,TITLE,CONTENT,READCOUNT FROM NOTICE
 		WHERE no_seq=#{no_seq}
 	</select>
+	
+	<update id="updatenotice" parameterType="noticeDto">
+		UPDATE NOTICE 
+		SET TITLE=#{title}, CONTENT=#{content}, REGDATE=SYSDATE
+		WHERE NO_SEQ=#{no_seq}
+	</update>
 </mapper>

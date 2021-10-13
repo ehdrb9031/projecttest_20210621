@@ -61,7 +61,26 @@ public class NoticeController extends HttpServlet {
 			
 			RequestDispatcher dispatch= request.getRequestDispatcher("detailNotice.jsp");
 			dispatch.forward(request, response);
+		}else if(command.equals("updateform")) {
+			String seq=request.getParameter("seq");
+			NoticeDto dto = dao.detailNotice(Integer.parseInt(seq));
+			request.setAttribute("dto", dto);
+			dispatch("updateNotice.jsp", request, response);
+		}else if(command.equals("updatenotice")) {
+			String seq=request.getParameter("seq");
+			String title=request.getParameter("title");
+			String content=request.getParameter("content");
+			int sseq=Integer.parseInt(seq);
+			
+			boolean isS=dao.updateNotice(new NoticeDto(sseq,title,content));
+			if(isS) {
+				response.sendRedirect("NoticeController.do?command=detailnotice&seq="+sseq);
+			}else {
+				request.setAttribute("msg", "글수정실패");
+				dispatch("error.jsp", request, response);
+			}
 		}
+		
 }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
