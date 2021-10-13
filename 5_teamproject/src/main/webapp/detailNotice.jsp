@@ -14,6 +14,7 @@
 </head>
 <%
 	NoticeDto dto=(NoticeDto)request.getAttribute("dto");
+	session.getAttribute("readcount");
 
 	JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
 	if(ldto==null){

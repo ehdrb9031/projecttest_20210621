@@ -57,6 +57,10 @@ public class NoticeController extends HttpServlet {
 			String seq=request.getParameter("seq");
 			int sseq=Integer.parseInt(seq);
 			NoticeDto dto= dao.detailNotice(sseq);
+			if(session.getAttribute("readcount")==null) {
+				session.setAttribute("readcount", "readcount");
+				dao.readCount(sseq);
+			}
 			request.setAttribute("dto", dto);
 			
 			RequestDispatcher dispatch= request.getRequestDispatcher("detailNotice.jsp");

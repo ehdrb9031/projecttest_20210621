@@ -25,4 +25,12 @@
 		SET TITLE=#{title}, CONTENT=#{content}, REGDATE=SYSDATE
 		WHERE NO_SEQ=#{no_seq}
 	</update>
+	
+	 <update id="readcount" parameterType="int">
+    <![CDATA[
+		UPDATE NOTICE
+		SET READCOUNT=READCOUNT+1
+		WHERE NO_SEQ = #{no_seq}
+		]]>
+    </update>
 </mapper>

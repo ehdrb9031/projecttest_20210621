@@ -93,4 +93,20 @@ public class NoticeDao extends SqlMapConfig {
 		}
 		return count>0?true:false;
 	}
+	
+	public boolean readCount(int seq) {
+		int count = 0;
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.update(namespace+"readcount",seq);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:readCount():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
 }
