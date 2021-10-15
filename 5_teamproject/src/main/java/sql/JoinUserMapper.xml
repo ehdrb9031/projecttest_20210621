@@ -21,7 +21,7 @@
    </update>
    
 	<select id="getPreUserList" resultType="JoinUserDto">
-   		SELECT SEQ ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME , ROLE ,ENABLED  FROM JOINUSER 
+   		SELECT SEQ ,ID ,NAME ,PHONE , EMAIL, ADDRESS ,DNAME , ROLE ,ENABLED  FROM JOINUSER 
   		WHERE ENABLED = 'Y' ORDER BY ROLE
    </select>
    <select id="getUser" resultType="JoinUserDto" parameterType="String">
@@ -41,7 +41,4 @@
 	<select id="idChk" resultType="String">
 		SELECT ID FROM JOINUSER WHERE ID=#{id}
 	</select>
-	 <select id="getUserId" resultType="String" parameterType="String">
-        SELECT ID FROM JOINUSER WHERE SEQ =#{seq}
-   </select>
 </mapper>

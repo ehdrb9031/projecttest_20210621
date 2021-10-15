@@ -32,8 +32,12 @@ public class Util {
 	}
 	
 	//한자릿수를 두자릿수로 변환하는 메서드
-	public static String isTwo(String s) {
-		return s.length()<2?"0"+s:s;
+	public static String[] isTwo(String []s) {
+		String []a=new String[s.length];
+		for (int i = 0; i < s.length; i++) {
+			 a[i]=s[i].length()<2?"0"+s[i]:s[i];	 
+		}
+		return a;
 	}
 	
 

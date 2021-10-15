@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -58,22 +59,25 @@ public class CalController extends HttpServlet {
 			}
 		}else if(command.equals("addschedule")) {
 			
-			String year=request.getParameter("year");
-			String month=request.getParameter("month");
-			String date=request.getParameter("date");
-			String yyyyMMdd=year+Util.isTwo(month)+Util.isTwo(date);//"20211013"
-			String wdate=yyyyMMdd+request.getParameter("wdate");
-			String seq=request.getParameter("seq");
-		
-			//seq값을 통해 id를 구해온다.
-			String id=jDao.getUserId(seq);
-			
-			//totalcal DB에 넣어준다.
-			boolean isS=cDao.insertCal(new CalDto(id,wdate));
+			String []ids=request.getParameterValues("id");
+			String []years=request.getParameterValues("year");
+			String []months=request.getParameterValues("month");
+			String []dates=request.getParameterValues("date");
+			String []wdates=request.getParameterValues("wdate");
+			String []works=new String[wdates.length];
+			for (int i = 0; i < wdates.length; i++) { 
+				works[i]=years[i]+Util.isTwo(months)[i]+Util.isTwo(dates)[i]+wdates[i];
+			}
+
+			//hk (4) : 20211013day 20211013day 20211013day 20211013day 20211013day 20211013day
+			//hk2 (1) : 20211013day 20211013day 20211013day 20211013day 20211013day 20211013day
+			boolean isS=false;
+			for (int i = 0; i < ids.length; i++) {
+				String id=ids[i];
+				isS=cDao.insertCal(id,works); 
+			}
 			if(isS) {
-				response.sendRedirect("JoinUserController.do?command=admin_main");
-			}else {
-				response.sendRedirect("error.jsp");
+				
 			}
 		}else if(command.equals("addnurse")) {
 			String[] ids=request.getParameterValues("chk");

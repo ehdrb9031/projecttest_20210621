@@ -149,6 +149,7 @@
 			if (!dto.getRole().equals("HEAD")) {
 	%>  	
 	<tr>
+		<input type="hidden" name="id" value="<%=dto.getId()%>" >
 		<td><%=dto.getName()%></td>
 		<td><%=Util.dName(dto)%></td>
 		<td><%=Util.rName(dto)%></td> 
@@ -156,10 +157,10 @@
 		for(int j=1;j<=lastDay;j++){
 			%>
 		<td>
-			<input type="hidden" name="year" value="<%=year%>" >
-			<input type="hidden" name="month" value="<%=month%>" >
-			<input type="hidden" name="date" value="<%=j%>" >
-			<input type="hidden" name="name" value="<%=dto.getSeq()%>" >
+			<input type="text" name="year" value="<%=year%>" >
+			<input type="text" name="month" value="<%=month%>" >
+			<input type="text" name="date" value="<%=j%>" >
+			
 			<select class="custom-select d-block w-100" name="wdate" > 
 					<option value="day">데이</option> 
 					<option value="eve">이브</option> 
