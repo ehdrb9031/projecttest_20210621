@@ -68,7 +68,7 @@
 		alert("삭제되었습니다");
 	}
 	function boardList(){
-		location.href="NoticeController.do?command=noticelist&title=<%=dto.getTitle()%>&content=<%=dto.getContent()%>";
+		location.href="NoticeController.do?command=noticelist";
 	}
 </script>
 </body>

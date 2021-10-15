@@ -26,7 +26,7 @@
 <div id="tablebox">
 <h1>공지사항</h1>
    <form action="NoticeController.do" method="post">
-      <input type="hidden" name="command" value="noticelist">
+      <input type="hidden" name="command" value="insertnotice">
 <%--       <input type="hidden" name="seq" value="${requestScope.dto.no_seq}">       --%>
       <table class="table table-hover">
          <tr>
