@@ -62,7 +62,13 @@ public class JoinUserController extends HttpServlet {
 			  response.sendRedirect("error.jsp");
 			}
 		}else if(command.equals("admin_main")){
-			response.sendRedirect("admin_main.jsp");
+			String id=request.getParameter("id");
+			String role=dao.getRole(id);
+			if(role.equals("HEAD")) {
+				response.sendRedirect("admin_main.jsp");				
+			}else {
+				response.sendRedirect("user_main.jsp");
+			}
 		}else if(command.equals("logout")) {
 			request.getSession().invalidate();
 			response.sendRedirect("index.jsp");

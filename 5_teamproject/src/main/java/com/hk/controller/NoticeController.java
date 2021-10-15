@@ -25,9 +25,7 @@ public class NoticeController extends HttpServlet {
 		HttpSession session=request.getSession();
 		NoticeDao dao = new NoticeDao();
 		
-		if(command.equals("admin")) {
-			response.sendRedirect("admin_main.jsp");
-		}else if(command.equals("addnotice")) {
+		if(command.equals("addnotice")) {//admin 메인 페이지에서 공지사항 등록으로 이동
 			response.sendRedirect("addnotice.jsp");
 		}else if(command.equals("noticelist")) {
 			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
@@ -46,7 +44,7 @@ public class NoticeController extends HttpServlet {
 			List<NoticeDto> list = dao.getNoticeList();
 			request.setAttribute("list", list);
 			dispatch("notice.jsp",request,response);
-		}else if(command.equals("muldel")) {
+		}else if(command.equals("muldel")) {//삭제
 			String[] chks=request.getParameterValues("chk");
 			boolean isS=dao.delNotice(chks);
 			if(isS) { 
@@ -54,7 +52,7 @@ public class NoticeController extends HttpServlet {
 			}else {
 				response.sendRedirect("error.jsp");
 			}
-		}else if(command.equals("detailnotice")) {
+		}else if(command.equals("detailnotice")) {//notice페이지에서 detailnotice로 이동
 			String seq=request.getParameter("seq");
 			int sseq=Integer.parseInt(seq);
 			NoticeDto dto= dao.detailNotice(sseq);

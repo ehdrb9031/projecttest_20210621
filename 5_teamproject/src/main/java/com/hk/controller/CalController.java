@@ -68,7 +68,9 @@ public class CalController extends HttpServlet {
 			for (int i = 0; i < wdates.length; i++) { 
 				works[i]=years[i]+Util.isTwo(months)[i]+Util.isTwo(dates)[i]+wdates[i];
 			}
-
+			for (int i = 0; i < works.length; i++) {
+				//works에 있는 값은 전체의 값이니 그 값을 id에 맞게 들어가게 해줘야 한다.
+			}
 			//hk (4) : 20211013day 20211013day 20211013day 20211013day 20211013day 20211013day
 			//hk2 (1) : 20211013day 20211013day 20211013day 20211013day 20211013day 20211013day
 			boolean isS=false;
@@ -77,7 +79,9 @@ public class CalController extends HttpServlet {
 				isS=cDao.insertCal(id,works); 
 			}
 			if(isS) {
-				
+				response.sendRedirect("schedule.jsp");
+			}else {
+				response.sendRedirect("error.jsp");
 			}
 		}else if(command.equals("addnurse")) {
 			String[] ids=request.getParameterValues("chk");

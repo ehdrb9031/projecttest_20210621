@@ -196,4 +196,20 @@ public class JoinUserDao extends SqlMapConfig {
 		return list;
 	}
 	
+	public String getRole(String id) {
+		String role="";
+		SqlSession sqlSession=null;
+
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			role=sqlSession.selectOne(namespace+"getRole",id);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:getRole():"+getClass());
+		}finally {
+			sqlSession.close();
+		}
+		return role;
+	}
+	
 }
