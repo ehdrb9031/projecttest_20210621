@@ -31,7 +31,7 @@
 <nav class="navbar navbar-light bg-light">
   <form class="container-fluid justify-content-start">
 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=insertschedule'">나의근무표조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='NoticeController.do?command=addnotice'">공지사항</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='NoticeController.do?command=noticelist'">공지사항목록</button>
 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=userinfo'">나의정보</button>
 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=logout'">로그아웃</button>
   </form>

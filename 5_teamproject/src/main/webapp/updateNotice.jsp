@@ -13,7 +13,7 @@
 <title></title>
 <script type="text/javascript">
 	function noticeList(){
-		location.href="NoticeController.do?command=getnotice";
+		location.href="NoticeController.do?command=noticelist";
 	}
 </script>
 </head>

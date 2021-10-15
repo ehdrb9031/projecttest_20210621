@@ -4,7 +4,7 @@
 <mapper namespace="com.hk.notice">
 	<insert id="insertNotice" parameterType="noticeDto">
 		INSERT INTO NOTICE VALUES
-		(NOTICE_NO_SEQ.NEXTVAL, #{id}, #{title}, #{content}, NULL, SYSDATE)
+		(NOTICE_NO_SEQ.NEXTVAL, #{id}, #{title}, #{content}, 0, SYSDATE)
 	</insert>
 	
 	<select id="getnoticelist" resultType="noticeDto" >

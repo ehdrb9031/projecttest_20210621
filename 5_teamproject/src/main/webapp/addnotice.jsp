@@ -45,7 +45,7 @@
             <td colspan="2">
                <input type="submit" value="등록하기" class="btn btn-primary">
                <input type="button" value="취소" class="btn btn-primary"
-               onclick="location.href='JoinUserController.do?command=admin_main&id=${ldto.id}'"/>
+               onclick="location.href='NoticeController.do?command=noticelist'"/>
             </td>
          </tr>
       </table>

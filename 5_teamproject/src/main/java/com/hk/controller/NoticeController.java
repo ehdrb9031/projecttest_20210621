@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import com.hk.dtos.NoticeDto;
 public class NoticeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String command=request.getParameter("command");
 		HttpSession session=request.getSession();
@@ -42,7 +44,9 @@ public class NoticeController extends HttpServlet {
 				request.setAttribute("msg", "글수정실패");
 				dispatch("error.jsp", request, response);
 			}
-		}else if(command.equals("noticelist")) {
+		}else if(command.equals("noticelist")) {		
+			session.removeAttribute("readcount");
+			
 			List<NoticeDto> list = dao.getNoticeList();
 			request.setAttribute("list", list);
 			dispatch("notice.jsp",request,response);
@@ -55,17 +59,15 @@ public class NoticeController extends HttpServlet {
 				response.sendRedirect("error.jsp");
 			}
 		}else if(command.equals("detailnotice")) {//notice페이지에서 detailnotice로 이동
-			String seq=request.getParameter("seq");
-			int sseq=Integer.parseInt(seq);
-			NoticeDto dto= dao.detailNotice(sseq);
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			NoticeDto dto= dao.detailNotice(seq);
 			if(session.getAttribute("readcount")==null) {
 				session.setAttribute("readcount", "readcount");
-				dao.readCount(sseq);
+				dao.readCount(seq);
 			}
-			request.setAttribute("dto", dto);
 
-			RequestDispatcher dispatch= request.getRequestDispatcher("detailNotice.jsp");
-			dispatch.forward(request, response);
+			request.setAttribute("dto", dto);
+			dispatch("detailNotice.jsp",request, response);
 		}else if(command.equals("updateform")) {//detailNotice -> 수정버튼
 			String seq=request.getParameter("seq");
 			NoticeDto dto = dao.detailNotice(Integer.parseInt(seq));
@@ -93,6 +95,18 @@ public class NoticeController extends HttpServlet {
 	public void dispatch(String url, HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		request.getRequestDispatcher(url).forward(request, response);
+	}
+	
+	//원하는 쿠키 구하는 메서드
+	public Cookie getCookie(String cookieName, HttpServletRequest request) {
+		Cookie[] cookies=request.getCookies();
+		Cookie cookie=null;
+		for (int i = 0; i < cookies.length; i++) {
+			if(cookies[i].getName().equals(cookieName)) {//쿠키 하나에 대해 key:value의 형태로 저장되어 있다.
+				cookie=cookies[i];
+			}
+		}		
+		return cookie;
 	}
 
 }

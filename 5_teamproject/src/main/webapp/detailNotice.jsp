@@ -45,9 +45,9 @@
 			<%
 				if(dto.getId().equals(ldto.getId())){
 				%>					
-					<button onclick="updateBoard()" class="btn btn-primary">수정</button>
+					<button onclick="location.href='NoticeController.do?command=updateform&seq=<%=dto.getNo_seq()%>'" class="btn btn-primary">수정</button>
 					<button onclick="delBoard()" >삭제</button>
-					<button onclick="boardList()">목록</button>
+					<button onclick="location.href='NoticeController.do?command=noticelist'">목록</button>
 				<%
 				}else{
 				%>
@@ -59,16 +59,10 @@
 	</tr>
 </table>
 <script type="text/javascript">
-	function updateBoard(){
-		location.href="NoticeController.do?command=updateform&seq=<%=dto.getNo_seq()%>";
-	}
 	//글삭제하기
 	function delBoard(){
 		location.href="NoticeController.do?command=muldel&chk=<%=dto.getNo_seq()%>";
 		alert("삭제되었습니다");
-	}
-	function boardList(){
-		location.href="NoticeController.do?command=noticelist";
 	}
 </script>
 </body>

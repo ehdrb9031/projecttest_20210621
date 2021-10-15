@@ -61,7 +61,7 @@ public class JoinUserController extends HttpServlet {
 			}else{
 			  response.sendRedirect("error.jsp");
 			}
-		}else if(command.equals("admin_main")){
+		}else if(command.equals("main")){
 			String id=request.getParameter("id");
 			String role=dao.getRole(id);
 			if(role.equals("HEAD")) {

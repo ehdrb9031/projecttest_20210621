@@ -87,7 +87,7 @@ response.setContentType("text/html; charset=UTF-8");
 				<button class="btn btn-danger"
 					onclick="deleteUser('<%=dto.getId()%>')">탈퇴</button>
 				<button class="btn btn-info"
-					onclick="location.href='admin_main.jsp'">메인</button>
+					onclick="location.href='JoinUserController.do?command=main&id=<%=dto.getId()%>'">메인</button>
 			</td>
 		</tr>
 	</table>
