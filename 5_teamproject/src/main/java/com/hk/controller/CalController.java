@@ -37,7 +37,7 @@ public class CalController extends HttpServlet {
 		JoinUserDao jDao=new JoinUserDao();
 		
 		
-		if(command.equals("insertschedule")) {
+		if(command.equals("myschedule")) {
 			if(session.getAttribute("ldto")==null) {
 				response.sendRedirect("index.jsp");
 			}else {
@@ -55,11 +55,30 @@ public class CalController extends HttpServlet {
 				request.setAttribute("list", list);
 				request.setAttribute("year", year);
 				request.setAttribute("month", month);
-				dispatch("insertschedule.jsp", request, response); 
+				dispatch("myschedule.jsp", request, response);  
+			}
+		}else if(command.equals("insertschedule")) {
+			if(session.getAttribute("ldto")==null) {
+				response.sendRedirect("index.jsp");
+			}else {
+				JoinUserDto dto=(JoinUserDto)session.getAttribute("ldto");
+				
+				List<JoinUserDto> list=jDao.getPreUserList();
+				
+				String year=request.getParameter("year");
+				String month=request.getParameter("month");			
+				if(year==null) {
+					Calendar cal=Calendar.getInstance();
+					year=cal.get(Calendar.YEAR)+"";
+					month=cal.get(Calendar.MONTH)+1+"";					
+				}
+				request.setAttribute("list", list);
+				request.setAttribute("year", year);
+				request.setAttribute("month", month);
+				dispatch("insertschedule.jsp", request, response);  
 			}
 		}else if(command.equals("addschedule")) {
-			
-			String []ids=request.getParameterValues("id");
+			String []ids=request.getParameterValues("id");//사람의 수
 			String []years=request.getParameterValues("year");
 			String []months=request.getParameterValues("month");
 			String []dates=request.getParameterValues("date");
@@ -70,6 +89,7 @@ public class CalController extends HttpServlet {
 			}
 			for (int i = 0; i < works.length; i++) {
 				//works에 있는 값은 전체의 값이니 그 값을 id에 맞게 들어가게 해줘야 한다.
+				
 			}
 			//hk (4) : 20211013day 20211013day 20211013day 20211013day 20211013day 20211013day
 			//hk2 (1) : 20211013day 20211013day 20211013day 20211013day 20211013day 20211013day
