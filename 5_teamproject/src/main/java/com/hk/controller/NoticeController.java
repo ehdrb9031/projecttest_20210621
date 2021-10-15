@@ -24,31 +24,29 @@ public class NoticeController extends HttpServlet {
 		String command=request.getParameter("command");
 		HttpSession session=request.getSession();
 		NoticeDao dao = new NoticeDao();
-		
+
 		if(command.equals("addnotice")) {//admin 메인 페이지에서 공지사항 등록으로 이동
 			response.sendRedirect("addnotice.jsp");
-		}else if(command.equals("noticelist")) {
+		}else if(command.equals("noticelist")) {//addnotice에서 글쓰기 -> notice
 			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
 			String id=ldto.getId();
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
-		
+
 			boolean isS=dao.insertNotice(new NoticeDto(id,title,content));
 			if(isS){ 
-				  response.sendRedirect("NoticeController.do?command=getnotice");
-				}else{
-				  response.sendRedirect("error.jsp");
-				}
-		}else if(command.equals("getnotice")) {
-			session.removeAttribute("readcount");
-			List<NoticeDto> list = dao.getNoticeList();
-			request.setAttribute("list", list);
-			dispatch("notice.jsp",request,response);
+				List<NoticeDto> list = dao.getNoticeList();
+				request.setAttribute("list", list);
+				dispatch("notice.jsp",request,response);
+			}else{
+				request.setAttribute("msg", "글수정실패");
+				dispatch("error.jsp", request, response);
+			}
 		}else if(command.equals("muldel")) {//삭제
 			String[] chks=request.getParameterValues("chk");
 			boolean isS=dao.delNotice(chks);
 			if(isS) { 
-				response.sendRedirect("NoticeController.do?command=getnotice");
+				response.sendRedirect("notice.jsp");
 			}else {
 				response.sendRedirect("error.jsp");
 			}
@@ -61,10 +59,10 @@ public class NoticeController extends HttpServlet {
 				dao.readCount(sseq);
 			}
 			request.setAttribute("dto", dto);
-			
+
 			RequestDispatcher dispatch= request.getRequestDispatcher("detailNotice.jsp");
 			dispatch.forward(request, response);
-		}else if(command.equals("updateform")) {
+		}else if(command.equals("updateform")) {//detailNotice -> 수정버튼
 			String seq=request.getParameter("seq");
 			NoticeDto dto = dao.detailNotice(Integer.parseInt(seq));
 			request.setAttribute("dto", dto);
@@ -74,7 +72,7 @@ public class NoticeController extends HttpServlet {
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
 			int sseq=Integer.parseInt(seq);
-			
+
 			boolean isS=dao.updateNotice(new NoticeDto(sseq,title,content));
 			if(isS) {
 				response.sendRedirect("NoticeController.do?command=detailnotice&seq="+sseq);
@@ -83,15 +81,14 @@ public class NoticeController extends HttpServlet {
 				dispatch("error.jsp", request, response);
 			}
 		}
-		
-}
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
+
 	public void dispatch(String url, HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-			request.getRequestDispatcher(url).forward(request, response);
-		}
+		request.getRequestDispatcher(url).forward(request, response);
+	}
 
 }
