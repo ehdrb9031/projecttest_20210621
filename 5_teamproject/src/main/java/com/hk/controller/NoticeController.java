@@ -42,6 +42,7 @@ public class NoticeController extends HttpServlet {
 				  response.sendRedirect("error.jsp");
 				}
 		}else if(command.equals("getnotice")) {
+			session.removeAttribute("readcount");
 			List<NoticeDto> list = dao.getNoticeList();
 			request.setAttribute("list", list);
 			dispatch("notice.jsp",request,response);
