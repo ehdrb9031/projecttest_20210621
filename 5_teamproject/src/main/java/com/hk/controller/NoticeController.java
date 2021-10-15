@@ -54,7 +54,7 @@ public class NoticeController extends HttpServlet {
 			String[] chks=request.getParameterValues("chk");
 			boolean isS=dao.delNotice(chks);
 			if(isS) { 
-				response.sendRedirect("notice.jsp");
+				response.sendRedirect("NoticeController.do?command=noticelist");
 			}else {
 				response.sendRedirect("error.jsp");
 			}

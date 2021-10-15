@@ -51,7 +51,7 @@
 				<%
 				}else{
 				%>
-					<button onclick="boardList()">목록</button>
+					<button onclick="location.href='NoticeController.do?command=noticelist'">목록</button>
 				<%
 				}
 			%>

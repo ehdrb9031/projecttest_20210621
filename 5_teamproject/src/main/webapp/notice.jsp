@@ -52,9 +52,12 @@
 		   alert("최소 하나 선택하세요");
 		   return false;
 		}else{
+			alert("삭제 되었습니다.");
 		   return true;
 		}
 	}
+	
+	
 
 </script>
 </head>
@@ -94,7 +97,7 @@
 	%>
 	<tr>
 		<td colspan="6">
-			<input class="btn btn-primary" type="submit" value="삭제하기"/>
+			<input class="btn btn-primary" type="submit" value="삭제하기" />
 			<button class="btn btn-outline-success me-2" type="button" onclick="location.href='NoticeController.do?command=addnotice'">작성</button>
 			<button type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
 		</td>
