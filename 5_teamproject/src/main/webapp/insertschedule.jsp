@@ -179,6 +179,7 @@
 	<tr>
       <td colspan="<%=lastDay+3%>">
          <input class="btn btn-primary" type="submit" value="저장"/>
+         <button type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
       </td>
    </tr>
 </table>
