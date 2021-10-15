@@ -51,7 +51,6 @@
 				<%
 				}else{
 				%>
-					<button onclick="delBoard()" >삭제</button>
 					<button onclick="boardList()">목록</button>
 				<%
 				}
