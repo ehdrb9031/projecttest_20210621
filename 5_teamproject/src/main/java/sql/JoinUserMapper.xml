@@ -41,15 +41,30 @@
 	<select id="idChk" resultType="String">
 		SELECT ID FROM JOINUSER WHERE ID=#{id}
 	</select>
+	
 	<select id="getRole" parameterType="String" resultType="String">
 		SELECT ROLE FROM JOINUSER WHERE ID =#{id} 
 	</select>
+	
 	<select id="getNotGivenList" resultType="JoinUserDto" parameterType="Map">
 		SELECT * FROM JOINUSER WHERE ID NOT IN
 		<foreach collection="ids" item="id" open="(" close=")" separator=",">
 		 #{id}
 		</foreach>
 	</select>
+	
+	<select id="getIdDnameList" resultType="JoinUserDto" parameterType="Map">
+		SELECT * FROM JOINUSER WHERE ID NOT IN
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		 #{id}
+		</foreach>
+		AND DNAME IN 
+		<foreach collection="dnames" item="dname" open="(" close=")" separator=",">
+		#{dname}
+		</foreach>
+		ORDER BY DNAME
+	</select>
+	
 	<select id="getDnameList" resultType="JoinUserDto" parameterType="Map">
 		SELECT * FROM JOINUSER WHERE DNAME IN 
 		<foreach collection="dnames" item="dname" open="(" close=")" separator=",">

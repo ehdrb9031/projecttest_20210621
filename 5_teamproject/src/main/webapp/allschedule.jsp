@@ -107,7 +107,7 @@
 <h1>관리자 페이지</h1>
 <h1>근무표</h1>
 <form action="CalController.do" method="post"> 
-<input type="hidden" name="command" value="selectedname" >
+<input type="hidden" name="command" value="selectednameall" >
 <div>
 <label><input type="checkbox" name="all" onclick="allSel(this.checked)">전체</label>
 <label><input type="checkbox" value="PEDIATRIC" name="chk" >소아과</label>
