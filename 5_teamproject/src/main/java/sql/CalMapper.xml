@@ -22,4 +22,8 @@
 	<select id="getGivenId" parameterType="String" resultType="String">
 		SELECT DISTINCT ID FROM TOTALCAL WHERE SUBSTR(WDATE,0,6)=#{yyyymm}
 	</select>
+	
+	<select id="getAllList" resultType="CalDto">
+		SELECT ID , WDATE FROM TOTALCAL
+	</select>
 </mapper>

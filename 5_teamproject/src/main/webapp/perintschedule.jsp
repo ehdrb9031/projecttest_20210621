@@ -76,7 +76,7 @@
 <div>
 	<span><%=ldto.getId() %></span>님 반갑습니다.
 </div> 
-<h1>근무표 작성</h1>
+<h1>근무표 수정</h1>
 <form action="CalController.do" method="post">
 <input type="hidden" name="command" value="addschedule" >
 <input type="hidden" name="lastday" value="<%=lastDay%>" >
@@ -160,7 +160,7 @@
       <td colspan="<%=lastDay+3%>">
        	 <button class="btn btn-info" type="button" onclick="getName()">조회</button>
          <input class="btn btn-primary" type="submit" value="저장"/>
-         <button class="btn btn-info" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
+		 <button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=allschedule'">근무표 보기</button>
       </td>
    </tr>
 </table>

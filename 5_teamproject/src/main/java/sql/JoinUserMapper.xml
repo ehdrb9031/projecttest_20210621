@@ -44,7 +44,7 @@
 	<select id="getRole" parameterType="String" resultType="String">
 		SELECT ROLE FROM JOINUSER WHERE ID =#{id} 
 	</select>
-	<select id="getNotGivenList" resultType="String" parameterType="Map">
+	<select id="getNotGivenList" resultType="JoinUserDto" parameterType="Map">
 		SELECT * FROM JOINUSER WHERE ID NOT IN
 		<foreach collection="ids" item="id" open="(" close=")" separator=",">
 		 #{id}

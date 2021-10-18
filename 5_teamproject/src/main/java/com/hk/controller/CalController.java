@@ -83,8 +83,7 @@ public class CalController extends HttpServlet {
 				String yyyymm=year+Util.isTwo(month+"");//현재의 근무표 작성 년월
 //				//근무표 작성된 id를 배열로 가져왔다.
 				List<String>ids=cDao.getGivenId(yyyymm);
-//				//근무표 작성된 id를 제외한 JoinUser 리스트를 가져온다.
-				
+//				//근무표 작성된 id를 제외한 JoinUser 리스트를 가져온다.	
 				List<JoinUserDto> list=jDao.getNotGivenList(ids);				
 				
 				request.setAttribute("list", list);
@@ -138,6 +137,30 @@ public class CalController extends HttpServlet {
 				request.setAttribute("year", year);
 				request.setAttribute("month", month);
 				dispatch("perintschedule.jsp", request, response);  
+			}
+		}else if(command.equals("allschedule")) {
+			if(session.getAttribute("ldto")==null) {
+				response.sendRedirect("index.jsp");
+			}else {
+				JoinUserDto dto=(JoinUserDto)session.getAttribute("ldto");
+				
+				//id와 wdate를 가져온다. list와 calList가 같은 id이면 넣어준다.
+				List<CalDto> calList=cDao.getAllList();
+				
+				List<JoinUserDto> list=jDao.getPreUserList();
+				
+				String year=request.getParameter("year");
+				String month=request.getParameter("month");			
+				if(year==null) {
+					Calendar cal=Calendar.getInstance();
+					year=cal.get(Calendar.YEAR)+"";
+					month=cal.get(Calendar.MONTH)+1+"";					
+				}
+				request.setAttribute("list", list);
+				request.setAttribute("calList", calList);
+				request.setAttribute("year", year);
+				request.setAttribute("month", month);
+				dispatch("allschedule.jsp", request, response);  
 			}
 		}
 	}

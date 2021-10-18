@@ -63,6 +63,8 @@
 	
 	List<JoinUserDto>list=(List<JoinUserDto>)request.getAttribute("list");
 	
+	List<CalDto>calList=(List<CalDto>)request.getAttribute("calList");
+	
 	JoinUserDto ldto=(JoinUserDto)session.getAttribute("ldto"); 
 	if(ldto==null){
 		pageContext.forward("index.jsp");
@@ -70,21 +72,21 @@
 %>
 <body>
 <h1>관리자 페이지</h1>
-<h1>근무표작성 페이지</h1>
+<h1>근무표</h1>
 <div>
 	<span><%=ldto.getId() %></span>님 반갑습니다.
 </div> 
-<h1>근무표 작성</h1>
+<h1>근무표</h1>
 <form action="CalController.do" method="post">
 <input type="hidden" name="command" value="addschedule" >
 <input type="hidden" name="lastday" value="<%=lastDay%>" >
 <table border="1" class="table table-hover">
 	<caption> 
-		<a href="CalController.do?command=insertschedule&year=<%=year-1%>&month=<%=month%>">◁</a>
-		<a href="CalController.do?command=insertschedule&year=<%=year%>&month=<%=month-1%>">◀</a>
+		<a href="CalController.do?command=allschedule&year=<%=year-1%>&month=<%=month%>">◁</a>
+		<a href="CalController.do?command=allschedule&year=<%=year%>&month=<%=month-1%>">◀</a>
 		<span><%=year%></span>년<span><%=month%></span>월
-		<a href="CalController.do?command=insertschedule&year=<%=year%>&month=<%=month+1%>">▶</a>
-		<a href="CalController.do?command=insertschedule&year=<%=year+1%>&month=<%=month%>">▷</a>
+		<a href="CalController.do?command=allschedule&year=<%=year%>&month=<%=month+1%>">▶</a>
+		<a href="CalController.do?command=allschedule&year=<%=year+1%>&month=<%=month%>">▷</a>
 	</caption>
 	<tr style="width: 500px;">
 	<th>부서</th>
@@ -147,13 +149,10 @@
 		<td>
 			<input type="hidden" name="year" value="<%=year%>" >
 			<input type="hidden" name="month" value="<%=month%>" >
-			<input type="hidden" name="date" value="<%=j%>" >		
-			<select class="custom-select d-block w-100" name="wdate" > 
-					<option value="day">데이</option> 
-					<option value="eve">이브</option> 
-					<option value="night">나이트</option> 
-					<option value="off">오프</option> 
-			</select> 
+			<input type="hidden" name="date" value="<%=j%>" >
+			<div style="font-size: 15px;">
+					<%=Util.getCalView(calList,dto.getId(),year,month,j) %>			
+			</div>
 		</td> 
 		<%
 		}
@@ -165,8 +164,9 @@
 	%>
 	<tr>
       <td colspan="<%=lastDay+3%>">
-         <input class="btn btn-primary" type="submit" value="저장"/>
-		 <button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=allschedule'">근무표 보기</button>
+      	 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=insertschedule'">근무표 작성</button>
+		 <button class="btn btn-info" type="button" onclick="location.href='CalController.do?command=perintschedule'">수정</button>
+         <button class="btn btn-info" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
       </td>
    </tr>
 </table>

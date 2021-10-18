@@ -74,4 +74,20 @@ public class CalDao extends SqlMapConfig {
 		}
 		return list;
 	}
+	
+	public List<CalDto> getAllList() {
+		List<CalDto> list=new ArrayList<CalDto>();
+		SqlSession sqlSession=null;
+
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			list=sqlSession.selectList(namespace+"getAllList");
+		} catch (Exception e) {
+			System.out.println("JDBC실패:getAllList():"+getClass());
+		}finally {
+			sqlSession.close();
+		}
+		return list;
+	}
 }
