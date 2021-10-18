@@ -50,4 +50,11 @@
 		 #{id}
 		</foreach>
 	</select>
+	<select id="getDnameList" resultType="JoinUserDto" parameterType="Map">
+		SELECT * FROM JOINUSER WHERE DNAME IN 
+		<foreach collection="dnames" item="dname" open="(" close=")" separator=",">
+		#{dname}
+		</foreach>
+		ORDER BY DNAME
+	</select>
 </mapper>

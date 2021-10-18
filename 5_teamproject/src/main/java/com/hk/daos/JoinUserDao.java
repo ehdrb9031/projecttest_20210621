@@ -232,5 +232,25 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return list;
 	}
+	
+	public List<JoinUserDto> getDnameList(String[]dname) {
+		List<JoinUserDto> list=new ArrayList<JoinUserDto>();
+		SqlSession sqlSession=null;
+
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			Map<String, String[]>map=new HashMap<String, String[]>();
+			map.put("dnames", dname);
+			list=sqlSession.selectList(namespace+"getDnameList", map);
+
+		} catch (Exception e) {
+			System.out.println("JDBC실패:getDnameList():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return list;
+	}
 		
 }

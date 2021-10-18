@@ -162,6 +162,33 @@ public class CalController extends HttpServlet {
 				request.setAttribute("month", month);
 				dispatch("allschedule.jsp", request, response);  
 			}
+		}else if(command.equals("selectedname")) {
+			
+			if(session.getAttribute("ldto")==null) {
+				response.sendRedirect("index.jsp");
+			}else {
+				String[] dname=request.getParameterValues("chk");	
+				JoinUserDto dto=(JoinUserDto)session.getAttribute("ldto");
+				
+				//id와 wdate를 가져온다. list와 calList가 같은 id이면 넣어준다.
+				List<CalDto> calList=cDao.getAllList();
+				 
+				List<JoinUserDto> list=jDao.getDnameList(dname);
+				
+				String year=request.getParameter("year");
+				String month=request.getParameter("month");			
+				if(year==null) {
+					Calendar cal=Calendar.getInstance();
+					year=cal.get(Calendar.YEAR)+"";
+					month=cal.get(Calendar.MONTH)+1+"";					
+				}
+				request.setAttribute("dname", dname);
+				request.setAttribute("list", list);
+				request.setAttribute("calList", calList);
+				request.setAttribute("year", year);
+				request.setAttribute("month", month);
+				dispatch("allschedule.jsp", request, response);  
+			}
 		}
 	}
 

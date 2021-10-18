@@ -17,6 +17,38 @@
 	}
 </style>
 <title></title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js" ></script>
+<script type="text/javascript">
+
+	function allSel(bool){
+		var chks=document.getElementsByName("chk");
+		for(var i = 0; i< chks.length; i++){
+			chks[i].checked=bool;
+		}
+	}
+	
+	onload = function(){
+		var chks = document.getElementsByName("chk");
+		
+		for(var i = 0; i < chks.length; i++){
+			chks[i].onclick=function(){
+				var count = 0;
+				for(var i =0; i < chks.length; i++){
+					if(chks[i].checked){
+						count++;
+					}
+				}
+				if(count == chks.length){
+					a = document.getElementsByName("all")[0];
+		 			a.checked = true;
+				}else{		
+					b = document.getElementsByName("all")[0];
+		 			b.checked = false;
+				}	
+			}
+		}
+	}
+</script>
 </head>
 <%
 //요청한 년 , 월 파라미터를 받는다.
@@ -69,16 +101,28 @@
 	if(ldto==null){
 		pageContext.forward("index.jsp");
 	}
+	
 %>
 <body>
 <h1>관리자 페이지</h1>
 <h1>근무표</h1>
+<form action="CalController.do" method="post"> 
+<input type="hidden" name="command" value="selectedname" >
+<div>
+<label><input type="checkbox" name="all" onclick="allSel(this.checked)">전체</label>
+<label><input type="checkbox" value="PEDIATRIC" name="chk" >소아과</label>
+<label><input type="checkbox" value="NEUROLOGY" name="chk" >신경과</label>
+<label><input type="checkbox" value="PLASTIC" name="chk" >성형외과</label>
+<label><input type="checkbox" value="EARNOSETHROAT" name="chk" >이비인후과</label>
+<label><input type="checkbox" value="ORTHOPEDICS" name="chk" >정형외과</label>
+<label><input type="checkbox" value="INTEGRATED" name="chk" >통합진료과</label>
+<label><input type="checkbox" value="UROLOGY" name="chk" >비뇨기과</label>
+<input type="submit" value="조회" >
+</div>
+</form>
 <div>
 	<span><%=ldto.getId() %></span>님 반갑습니다.
 </div> 
-<h1>근무표</h1>
-<form action="CalController.do" method="post">
-<input type="hidden" name="command" value="addschedule" >
 <input type="hidden" name="lastday" value="<%=lastDay%>" >
 <table border="1" class="table table-hover">
 	<caption> 
@@ -164,12 +208,11 @@
 	%>
 	<tr>
       <td colspan="<%=lastDay+3%>">
-      	 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=insertschedule'">근무표 작성</button>
+      	 <button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=insertschedule'">근무표 작성</button>
 		 <button class="btn btn-info" type="button" onclick="location.href='CalController.do?command=perintschedule'">수정</button>
          <button class="btn btn-info" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
       </td>
    </tr>
 </table>
-</form>
 </body>
 </html>
