@@ -154,7 +154,18 @@
 		</td>
 		<td>
 			<span id="n"></span>
-			
+			<select class="custom-select d-block w-100" id="rname" > 		
+			<%
+			for(int i=0;i<list.size();i++){
+				JoinUserDto dto=list.get(i);
+				if(dto.getDname().equals("PEDIATRIC")&&dto.getRole().equals("NURSE")){
+					%>
+						<option value="<%=dto.getName()%>"><%=dto.getName() %></option> 
+					<%
+				}
+			}
+			%>
+			</select> 
 		</td>
 	</tr>
 	<tr>
