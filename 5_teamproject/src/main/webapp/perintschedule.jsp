@@ -135,7 +135,7 @@
 	</tr>
 	<tr>
 		<td>	
-		<select class="custom-select d-block w-100" id="dname" > 
+		<select class="custom-select d-block w-100" id="dname" onchange="aa"> 
 			<option value="PEDIATRIC" >소아과</option> 
 			<option value="NEUROLOGY" >신경과</option> 
 			<option value="PLASTIC" >성형회과</option> 
@@ -153,7 +153,8 @@
 		</select> 
 		</td>
 		<td>
-		
+			<span id="n"></span>
+			
 		</td>
 	</tr>
 	<tr>
@@ -165,5 +166,15 @@
    </tr>
 </table>
 </form>
+<script type="text/javascript">
+	function aa(){
+		<%String a="";%>
+		document.getElementById("dname").value= <%=a%>
+	<%
+		System.out.println("하이"+a);
+	%>
+		document.getElementById("rname").value= <%String b="";%>
+	}
+</script>
 </body>
 </html>
