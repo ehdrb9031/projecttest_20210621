@@ -24,6 +24,7 @@ public class CalDao extends SqlMapConfig {
 		String[] ids= {id};
 		
 		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
 			sqlSession=getSqlSessionFactory().openSession(true);
 			Map<String, String[]>map=new HashMap<String, String[]>();
 			map.put("ids", ids);

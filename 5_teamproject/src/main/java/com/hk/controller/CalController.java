@@ -69,26 +69,24 @@ public class CalController extends HttpServlet {
 			}else {
 				JoinUserDto dto=(JoinUserDto)session.getAttribute("ldto");
 				
-				List<JoinUserDto> list=jDao.getPreUserList();
+//				List<JoinUserDto> list=jDao.getPreUserList();
 				
 				String year=request.getParameter("year");
 				String month=request.getParameter("month");	
-				
-//				String yyyymm=year+Util.isTwo(month);//현재의 근무표 작성 년월
-//				//근무표 작성된 id를 배열로 가져왔다.
-//				List<String>ids=cDao.getGivenId(yyyymm);
-//				//근무표 작성된 id를 제외한 JoinUser 리스트를 가져온다.
-//				
-//				for (int i = 0; i < ids.size(); i++) {
-//					System.out.println(ids.get(i));
-//				}
-				
-				
+							
 				if(year==null) {
 					Calendar cal=Calendar.getInstance();
 					year=cal.get(Calendar.YEAR)+"";
 					month=cal.get(Calendar.MONTH)+1+"";					
 				}
+				
+				String yyyymm=year+Util.isTwo(month+"");//현재의 근무표 작성 년월
+//				//근무표 작성된 id를 배열로 가져왔다.
+				List<String>ids=cDao.getGivenId(yyyymm);
+//				//근무표 작성된 id를 제외한 JoinUser 리스트를 가져온다.
+				
+				List<JoinUserDto> list=jDao.getNotGivenList(ids);				
+				
 				request.setAttribute("list", list);
 				request.setAttribute("year", year);
 				request.setAttribute("month", month);

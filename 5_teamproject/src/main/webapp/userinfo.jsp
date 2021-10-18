@@ -19,6 +19,11 @@
    </script>
 </head>     
 <%    
+	JoinUserDto ldto=(JoinUserDto)session.getAttribute("ldto"); 
+	if(ldto==null){
+		pageContext.forward("index.jsp");
+	}
+
    JoinUserDto dto=(JoinUserDto)request.getAttribute("dto"); 
 %>
 
@@ -58,7 +63,7 @@
       <td colspan="2">
          <button class="btn btn-primary" onclick="location.href='JoinUserController.do?command=updateform'">수정</button>
          <button class="btn btn-danger" onclick="deleteUser('<%=dto.getId()%>')">탈퇴</button>
-         <button class="btn btn-info" onclick="location.href='admin_main.jsp'">메인</button> 
+         <button class="btn btn-info" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
       </td>
    </tr>
 </table>

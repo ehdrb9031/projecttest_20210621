@@ -212,4 +212,25 @@ public class JoinUserDao extends SqlMapConfig {
 		return role;
 	}
 	
+	//체크된 간호사 리스트 구하기
+	public List<JoinUserDto> getNotGivenList(List<String>ids) {
+		List<JoinUserDto> list=new ArrayList<JoinUserDto>();
+		SqlSession sqlSession=null;
+
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			Map<String, List<String>>map=new HashMap<String, List<String>>();
+			map.put("ids", ids);
+			list=sqlSession.selectList(namespace+"getNotGivenList", map);
+
+		} catch (Exception e) {
+			System.out.println("JDBC실패:getNotGivenList():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return list;
+	}
+		
 }
