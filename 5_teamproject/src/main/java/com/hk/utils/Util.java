@@ -40,6 +40,9 @@ public class Util {
 		return a;
 	}
 	
+	public static String isTwo(String s) {
+		return s.length()<2?"0"+s:s;
+	}
 
 	//요일별 날짜 색깔 적용하기
 	public static String fontColor(int dayOfWeek,int i){
@@ -88,11 +91,25 @@ public class Util {
 		}
 		return role;
 	}
+	
+	public static String getCalView(List<String>calList,int year, int month, int i){ 
+		//i가 int형 +""를 하면서 string 변환  5일 --> 5 --> "05" 정수형의 숫자를 두자리 문자열로 변환	
+		String d=Util.isTwo(i+"");
+		String cal="";//출력해 줄 p태그 "<p>day</p>"
+		String y=year+"";
+		String m=month+"";
+		String yyyymmdd=y+m+d;//20210928
+		
+		for (int j = 0; j < calList.size(); j++) {
+			String a=calList.get(j);
+			//"20210928day" -> 20210928
+			if(yyyymmdd.equals(a.substring(0, 8))){ 
+				cal+="<p>"
+						+a.substring(8)//"20210928day" -> day
+						+"</p>"; 			
+			}
+		}	
+		return cal;
+	}
 }
-
-
-
-
-
-
 

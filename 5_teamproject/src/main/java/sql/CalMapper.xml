@@ -9,9 +9,17 @@
 		VALUES (get_seq,
 			<foreach collection="ids" item="id">
 				#{id}		
-			</foreach>
+			</foreach> 
 		,#{wdate})
 		</foreach>
 		SELECT * FROM DUAL
 	</insert>
+	
+	<select id="getCal" parameterType="String" resultType="String">
+		SELECT WDATE FROM TOTALCAL WHERE ID =#{id}
+	</select>
+	
+	<select id="getGivenId" parameterType="String" resultType="String">
+		SELECT DISTINCT ID FROM TOTALCAL WHERE SUBSTR(WDATE,0,6)=#{yyyymm}
+	</select>
 </mapper>

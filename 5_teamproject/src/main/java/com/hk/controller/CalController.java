@@ -3,6 +3,8 @@ package com.hk.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -43,6 +45,9 @@ public class CalController extends HttpServlet {
 			}else {
 				JoinUserDto dto=(JoinUserDto)session.getAttribute("ldto");
 				
+				String id=dto.getId();//로그인 한 id 가져오기
+				List<String> calList=cDao.getCal(id);//근무날짜(wdate) 리스트 받아오기				
+				
 				List<JoinUserDto> list=jDao.getPreUserList();
 				
 				String year=request.getParameter("year");
@@ -53,11 +58,70 @@ public class CalController extends HttpServlet {
 					month=cal.get(Calendar.MONTH)+1+"";					
 				}
 				request.setAttribute("list", list);
+				request.setAttribute("calList", calList);
 				request.setAttribute("year", year);
 				request.setAttribute("month", month);
 				dispatch("myschedule.jsp", request, response);  
 			}
 		}else if(command.equals("insertschedule")) {
+			if(session.getAttribute("ldto")==null) {
+				response.sendRedirect("index.jsp");
+			}else {
+				JoinUserDto dto=(JoinUserDto)session.getAttribute("ldto");
+				
+				List<JoinUserDto> list=jDao.getPreUserList();
+				
+				String year=request.getParameter("year");
+				String month=request.getParameter("month");	
+				
+//				String yyyymm=year+Util.isTwo(month);//현재의 근무표 작성 년월
+//				//근무표 작성된 id를 배열로 가져왔다.
+//				List<String>ids=cDao.getGivenId(yyyymm);
+//				//근무표 작성된 id를 제외한 JoinUser 리스트를 가져온다.
+//				
+//				for (int i = 0; i < ids.size(); i++) {
+//					System.out.println(ids.get(i));
+//				}
+				
+				
+				if(year==null) {
+					Calendar cal=Calendar.getInstance();
+					year=cal.get(Calendar.YEAR)+"";
+					month=cal.get(Calendar.MONTH)+1+"";					
+				}
+				request.setAttribute("list", list);
+				request.setAttribute("year", year);
+				request.setAttribute("month", month);
+				
+				dispatch("insertschedule.jsp", request, response);  
+			}
+		}else if(command.equals("addschedule")) {
+			int lastday=Integer.parseInt(request.getParameter("lastday"));
+			String []ids=request.getParameterValues("id");//사람의 수
+			String []years=request.getParameterValues("year");
+			String []months=request.getParameterValues("month");
+			String []dates=request.getParameterValues("date");
+			String []wdates=request.getParameterValues("wdate");
+			String []works=new String[wdates.length];
+			for (int i = 0; i < wdates.length; i++) { 
+				works[i]=years[i]+Util.isTwo(months)[i]+Util.isTwo(dates)[i]+wdates[i];
+			}
+			//hk (4) : 20211013day 20211013day 20211013day 20211013day 20211013day 20211013day
+			//hk2 (1) : 20211013day 20211013day 20211013day 20211013day 20211013day 20211013day
+			boolean isS=false;
+			String []w=null;
+			for (int i = 0; i < ids.length; i++) {
+				String id=ids[i]; 
+				w=Arrays.copyOfRange(works, lastday*i, lastday*(i+1));
+				isS=cDao.insertCal(id,w);  					
+			}  
+		
+			if(isS) {
+				response.sendRedirect("admin_main.jsp");
+			}else {
+				response.sendRedirect("error.jsp");
+			}
+		}else if(command.equals("perintschedule")) {
 			if(session.getAttribute("ldto")==null) {
 				response.sendRedirect("index.jsp");
 			}else {
@@ -75,41 +139,8 @@ public class CalController extends HttpServlet {
 				request.setAttribute("list", list);
 				request.setAttribute("year", year);
 				request.setAttribute("month", month);
-				dispatch("insertschedule.jsp", request, response);  
+				dispatch("perintschedule.jsp", request, response);  
 			}
-		}else if(command.equals("addschedule")) {
-			String []ids=request.getParameterValues("id");//사람의 수
-			String []years=request.getParameterValues("year");
-			String []months=request.getParameterValues("month");
-			String []dates=request.getParameterValues("date");
-			String []wdates=request.getParameterValues("wdate");
-			String []works=new String[wdates.length];
-			for (int i = 0; i < wdates.length; i++) { 
-				works[i]=years[i]+Util.isTwo(months)[i]+Util.isTwo(dates)[i]+wdates[i];
-			}
-			for (int i = 0; i < works.length; i++) {
-				//works에 있는 값은 전체의 값이니 그 값을 id에 맞게 들어가게 해줘야 한다.
-				
-			}
-			//hk (4) : 20211013day 20211013day 20211013day 20211013day 20211013day 20211013day
-			//hk2 (1) : 20211013day 20211013day 20211013day 20211013day 20211013day 20211013day
-			boolean isS=false;
-			for (int i = 0; i < ids.length; i++) {
-				String id=ids[i];
-				isS=cDao.insertCal(id,works); 
-			}
-			if(isS) {
-				response.sendRedirect("schedule.jsp");
-			}else {
-				response.sendRedirect("error.jsp");
-			}
-		}else if(command.equals("addnurse")) {
-			String[] ids=request.getParameterValues("chk");
-			String wdate=request.getParameter("wdate");
-			
-//			wdate를 바로 넣는 게 아니라 year month date를 받아서 넣어야 한다. 
-//			그러므로 id와 wdate를 addschedule로 보내서 처리를 해야 한다.
-			response.sendRedirect("addnurseform.jsp");
 		}
 	}
 

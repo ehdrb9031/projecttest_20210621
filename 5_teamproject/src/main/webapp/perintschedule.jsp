@@ -17,6 +17,7 @@
 	}
 </style>
 <title></title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js" ></script>
 </head>
 <%
 //요청한 년 , 월 파라미터를 받는다.
@@ -57,15 +58,12 @@
 	//month에 -1로 넣고 계산을 해야 0~11로 계산을 할 수 있다. 년 월은 바뀌지만 일은 1일로 같다.
 	cal.set(year, month-1, 1);// 2021-09-01로 셋팅한다.
 	int dayOfWeek=cal.get(Calendar.DAY_OF_WEEK);//일(1)~토(7) dayOfWeek-1을 하면 공뱁수를 구할 수 있다.
-//	System.out.println("현재 요일:"+dayOfWeek);
+	System.out.println("현재 요일:"+dayOfWeek);
 	
 	//2.해당 달의 마지막 날 구하기 --> 마지막날이 28일, 29일, 30일, 31일인지를 알기 위해
 	int lastDay=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 	
-	//한달 단위 일정 목록
-	List<CalDto>list=(List<CalDto>)request.getAttribute("list");
-
-	List<String>calList=(List<String>)request.getAttribute("calList");
+	List<JoinUserDto>list=(List<JoinUserDto>)request.getAttribute("list");
 	
 	JoinUserDto ldto=(JoinUserDto)session.getAttribute("ldto"); 
 	if(ldto==null){
@@ -73,79 +71,99 @@
 	}
 %>
 <body>
-<h1>간호사 페이지</h1>
-<h1>나의 근무표 조회</h1>
+<h1>관리자 페이지</h1>
+<h1>개인 근무표 수정</h1>
 <div>
 	<span><%=ldto.getId() %></span>님 반갑습니다.
 </div> 
 <h1>근무표 작성</h1>
+<form action="CalController.do" method="post">
+<input type="hidden" name="command" value="addschedule" >
+<input type="hidden" name="lastday" value="<%=lastDay%>" >
 <table border="1" class="table table-hover">
 	<caption> 
-		<a href="CalController.do?command=myschedule&year=<%=year-1%>&month=<%=month%>">◁</a>
-		<a href="CalController.do?command=myschedule&year=<%=year%>&month=<%=month-1%>">◀</a>
+		<a href="CalController.do?command=insertschedule&year=<%=year-1%>&month=<%=month%>">◁</a>
+		<a href="CalController.do?command=insertschedule&year=<%=year%>&month=<%=month-1%>">◀</a>
 		<span><%=year%></span>년<span><%=month%></span>월
-		<a href="CalController.do?command=myschedule&year=<%=year%>&month=<%=month+1%>">▶</a>
-		<a href="CalController.do?command=myschedule&year=<%=year+1%>&month=<%=month%>">▷</a>
+		<a href="CalController.do?command=insertschedule&year=<%=year%>&month=<%=month+1%>">▶</a>
+		<a href="CalController.do?command=insertschedule&year=<%=year+1%>&month=<%=month%>">▷</a>
 	</caption>
 	<tr style="width: 500px;">
-		<th>일</th>
-		<th>월</th>
-		<th>화</th>
-		<th>수</th>
-		<th>목</th>
-		<th>금</th>
-		<th>토</th>
+	<th>부서</th>
+	<th>직위</th>
+	<th>이름</th>
+	<%
+	for(int i=dayOfWeek;i<lastDay+dayOfWeek;i++){
+		String day="";
+		if(i%7==6){//6/7 -> 1
+			day="금";
+		}else if(i%7==0){
+			day="토";
+		}else if(i%7==1){
+			day="일";
+		}else if(i%7==2){
+			day="월";
+		}else if(i%7==3){
+			day="화";
+		}else if(i%7==4){
+			day="수";
+		}else if(i%7==5){
+			day="목";
+		}
+		%>
+		<th><%=day%></th>
+		<%
+		
+	}
+	%>
 	</tr>
 	<tr>
 		<%
 		//공백td출력하는 for문
-		for(int i=0;i<dayOfWeek-1;i++){
+		for(int i=0;i<3;i++){
 			out.print("<td>&nbsp;</td>");//out은 jsp의 기본객체중에 하나임
 		}
 		//날짜td출력하는 for문
 		for(int i=1;i<=lastDay;i++){
 			%>
-			<td>
-				<a class="countA" style="color:<%=Util.fontColor(dayOfWeek,i)%>"
-				href="CalController.do?command=myschedule&year=<%=year%>&month=<%=month%>&date=<%=i%>"><%=i%></a>
-				<div style="font-size: 15px;">
-					<%=Util.getCalView(calList,year,month,i) %>			
-				</div>
+			<td class="countA" style="color:<%=Util.fontColor(dayOfWeek,i)%>">
+				<%=i%>
 			</td>
 			<%
-			// (현재날짜+공백수)%7==0 조건을 만족하는 요일은 토요일이다.
-			if((i+dayOfWeek-1)%7==0){//1주가 끝난 것
-				out.print("</tr><tr>");//tr을 통해 줄바꿈을 할 수 있다.
-			}
 		}
-		//달력의 나머지 공백수 출력하는 for문
-		int nbsp=(7-(lastDay+dayOfWeek-1)%7)%7;//나누어 떨어지는 달력일 때 한 칸 더 생기는 현상을 방지하기 위해 %7을 한 번 더 해서 처리를 해준다.
-		for(int i=1;i<=nbsp;i++){
-			out.print("<td>"+i+"</td>");
-		}
-		
 		%>
 	</tr>
 	<tr>
-		<td colspan="7">
-			<button>근무변경신청</button>
-			<button class="btn btn-info" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
+		<td>	
+		<select class="custom-select d-block w-100" id="dname" > 
+			<option value="PEDIATRIC" >소아과</option> 
+			<option value="NEUROLOGY" >신경과</option> 
+			<option value="PLASTIC" >성형회과</option> 
+			<option value="EARNOSETHROAT" >이비인후과</option> 
+			<option value="ORTHOPEDICS" >정형외과</option> 
+			<option value="INTEGRATED" >통합진료과</option> 
+			<option value="UROLOGY" >비뇨기과</option> 
+		</select> 
+		</td>
+		<td>
+		<select class="custom-select d-block w-100" id="rname" > 		
+			<option value="CHIEF">수간호사</option> 
+			<option value="RESPONSIBLE">책임간호사</option> 
+			<option value="NURSE">평간호사</option> 
+		</select> 
+		</td>
+		<td>
+		
 		</td>
 	</tr>
+	<tr>
+      <td colspan="<%=lastDay+3%>">
+       	 <button class="btn btn-info" type="button" onclick="getName()">조회</button>
+         <input class="btn btn-primary" type="submit" value="저장"/>
+         <button class="btn btn-info" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
+      </td>
+   </tr>
 </table>
-<%! //자바 메서드 선언부
-	//요일별 날짜 색깔 적용하기
-	public String fontColor(int dayOfWeek,int i){
-		String color="";
-		if((i+dayOfWeek-1)%7==0){//토요일
-			color="blue";
-		}else if((i+dayOfWeek-1)%7==1){//일요일
-			color="red";
-		}else{//평일
-			color="black";
-		}
-		return color;
-	}
-%>
+</form>
 </body>
 </html>

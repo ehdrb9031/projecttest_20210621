@@ -57,7 +57,6 @@
 	//month에 -1로 넣고 계산을 해야 0~11로 계산을 할 수 있다. 년 월은 바뀌지만 일은 1일로 같다.
 	cal.set(year, month-1, 1);// 2021-09-01로 셋팅한다.
 	int dayOfWeek=cal.get(Calendar.DAY_OF_WEEK);//일(1)~토(7) dayOfWeek-1을 하면 공뱁수를 구할 수 있다.
-	System.out.println("현재 요일:"+dayOfWeek);
 	
 	//2.해당 달의 마지막 날 구하기 --> 마지막날이 28일, 29일, 30일, 31일인지를 알기 위해
 	int lastDay=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -71,25 +70,14 @@
 %>
 <body>
 <h1>관리자 페이지</h1>
+<h1>근무표작성 페이지</h1>
 <div>
 	<span><%=ldto.getId() %></span>님 반갑습니다.
 </div> 
-<div class="box">
-<nav class="navbar navbar-light bg-light">
-  <form class="container-fluid justify-content-start">
-     <button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=alluserlist'">간호사전체조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=userlist'">재직간호사조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=insertschedule'">근무표작성</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=workchangelist'">휴가/근무변경조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='NoticeController.do?command=noticelist'">공지사항목록</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=userinfo'">나의정보</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=logout'">로그아웃</button>
-  </form>
-</nav>
-</div>
 <h1>근무표 작성</h1>
 <form action="CalController.do" method="post">
 <input type="hidden" name="command" value="addschedule" >
+<input type="hidden" name="lastday" value="<%=lastDay%>" >
 <table border="1" class="table table-hover">
 	<caption> 
 		<a href="CalController.do?command=insertschedule&year=<%=year-1%>&month=<%=month%>">◁</a>
@@ -99,9 +87,9 @@
 		<a href="CalController.do?command=insertschedule&year=<%=year+1%>&month=<%=month%>">▷</a>
 	</caption>
 	<tr style="width: 500px;">
-	<th>이름</th>
 	<th>부서</th>
 	<th>직위</th>
+	<th>이름</th>
 	<%
 	for(int i=dayOfWeek;i<lastDay+dayOfWeek;i++){
 		String day="";
@@ -150,16 +138,16 @@
 	%>  	
 	<tr>
 		<input type="hidden" name="id" value="<%=dto.getId()%>" >
-		<td><%=dto.getName()%></td>
 		<td><%=Util.dName(dto)%></td>
 		<td><%=Util.rName(dto)%></td> 
+		<td><%=dto.getName()%></td>
 		<%
-		for(int j=1;j<=lastDay;j++){
+		for(int j=1;j<=lastDay;j++){ 
 			%>
 		<td>
-			<input type="text" name="year" value="<%=year%>" >
-			<input type="text" name="month" value="<%=month%>" >
-			<input type="text" name="date" value="<%=j%>" >
+			<input type="hidden" name="year" value="<%=year%>" >
+			<input type="hidden" name="month" value="<%=month%>" >
+			<input type="hidden" name="date" value="<%=j%>" >
 			
 			<select class="custom-select d-block w-100" name="wdate" > 
 					<option value="day">데이</option> 
@@ -179,7 +167,7 @@
 	<tr>
       <td colspan="<%=lastDay+3%>">
          <input class="btn btn-primary" type="submit" value="저장"/>
-         <button type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
+         <button class="btn btn-info" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
       </td>
    </tr>
 </table>

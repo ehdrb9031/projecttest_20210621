@@ -62,27 +62,14 @@
 </script>
 </head>
 <%
+	JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+	if(ldto==null){
+		pageContext.forward("index.jsp");
+	}
+	
 	List<JoinUserDto>list=(List<JoinUserDto>)request.getAttribute("list");
-// 	JoinUserDao dao = new JoinUserDao();
-//  	List<JoinUserDto> list = dao.getUserList();
- 	
 %>
 <body>
-<body>
-<div class="box">
-<nav class="navbar navbar-light bg-light">
-  <form class="container-fluid justify-content-start">
-<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=alluserlist'">간호사전체조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=userlist'">재직간호사조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=insertschedule'">근무표작성</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=workchangelist'">휴가/근무변경조회</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='NoticeController.do?command=addnotice'">공지사항등록</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=userinfo'">나의정보</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=logout'">로그아웃</button>
-  </form>
-</nav>
-</div>
-<div id="tablebox">
 <h1>관리자 페이지</h1>
 <h2>재직 간호사 조회</h2>
 <form action="JoinUserController.do" method="post" onsubmit="return isChecked()">
@@ -120,6 +107,7 @@
 	<tr>
       <td colspan="9">
          <input class="btn btn-primary" type="submit" value="삭제"/>
+         <button class="btn btn-info" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
       </td>
    </tr>
 </table>
