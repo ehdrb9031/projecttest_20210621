@@ -69,7 +69,38 @@
 	if(ldto==null){
 		pageContext.forward("index.jsp");
 	}
+	String dname="";
+	String rname="";
 %>
+<script type="text/javascript">
+	$(function(){
+		$("#rname").change(function() {
+		var dname=($("#dname").change().val());
+		var rname=$(this).val());
+		$.ajax({//key:value	서버쪽에 갔다가 응답을 해서 왔는데 페이지가 새로 로딩되지 않고 작업을 해준다. -> 비동기식
+			url:"CalController.do", //요청 URL
+			method:"post", //전송방식
+			//javascript코드에서 java를 사용할 때에는 EL과 출력부 스크립트릿을 사용해야 한다. 
+			data:{"command":"getName",
+				  "dname":dname,
+				  "rname":rname, 
+				  }, //server로 보낼 값
+			dataType:"json",
+			async:false, //javascript에서 ajax메서드의 실행을 비동기로 할지말지 여부
+			success:function(obj){//통신성공하면 기능 실행(obj변수는 전달된 데이터를 받는다)
+// 				document.getElementById("name").innerHTML=obj.dto.name;
+				alert(obj.dto.name);
+			},
+			error:function(){
+				console.log("서버통신실패");
+			}
+		});
+			
+		})
+	
+		
+	});
+</script>
 <body>
 <h1>관리자 페이지</h1>
 <h1>개인 근무표 수정</h1>
@@ -135,7 +166,7 @@
 	</tr>
 	<tr>
 		<td>	
-		<select class="custom-select d-block w-100" id="dname" onchange="aa"> 
+		<select class="custom-select d-block w-100" id="dname"> 
 			<option value="PEDIATRIC" >소아과</option> 
 			<option value="NEUROLOGY" >신경과</option> 
 			<option value="PLASTIC" >성형회과</option> 
@@ -153,39 +184,18 @@
 		</select> 
 		</td>
 		<td>
-			<span id="n"></span>
 			<select class="custom-select d-block w-100" id="rname" > 		
-			<%
-			for(int i=0;i<list.size();i++){
-				JoinUserDto dto=list.get(i);
-				if(dto.getDname().equals("PEDIATRIC")&&dto.getRole().equals("NURSE")){
-					%>
-						<option value="<%=dto.getName()%>"><%=dto.getName() %></option> 
-					<%
-				}
-			}
-			%>
+			<option id="name"></option> 
 			</select> 
 		</td>
 	</tr>
 	<tr>
       <td colspan="<%=lastDay+3%>">
-       	 <button class="btn btn-info" type="button" onclick="getName()">조회</button>
          <input class="btn btn-primary" type="submit" value="저장"/>
 		 <button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=allschedule'">근무표 보기</button>
       </td>
    </tr>
 </table>
 </form>
-<script type="text/javascript">
-	function aa(){
-		<%String a="";%>
-		document.getElementById("dname").value= <%=a%>
-	<%
-		System.out.println("하이"+a);
-	%>
-		document.getElementById("rname").value= <%String b="";%>
-	}
-</script>
 </body>
 </html>

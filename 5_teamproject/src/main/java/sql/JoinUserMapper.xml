@@ -72,4 +72,8 @@
 		</foreach>
 		ORDER BY DNAME
 	</select>
+	
+	<select id="getName" resultType="JoinUserDto" parameterType="Map">
+		SELECT * FROM JOINUSER WHERE DNAME =#{dname} AND ROLE =#{rname}
+	</select>
 </mapper>

@@ -218,7 +218,18 @@ public class CalController extends HttpServlet {
 				
 				dispatch("insertschedule.jsp", request, response);  
 			}
+		}else if(command.equals("getName")) {			
+			String dname=request.getParameter("dname");
+			String rname=request.getParameter("rname");
+			
+			List<JoinUserDto> list=jDao.getName(dname,rname);
+
+			//화면으로 출력하기 ---> $.ajax메서드에서 success: function(obj){} --> obj가 받는다
+			//PrintWriter 객체를 통해 print로 출력을 하면 화면에 출력되지 않고 ajax가 출력되는 값을 가로채간다. 
+			PrintWriter pw=response.getWriter();
+			pw.print(list);
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

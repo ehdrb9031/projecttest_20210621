@@ -274,4 +274,25 @@ public class JoinUserDao extends SqlMapConfig {
 		return list;
 	}
 		
+	
+	//dname,rname을 통해 이름 얻어오기
+	public List<JoinUserDto> getName(String dname,String rname) {
+		List<JoinUserDto> list=new ArrayList<JoinUserDto>();
+		SqlSession sqlSession=null;
+
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			Map<String, String>map=new HashMap<String, String>();
+			map.put("dname", dname);
+			map.put("rname", rname);
+			list=sqlSession.selectList(namespace+"getName",map);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:getName():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return list;
+	}
 }
