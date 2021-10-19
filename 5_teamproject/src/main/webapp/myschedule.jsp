@@ -78,7 +78,6 @@
 <div>
 	<span><%=ldto.getId() %></span>님 반갑습니다.
 </div> 
-<h1>근무표 작성</h1>
 <table border="1" class="table table-hover">
 	<caption> 
 		<a href="CalController.do?command=myschedule&year=<%=year-1%>&month=<%=month%>">◁</a>
@@ -88,13 +87,13 @@
 		<a href="CalController.do?command=myschedule&year=<%=year+1%>&month=<%=month%>">▷</a>
 	</caption>
 	<tr style="width: 500px;">
-		<th>일</th>
+		<th style="color:red">일</th>
 		<th>월</th>
 		<th>화</th>
 		<th>수</th>
 		<th>목</th>
 		<th>금</th>
-		<th>토</th>
+		<th style="color:blue">토</th>
 	</tr>
 	<tr>
 		<%
@@ -107,7 +106,7 @@
 			%>
 			<td>
 				<a class="countA" style="color:<%=Util.fontColor(dayOfWeek,i)%>"
-				href="CalController.do?command=myschedule&year=<%=year%>&month=<%=month%>&date=<%=i%>"><%=i%></a>
+				href="CalController.do?command=changeschedule&year=<%=year%>&month=<%=month%>&date=<%=i%>&wdate=<%=Util.getCalView(calList,year,month,i) %>"><%=i%></a>
 				<div style="font-size: 15px;">
 					<%=Util.getCalView(calList,year,month,i) %>			
 				</div>

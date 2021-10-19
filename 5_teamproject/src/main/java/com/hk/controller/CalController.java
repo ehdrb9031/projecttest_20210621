@@ -229,6 +229,27 @@ public class CalController extends HttpServlet {
 			PrintWriter pw=response.getWriter();
 			//json으로 하기
 			pw.print(list);
+		}else if(command.equals("changeschedule")) {			
+			String year=request.getParameter("year");
+			String month=request.getParameter("month");
+			String date=request.getParameter("date");
+			String wdate=request.getParameter("wdate");
+			
+			
+			request.setAttribute("year", year);
+			request.setAttribute("month", month);
+			request.setAttribute("date", date);
+			request.setAttribute("wdate", wdate);
+			
+			dispatch("changeschedule.jsp", request, response);  
+		}else if(command.equals("mychangelist")) {
+			String year=request.getParameter("year");
+			String month=request.getParameter("month");
+			String date=request.getParameter("date");
+			String wdate=request.getParameter("wdate"); //근무 날짜
+			String odate=request.getParameter("odate"); //변경 날짜
+			String title=request.getParameter("title");
+			String content=request.getParameter("content");
 		}
 		
 	}

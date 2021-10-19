@@ -104,9 +104,7 @@ public class Util {
 			String a=calList.get(j);
 			//"20210928day" -> 20210928
 			if(yyyymmdd.equals(a.substring(0, 8))){ 
-				cal+="<p>"
-						+a.substring(8)//"20210928day" -> day
-						+"</p>"; 			
+				cal+=transWork(a.substring(8));//"20210928day" -> day
 			}
 		}	
 		return cal;
@@ -126,12 +124,25 @@ public class Util {
 				//"20210928day" -> 20210928
 				if(yyyymmdd.equals(dto.getWdate().substring(0, 8))){ 
 					cal+="<p>"
-							+dto.getWdate().substring(8)//"20210928day" -> day
+							+transWork(dto.getWdate().substring(8))//"20210928day" -> day
 							+"</p>"; 		
 				}
 			}
 		}	
 		return cal;
+	}
+	
+	public static String transWork(String wdate) {
+		if (wdate.equals("day")) {
+			wdate="데이";
+		}else if(wdate.equals("eve")) {
+			wdate="이브";
+		}else if(wdate.equals("night")) {
+			wdate="나이트";
+		}else if(wdate.equals("off")) {
+			wdate="";
+		}
+		return wdate;
 	}
 }
 
