@@ -3,11 +3,18 @@
 
 <mapper namespace="com.hk.off">
 	<insert id="insertOff" parameterType="OffDto">
-		INSERT INTO OFFBOARD VALUES (NOTICE_NO_SEQ.NEXTVAL,#{id},#{off_title},#{off_content},#{wdate},'ch','N',#{odate},SYSDATE)
+		INSERT INTO OFFBOARD VALUES (OFFBOARD_OFF_SEQ.NEXTVAL,#{id},#{off_title},#{off_content},#{wdate},'CH','W',#{odate},SYSDATE)
 	</insert>
 	
 	<select id="getOffList" resultType="OffDto" parameterType="String">
 		SELECT * FROM OFFBOARD WHERE ID = #{id}
 	</select>
 	
+	<select id="getAllOffList" resultType="OffDto" parameterType="String">
+		SELECT * FROM OFFBOARD WHERE ID NOT IN #{id}
+	</select>
+	
+	<select id="geSelectOff" resultType="OffDto" parameterType="String">
+		SELECT * FROM OFFBOARD WHERE OFF_SEQ = #{seq}
+	</select>
 </mapper>

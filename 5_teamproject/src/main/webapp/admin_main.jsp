@@ -34,7 +34,7 @@
 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=userlist'">재직간호사조회</button>
 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=allschedule'">근무표</button>
 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=perintschedule'">개인근무표작성</button>
-	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=workchangelist'">휴가/근무변경조회</button>
+	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='OffController.do?command=selectofflist'">휴가/근무변경조회</button>
 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='NoticeController.do?command=noticelist'">공지사항목록</button>
 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=userinfo'">나의정보</button>
 	<button class="btn btn-outline-success me-2" type="button" onclick="location.href='JoinUserController.do?command=logout'">로그아웃</button>

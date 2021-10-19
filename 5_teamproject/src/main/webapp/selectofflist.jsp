@@ -79,7 +79,11 @@
       <th><input type="checkbox" name = "all" onclick="allSel(this.checked)"/></th>
       <th>번호</th>
       <th>아이디</th>
+      <th>이름</th>
+      <th>부서</th>
+      <th>직급</th>
       <th>제목</th>
+      <th>카테고리</th>
       <th>승인</th>
    </tr> 
  <%
@@ -90,7 +94,11 @@
 				<td><input type="checkbox" name="chk" value="<%=dto.getOff_seq()%>" /></td>
 				<td><%=dto.getOff_seq()%></td>
 				<td><%=dto.getId()%></td>
+				<td></td>
+				<td></td>
+				<td></td>
 				<td><a href="OffController.do?command=detailoff&seq=<%=dto.getOff_seq()%>"><%=dto.getOff_title()%></td>	
+				<td><%=Util.categoryChange(dto.getCategory())%></td>
 				<td><%=Util.offChange(dto.getOff())%></td>
 			</tr>
 	<%
@@ -99,6 +107,7 @@
 	<tr>
 		<td colspan="6">
 			<input class="btn btn-primary" type="submit" value="삭제하기" />
+			
 			<button type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
 		</td>
 	</tr>
