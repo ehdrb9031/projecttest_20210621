@@ -89,9 +89,9 @@
 					  }, //server로 보낼 값
 				dataType:"json",
 				success:function(obj){//통신성공하면 기능 실행(obj변수는 전달된 데이터를 받는다)
-				for(var i = 0; i < obj; i++){
-	 				document.getElementById("name").innerHTML=obj["list"][i]["name"];					
-					}
+				for(var i = 0; i < obj["list"].length; i++){
+	 				document.getElementById("name").innerHTML+="<option id='name'>" +obj['list'][i]['name'] +"</option>";			
+					}		
 				},
 				error:function(){
 					console.log("서버통신실패");
@@ -184,8 +184,7 @@
 		</select> 
 		</td>
 		<td>
-			<select class="custom-select d-block w-100"  > 		
-			<option id="name"></option> 
+			<select id="name" class="custom-select d-block w-100"  > 				 
 			</select> 
 		</td>
 	</tr>
