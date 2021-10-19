@@ -77,7 +77,7 @@
 		$("#rname").change(function() {
 			var dname=$("#dname").val();
 			var rname=$(this).val();
-			alert(dname);
+			//alert(dname);
 			$.ajax({//key:value	서버쪽에 갔다가 응답을 해서 왔는데 페이지가 새로 로딩되지 않고 작업을 해준다. -> 비동기식
 				url:"CalController.do", //요청 URL
 				method:"post", //전송방식
@@ -89,8 +89,9 @@
 					  }, //server로 보낼 값
 				dataType:"json",
 				success:function(obj){//통신성공하면 기능 실행(obj변수는 전달된 데이터를 받는다)
-	 			//	document.getElementById("name").innerHTML=obj.dto.name;
-					alert(obj.dto.name);
+				for(var i = 0; i < obj; i++){
+	 				document.getElementById("name").innerHTML=obj["list"][i]["name"];					
+					}
 				},
 				error:function(){
 					console.log("서버통신실패");
