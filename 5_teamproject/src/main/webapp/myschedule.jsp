@@ -76,7 +76,7 @@
 <h1>간호사 페이지</h1>
 <h1>나의 근무표 조회</h1>
 <div>
-	<span><%=ldto.getId() %></span>님 반갑습니다.
+	<span><%=ldto.getName() %></span>님 반갑습니다.
 </div> 
 <table border="1" class="table table-hover">
 	<caption> 
