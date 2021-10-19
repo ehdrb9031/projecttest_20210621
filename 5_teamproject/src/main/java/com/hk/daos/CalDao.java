@@ -91,7 +91,7 @@ public class CalDao extends SqlMapConfig {
 		return list;
 	}
 	
-	//id값으로 캘린더 출력해주기
+	//id값으로 근무표 출력해주기
 	public List<String> getOwnList(String id) {
 		List<String> list=new ArrayList<String>();
 		SqlSession sqlSession=null;

@@ -66,18 +66,9 @@
 	List<JoinUserDto>list=(List<JoinUserDto>)request.getAttribute("list");
 	
 	
+	String name = (String)request.getAttribute("name");
+	List<String> calList=(List<String>)request.getAttribute("calList");
 	
-	List<String>calList=null;
-	
-	
-	String name="";
-	if(name==""&&calList==null){
-		name="";
-		calList=null;
-	}else{
-		name = (String)request.getAttribute("name");
-		calList=(List<String>)request.getAttribute("calList");
-	}
 	JoinUserDto ldto=(JoinUserDto)session.getAttribute("ldto"); 
 	if(ldto==null){
 		pageContext.forward("index.jsp");
@@ -206,22 +197,17 @@
 		for(int j=1;j<=lastDay;j++){ 
 			%>
 			<td>
-				<div style="font-size: 15px;">
 					<%=Util.getCalView(calList,year,month,j) %>			
-				</div>
-			</td>
-			
-		<td>
-			<input type="hidden" name="year" value="<%=year%>" >
-			<input type="hidden" name="month" value="<%=month%>" >
-			<input type="hidden" name="date" value="<%=j%>" >		
 			<select class="custom-select d-block w-100" name="wdate" > 
 					<option value="day">데이</option> 
 					<option value="eve">이브</option> 
 					<option value="night">나이트</option> 
 					<option value="off">오프</option> 
-			</select> 
-		</td> 
+			</select> 	
+			</td>	
+			<input type="hidden" name="year" value="<%=year%>" >
+			<input type="hidden" name="month" value="<%=month%>" >
+			<input type="hidden" name="date" value="<%=j%>" >		
 		<%
 		}
 		}
