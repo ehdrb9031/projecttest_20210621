@@ -14,7 +14,7 @@ import com.hk.dtos.JoinUserDto;
 
 public class CalDao extends SqlMapConfig {
 	
-	private String namespace="com.hk.off.";
+	private String namespace="com.hk.cal.";
 	
 	//wdate넣기
 	public boolean insertCal(String id,String []works) {

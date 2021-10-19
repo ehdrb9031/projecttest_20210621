@@ -1,6 +1,7 @@
 <%@page import="com.hk.utils.Util"%>
 <%@page import="com.hk.dtos.JoinUserDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@include file="header.jsp" %> 
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=UTF-8"); %>
 <!DOCTYPE html>
@@ -33,7 +34,7 @@
 <h1>근무표 변경 신청</h1>
    <form action="OffController.do" method="post">
       <input type="hidden" name="command" value="mychangelist"> 
-       <input type="hidden" name="id" value="<%=ldto.getId()%>" >
+      <input type="hidden" name="id" value="<%=ldto.getId()%>" >
       <input type="hidden" name="year" value="<%=year%>" >
       <input type="hidden" name="month" value="<%=month%>" >
       <input type="hidden" name="date" value="<%=date%>" >

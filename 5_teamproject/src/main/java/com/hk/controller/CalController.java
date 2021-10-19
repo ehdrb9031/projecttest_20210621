@@ -234,28 +234,7 @@ public class CalController extends HttpServlet {
 	         JSONObject obj=JSONObject.fromObject(map);//map-->json변환
 	         PrintWriter pw=response.getWriter();
 	         obj.write(pw);//obj는 프린터가 없어서 프린터기를 빌려줌(pw)
-		}else if(command.equals("changeschedule")) {			
-			String year=request.getParameter("year");
-			String month=request.getParameter("month");
-			String date=request.getParameter("date");
-			String wdate=request.getParameter("wdate");
-			
-			
-			request.setAttribute("year", year);
-			request.setAttribute("month", month);
-			request.setAttribute("date", date);
-			request.setAttribute("wdate", wdate);
-			
-			dispatch("changeschedule.jsp", request, response);  
-		}else if(command.equals("mychangelist")) {
-			String year=request.getParameter("year");
-			String month=request.getParameter("month");
-			String date=request.getParameter("date");
-			String wdate=request.getParameter("wdate"); //근무 날짜
-			String odate=request.getParameter("odate"); //변경 날짜
-			String title=request.getParameter("title");
-			String content=request.getParameter("content");
-		}
+		} 
 		
 	}
 

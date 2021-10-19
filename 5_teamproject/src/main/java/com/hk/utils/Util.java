@@ -134,15 +134,24 @@ public class Util {
 	
 	public static String transWork(String wdate) {
 		if (wdate.equals("day")) {
-			wdate="데이";
+			wdate="day";
 		}else if(wdate.equals("eve")) {
-			wdate="이브";
+			wdate="eve";
 		}else if(wdate.equals("night")) {
-			wdate="나이트";
+			wdate="night";
 		}else if(wdate.equals("off")) {
 			wdate="";
 		}
 		return wdate;
+	}
+	
+	public static String offChange(String off) {
+		if(off.equals("N")) {
+			off="";
+		}else if(off.equals("Y")){
+			off="승인";
+		}
+		return off;
 	}
 }
 

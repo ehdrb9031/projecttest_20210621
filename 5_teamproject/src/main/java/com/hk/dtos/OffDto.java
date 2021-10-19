@@ -18,6 +18,15 @@ public class OffDto {
 		// TODO Auto-generated constructor stub
 	}
 
+	public OffDto(String id, String off_title, String off_content, String wdate, String odate) {
+		super();
+		this.id = id;
+		this.off_title = off_title;
+		this.off_content = off_content;
+		this.wdate = wdate;
+		this.odate = odate;
+	}
+
 	public OffDto(int seq, String id, String off_title, String off_content, String wdate, String category, String off,
 			String odate, Date regdate) {
 		super();

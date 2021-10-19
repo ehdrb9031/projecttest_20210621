@@ -106,7 +106,7 @@
 			%>
 			<td>
 				<a class="countA" style="color:<%=Util.fontColor(dayOfWeek,i)%>"
-				href="CalController.do?command=changeschedule&year=<%=year%>&month=<%=month%>&date=<%=i%>&wdate=<%=Util.getCalView(calList,year,month,i) %>"><%=i%></a>
+				href="OffController.do?command=changeschedule&year=<%=year%>&month=<%=month%>&date=<%=i%>&wdate=<%=Util.getCalView(calList,year,month,i) %>"><%=i%></a>
 				<div style="font-size: 15px;">
 					<%=Util.getCalView(calList,year,month,i) %>			
 				</div>

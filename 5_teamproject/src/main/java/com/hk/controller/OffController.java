@@ -1,8 +1,12 @@
 package com.hk.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,27 +28,48 @@ public class OffController extends HttpServlet {
 		String command=request.getParameter("command");
 		HttpSession session=request.getSession();
 		OffDao oDao=new OffDao();
-		if(command.equals("mychangelist")) {
+		if(command.equals("changeschedule")) {			
+			String year=request.getParameter("year");
+			String month=request.getParameter("month");
+			String date=request.getParameter("date");
+			String wdate=request.getParameter("wdate");
+			
+			
+			request.setAttribute("year", year);
+			request.setAttribute("month", month);
+			request.setAttribute("date", date);
+			request.setAttribute("wdate", wdate);
+			
+			dispatch("changeschedule.jsp", request, response);  
+		}else if(command.equals("mychangelist")) {
 			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
 			if(ldto==null){
 				response.sendRedirect("index.jsp");
 			} 
 			String id=request.getParameter("id");
 			
-			String year=request.getParameter("year");
-			String month=request.getParameter("month");
-			String date=request.getParameter("date");
-			String dwork=request.getParameter("dwork"); //근무 날짜	
-			String work=year+Util.isTwo(month)+Util.isTwo(date)+dwork;
+			String dYear=request.getParameter("year");
+			String dMonth=request.getParameter("month");
+			String dDate=request.getParameter("date");
+			String dWork=request.getParameter("dwork"); //근무 날짜	
+			String wdate=dYear+Util.isTwo(dMonth)+Util.isTwo(dDate)+dWork;			
+		 
+			String oDate=request.getParameter("odate"); //변경 날짜
+			String oWork=request.getParameter("owork"); //근무 날짜	
+			String off_title=request.getParameter("title");
+			String off_content=request.getParameter("content");
 			
-			System.out.println(work);
-			
-//			Date odate=request.getParameter("odate"); //변경 날짜
-			String wdate=request.getParameter("owork"); //근무 날짜	
-			String title=request.getParameter("title");
-			String content=request.getParameter("content");
-			
-			
+			String odate=oDate.substring(0, 4)+oDate.substring(5, 7)+oDate.substring(8, 10)+oWork;
+		
+			boolean isS=oDao.insertOff(new OffDto(id,off_title,off_content,wdate,odate));
+			if(isS) {
+				response.sendRedirect("OffController.do?command=myoffboardlist&id="+id);
+			}
+		}else if(command.equals("myoffboardlist")) {
+			String id=request.getParameter("id");
+			List<OffDto> list=oDao.getOffList(id);
+			request.setAttribute("list", list);
+			dispatch("myoffboardlist.jsp", request, response);
 		}
 	}
 
@@ -52,5 +77,9 @@ public class OffController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+	public void dispatch(String url, HttpServletRequest request,HttpServletResponse response) 
+			throws ServletException, IOException{
+		RequestDispatcher dispatch=request.getRequestDispatcher(url);
+		dispatch.forward(request, response);
+	}
 }
