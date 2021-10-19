@@ -227,6 +227,7 @@ public class CalController extends HttpServlet {
 			//화면으로 출력하기 ---> $.ajax메서드에서 success: function(obj){} --> obj가 받는다
 			//PrintWriter 객체를 통해 print로 출력을 하면 화면에 출력되지 않고 ajax가 출력되는 값을 가로채간다. 
 			PrintWriter pw=response.getWriter();
+			//json으로 하기
 			pw.print(list);
 		}
 		

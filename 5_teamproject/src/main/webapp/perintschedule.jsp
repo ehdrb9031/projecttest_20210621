@@ -75,31 +75,30 @@
 <script type="text/javascript">
 	$(function(){
 		$("#rname").change(function() {
-		var dname=($("#dname").change().val());
-		var rname=$(this).val());
-		$.ajax({//key:value	서버쪽에 갔다가 응답을 해서 왔는데 페이지가 새로 로딩되지 않고 작업을 해준다. -> 비동기식
-			url:"CalController.do", //요청 URL
-			method:"post", //전송방식
-			//javascript코드에서 java를 사용할 때에는 EL과 출력부 스크립트릿을 사용해야 한다. 
-			data:{"command":"getName",
-				  "dname":dname,
-				  "rname":rname, 
-				  }, //server로 보낼 값
-			dataType:"json",
-			async:false, //javascript에서 ajax메서드의 실행을 비동기로 할지말지 여부
-			success:function(obj){//통신성공하면 기능 실행(obj변수는 전달된 데이터를 받는다)
-// 				document.getElementById("name").innerHTML=obj.dto.name;
-				alert(obj.dto.name);
-			},
-			error:function(){
-				console.log("서버통신실패");
-			}
+			var dname=$("#dname").val();
+			var rname=$(this).val();
+			alert(dname);
+			$.ajax({//key:value	서버쪽에 갔다가 응답을 해서 왔는데 페이지가 새로 로딩되지 않고 작업을 해준다. -> 비동기식
+				url:"CalController.do", //요청 URL
+				method:"post", //전송방식
+				async:false, //javascript에서 ajax메서드의 실행을 비동기로 할지말지 여부
+				//javascript코드에서 java를 사용할 때에는 EL과 출력부 스크립트릿을 사용해야 한다. 
+				data:{"command":"getName",
+					  "dname":dname,
+					  "rname":rname, 
+					  }, //server로 보낼 값
+				dataType:"json",
+				success:function(obj){//통신성공하면 기능 실행(obj변수는 전달된 데이터를 받는다)
+	 			//	document.getElementById("name").innerHTML=obj.dto.name;
+					alert(obj.dto.name);
+				},
+				error:function(){
+					console.log("서버통신실패");
+				}
+			});//ajax
 		});
-			
-		})
-	
-		
 	});
+
 </script>
 <body>
 <h1>관리자 페이지</h1>
@@ -169,7 +168,7 @@
 		<select class="custom-select d-block w-100" id="dname"> 
 			<option value="PEDIATRIC" >소아과</option> 
 			<option value="NEUROLOGY" >신경과</option> 
-			<option value="PLASTIC" >성형회과</option> 
+			<option value="PLASTIC" >성형외과</option> 
 			<option value="EARNOSETHROAT" >이비인후과</option> 
 			<option value="ORTHOPEDICS" >정형외과</option> 
 			<option value="INTEGRATED" >통합진료과</option> 
@@ -184,7 +183,7 @@
 		</select> 
 		</td>
 		<td>
-			<select class="custom-select d-block w-100" id="rname" > 		
+			<select class="custom-select d-block w-100"  > 		
 			<option id="name"></option> 
 			</select> 
 		</td>
