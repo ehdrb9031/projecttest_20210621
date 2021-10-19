@@ -76,4 +76,8 @@
 	<select id="getName" resultType="JoinUserDto" parameterType="Map">
 		SELECT * FROM JOINUSER WHERE DNAME =#{dname} AND ROLE =#{rname}
 	</select>
+	
+	<select id="selectId" parameterType="Map" resultType="String">
+		SELECT ID FROM JOINUSER WHERE NAME=#{name} AND DNAME=#{dname} AND ROLE=#{rname}
+	</select>
 </mapper>

@@ -65,6 +65,19 @@
 	
 	List<JoinUserDto>list=(List<JoinUserDto>)request.getAttribute("list");
 	
+	
+	
+	List<String>calList=null;
+	
+	
+	String name="";
+	if(name==""&&calList==null){
+		name="";
+		calList=null;
+	}else{
+		name = (String)request.getAttribute("name");
+		calList=(List<String>)request.getAttribute("calList");
+	}
 	JoinUserDto ldto=(JoinUserDto)session.getAttribute("ldto"); 
 	if(ldto==null){
 		pageContext.forward("index.jsp");
@@ -90,7 +103,7 @@
 				dataType:"json",
 				success:function(obj){//통신성공하면 기능 실행(obj변수는 전달된 데이터를 받는다)
 				for(var i = 0; i < obj["list"].length; i++){
-	 				document.getElementById("name").innerHTML+="<option id='name'>" +obj['list'][i]['name'] +"</option>";			
+	 				document.getElementById("name").innerHTML+="<option id='name'>" +obj['list'][i]['name'] +"</option>";	
 					}		
 				},
 				error:function(){
@@ -109,6 +122,29 @@
 </div> 
 <h1>근무표 수정</h1>
 <form action="CalController.do" method="post">
+	<input type="hidden" name="command" value="selectname" >
+	<select class="custom-select d-block w-100" id="dname" name="dname"> 
+		<option value="PEDIATRIC" >소아과</option> 
+		<option value="NEUROLOGY" >신경과</option> 
+		<option value="PLASTIC" >성형외과</option> 
+		<option value="EARNOSETHROAT" >이비인후과</option> 
+		<option value="ORTHOPEDICS" >정형외과</option> 
+		<option value="INTEGRATED" >통합진료과</option> 
+		<option value="UROLOGY" >비뇨기과</option> 
+	</select> 
+	
+	<select class="custom-select d-block w-100" id="rname" name="rname" > 		
+		<option value="CHIEF">수간호사</option> 
+		<option value="RESPONSIBLE">책임간호사</option> 
+		<option value="NURSE">평간호사</option> 
+	</select> 
+	
+		<select name="name" id="name" class="custom-select d-block w-100"  > 				 
+		</select> 
+
+	 <input class="btn btn-primary" type="submit" value="조회"  />
+ </form>
+<form action="CalController.do" method="post">
 <input type="hidden" name="command" value="addschedule" >
 <input type="hidden" name="lastday" value="<%=lastDay%>" >
 <table border="1" class="table table-hover">
@@ -120,8 +156,6 @@
 		<a href="CalController.do?command=insertschedule&year=<%=year+1%>&month=<%=month%>">▷</a>
 	</caption>
 	<tr style="width: 500px;">
-	<th>부서</th>
-	<th>직위</th>
 	<th>이름</th>
 	<%
 	for(int i=dayOfWeek;i<lastDay+dayOfWeek;i++){
@@ -144,15 +178,15 @@
 		%>
 		<th><%=day%></th>
 		<%
-		
 	}
-	%>
+%>
 	</tr>
 	<tr>
 		<%
 		//공백td출력하는 for문
-		for(int i=0;i<3;i++){
-			out.print("<td>&nbsp;</td>");//out은 jsp의 기본객체중에 하나임
+		for(int i=0;i<1;i++){
+			out.print("<td id='name2'>&nbsp;</td>");//out은 jsp의 기본객체중에 하나임
+			
 		}
 		//날짜td출력하는 for문
 		for(int i=1;i<=lastDay;i++){
@@ -164,34 +198,41 @@
 		}
 		%>
 	</tr>
+	
 	<tr>
-		<td>	
-		<select class="custom-select d-block w-100" id="dname"> 
-			<option value="PEDIATRIC" >소아과</option> 
-			<option value="NEUROLOGY" >신경과</option> 
-			<option value="PLASTIC" >성형외과</option> 
-			<option value="EARNOSETHROAT" >이비인후과</option> 
-			<option value="ORTHOPEDICS" >정형외과</option> 
-			<option value="INTEGRATED" >통합진료과</option> 
-			<option value="UROLOGY" >비뇨기과</option> 
-		</select> 
-		</td>
+		<td><%=name%></td>
+		<%
+		if(calList!=null){
+		for(int j=1;j<=lastDay;j++){ 
+			%>
+			<td>
+				<div style="font-size: 15px;">
+					<%=Util.getCalView(calList,year,month,j) %>			
+				</div>
+			</td>
+			
 		<td>
-		<select class="custom-select d-block w-100" id="rname" > 		
-			<option value="CHIEF">수간호사</option> 
-			<option value="RESPONSIBLE">책임간호사</option> 
-			<option value="NURSE">평간호사</option> 
-		</select> 
-		</td>
-		<td>
-			<select id="name" class="custom-select d-block w-100"  > 				 
+			<input type="hidden" name="year" value="<%=year%>" >
+			<input type="hidden" name="month" value="<%=month%>" >
+			<input type="hidden" name="date" value="<%=j%>" >		
+			<select class="custom-select d-block w-100" name="wdate" > 
+					<option value="day">데이</option> 
+					<option value="eve">이브</option> 
+					<option value="night">나이트</option> 
+					<option value="off">오프</option> 
 			</select> 
-		</td>
+		</td> 
+		<%
+		}
+		}
+		%>
 	</tr>
+	
 	<tr>
-      <td colspan="<%=lastDay+3%>">
+      <td colspan="<%=lastDay+1%>">
          <input class="btn btn-primary" type="submit" value="저장"/>
 		 <button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=allschedule'">근무표 보기</button>
+		
       </td>
    </tr>
 </table>

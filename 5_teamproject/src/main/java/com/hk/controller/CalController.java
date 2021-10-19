@@ -133,6 +133,7 @@ public class CalController extends HttpServlet {
 					year=cal.get(Calendar.YEAR)+"";
 					month=cal.get(Calendar.MONTH)+1+"";					
 				}
+				
 				request.setAttribute("list", list);
 				request.setAttribute("year", year);
 				request.setAttribute("month", month);
@@ -234,7 +235,29 @@ public class CalController extends HttpServlet {
 	         JSONObject obj=JSONObject.fromObject(map);//map-->json변환
 	         PrintWriter pw=response.getWriter();
 	         obj.write(pw);//obj는 프린터가 없어서 프린터기를 빌려줌(pw)
-		} 
+		}else if(command.equals("selectname")) {
+			String name = request.getParameter("name");
+			String dname = request.getParameter("dname");
+			String rname = request.getParameter("rname");
+			
+			String id=jDao.selectId(name,dname,rname);
+			
+			System.out.println(name+dname+rname);
+			String year=request.getParameter("year");
+			String month=request.getParameter("month");			
+			if(year==null) {
+				Calendar cal=Calendar.getInstance();
+				year=cal.get(Calendar.YEAR)+"";
+				month=cal.get(Calendar.MONTH)+1+"";					
+			}
+			
+			List<String>calList=cDao.getOwnList(id);
+			request.setAttribute("name", name);
+			request.setAttribute("calList", calList);
+			request.setAttribute("year", year);
+			request.setAttribute("month", month);
+			dispatch("perintschedule.jsp", request, response);
+		}
 		
 	}
 

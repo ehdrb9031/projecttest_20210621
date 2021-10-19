@@ -91,5 +91,22 @@ public class CalDao extends SqlMapConfig {
 		return list;
 	}
 	
+	//id값으로 캘린더 출력해주기
+	public List<String> getOwnList(String id) {
+		List<String> list=new ArrayList<String>();
+		SqlSession sqlSession=null;
+
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			list=sqlSession.selectList(namespace+"getownlist",id);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:getCal():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return list;
+	}
 	
 }

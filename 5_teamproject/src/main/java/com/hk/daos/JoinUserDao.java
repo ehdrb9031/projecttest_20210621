@@ -295,4 +295,26 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return list;
 	}
+	
+	//이름 부서 역할을 통해 id를 가져오기
+	public String selectId(String name, String dname, String rname) {
+		String id="";
+		SqlSession sqlSession=null;
+
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			Map<String, String>map=new HashMap<String, String>();
+			map.put("name", name);
+			map.put("dname", dname);
+			map.put("rname", rname);
+			id=sqlSession.selectOne(namespace+"selectId",map);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:selectId():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return id;
+	}
 }
