@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.hk.config.SqlMapConfig;
+import com.hk.dtos.JoinUserDto;
 import com.hk.dtos.OffDto;
 
 public class OffDao extends SqlMapConfig {
@@ -84,5 +85,41 @@ public class OffDao extends SqlMapConfig {
 			sqlSession.close();
 		}
 		return dto;
+	}
+	
+	public boolean delOffList(String[] noseqs) {
+		int count=0;
+		SqlSession sqlSession=null;
+		try {
+			sqlSession=getSqlSessionFactory().openSession(false);
+			for(int i =0; i <noseqs.length; i++) {		
+				String seq=noseqs[i];
+				sqlSession.delete(namespace+"delOffList", seq);
+			}
+			count = 1;
+			sqlSession.commit();
+		} catch (Exception e) {
+			System.out.println("JDBC실패:delOffList():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
+	
+	//승인 반려 update
+	public boolean updateOff(String seq) {
+		SqlSession sqlSession=null;
+		int count=0;
+		try {  
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			count=sqlSession.update(namespace+"updateOff",seq);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:updateOff():"+getClass());
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
 	}
 }

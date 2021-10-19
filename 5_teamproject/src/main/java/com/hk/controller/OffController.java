@@ -99,7 +99,24 @@ public class OffController extends HttpServlet {
 			JoinUserDto jDto=jDao.getListOne(oDto.getId());
 			
 			request.setAttribute("oDto", oDto);
+			request.setAttribute("jDto", jDto);
 			dispatch("detailoff.jsp", request, response);
+		}else if(command.equals("muldel")) {
+			String[] chks=request.getParameterValues("chk");
+			boolean isS=oDao.delOffList(chks);
+			if(isS) { 
+				response.sendRedirect("OffController.do?command=selectofflist");
+			}else {
+				response.sendRedirect("error.jsp");
+			}
+		}else if(command.equals("offYes")) {
+			String seq=request.getParameter("seq");
+			boolean isS=oDao.updateOff(seq);
+			if(isS) { 
+				response.sendRedirect("OffController.do?command=selectofflist");
+			}else {
+				response.sendRedirect("error.jsp");
+			}
 		}
 	}
 

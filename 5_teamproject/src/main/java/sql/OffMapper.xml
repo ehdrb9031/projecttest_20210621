@@ -17,4 +17,12 @@
 	<select id="geSelectOff" resultType="OffDto" parameterType="String">
 		SELECT * FROM OFFBOARD WHERE OFF_SEQ = #{seq}
 	</select>
+	
+	<delete id="delOffList" parameterType="String">
+		DELETE FROM OFFBOARD WHERE OFF_SEQ=#{seq}
+	</delete>
+	
+	<update id="updateOff" parameterType="String">
+		UPDATE OFFBOARD SET OFF ='Y' WHERE OFF_SEQ =#{seq}
+	</update>
 </mapper>

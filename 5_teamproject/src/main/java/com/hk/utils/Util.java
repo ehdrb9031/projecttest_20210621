@@ -27,6 +27,17 @@ public class Util {
 		this.toDates=sdf.format(tm);
 	}
 
+	public static String dateForm(String mDate) { 
+		
+		//mDate를 날짜형식으로 편집한다. yyyy-MM-dd hh:mm:ss
+		String m=mDate.substring(0, 4)+"-"   //year-
+				+mDate.substring(4, 6)+"-"   //year-month-
+				+mDate.substring(6, 8)+"-"   //"year-month-date "
+				+mDate.substring(8);   //"year-month-date hh:"
+		
+		return m;
+	}
+	
 	public String getToDates() {
 		return toDates;
 	}

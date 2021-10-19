@@ -1,3 +1,4 @@
+<%@page import="com.hk.daos.JoinUserDao"%>
 <%@page import="com.hk.utils.Util"%>
 <%@page import="com.hk.dtos.OffDto"%>
 <%@page import="java.util.List"%>
@@ -71,14 +72,13 @@
 	List<OffDto>list=(List<OffDto>)request.getAttribute("list");
 %>
 <body>
-<h1>나의 근무변경 신청 현황</h1>
+<h1>근무변경 휴가 조회</h1>
 <form action="OffController.do" method="post" onsubmit="return isChecked()">
 <input type="hidden" name="command" value="muldel">
 <table class="table table-hover">
    <tr>
       <th><input type="checkbox" name = "all" onclick="allSel(this.checked)"/></th>
       <th>번호</th>
-      <th>아이디</th>
       <th>이름</th>
       <th>부서</th>
       <th>직급</th>
@@ -87,16 +87,17 @@
       <th>승인</th>
    </tr> 
  <%
+ 		JoinUserDao jDao=new JoinUserDao();
 		for(int i=0;i<list.size();i++){
 			OffDto dto=list.get(i);//list[dto,dto,dto...]--> 순차적으로 하나씩 꺼낸다(dto)
+			JoinUserDto jDto=jDao.getListOne(dto.getId());
 			%>  	
 			<tr>
 				<td><input type="checkbox" name="chk" value="<%=dto.getOff_seq()%>" /></td>
 				<td><%=dto.getOff_seq()%></td>
-				<td><%=dto.getId()%></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><%=jDto.getName()%></td>
+				<td><%=Util.dName(jDto)%></td>
+				<td><%=Util.rName(jDto)%></td>
 				<td><a href="OffController.do?command=detailoff&seq=<%=dto.getOff_seq()%>"><%=dto.getOff_title()%></td>	
 				<td><%=Util.categoryChange(dto.getCategory())%></td>
 				<td><%=Util.offChange(dto.getOff())%></td>
@@ -105,9 +106,8 @@
 		}
 	%>
 	<tr>
-		<td colspan="6">
-			<input class="btn btn-primary" type="submit" value="삭제하기" />
-			
+		<td colspan="8">
+			<input class="btn btn-primary" type="submit" value="삭제하기" />		
 			<button type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
 		</td>
 	</tr>

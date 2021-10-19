@@ -80,4 +80,8 @@
 	<select id="selectId" parameterType="Map" resultType="String">
 		SELECT ID FROM JOINUSER WHERE NAME=#{name} AND DNAME=#{dname} AND ROLE=#{rname}
 	</select>
+	
+	<select id="getListOne" parameterType="String" resultType="JoinUserDto">
+		SELECT * FROM JOINUSER WHERE ID =#{id}
+	</select>
 </mapper>
