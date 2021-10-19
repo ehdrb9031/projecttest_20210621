@@ -27,7 +27,7 @@
 		SELECT ID , WDATE FROM TOTALCAL
 	</select>
 	
-	<select id="getownlist" parameterType="Map" resultType="String">
+	<select id="getownlist" parameterType="String" resultType="String">
 		SELECT WDATE FROM TOTALCAL WHERE ID=#{id}
 	</select>
 </mapper>
