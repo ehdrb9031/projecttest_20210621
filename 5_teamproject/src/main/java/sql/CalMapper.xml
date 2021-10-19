@@ -30,4 +30,8 @@
 	<select id="getownlist" parameterType="String" resultType="String">
 		SELECT WDATE FROM TOTALCAL WHERE ID=#{id}
 	</select>
+	
+	<update id="updateWork" parameterType="String">
+		UPDATE WDATE SET WDATE=#{wdate} FROM TOTALCAL WHERE ID=#{id}
+	</update>
 </mapper>
