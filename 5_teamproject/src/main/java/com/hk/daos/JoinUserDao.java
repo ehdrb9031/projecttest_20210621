@@ -96,6 +96,23 @@ public class JoinUserDao extends SqlMapConfig {
 		}
 		return list;
 	}
+	
+	//유저목록 조회 id를 통해 조회
+	public JoinUserDto getListOne(String id) {
+		JoinUserDto dto=new JoinUserDto();
+		SqlSession sqlSession=null;
+
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			dto=sqlSession.selectOne(namespace+"getListOne",id);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:getListOne():"+getClass());
+		}finally {
+			sqlSession.close();
+		}
+		return dto;
+	}
 
 	public boolean updateList(String[] seqs) {
 		int count=0;

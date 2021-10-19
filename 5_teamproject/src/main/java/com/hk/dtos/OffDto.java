@@ -3,7 +3,7 @@ package com.hk.dtos;
 import java.util.Date;
 
 public class OffDto {
-	private int seq;
+	private int off_seq;
 	private String id;
 	private String off_title;
 	private String off_content;
@@ -27,10 +27,10 @@ public class OffDto {
 		this.odate = odate;
 	}
 
-	public OffDto(int seq, String id, String off_title, String off_content, String wdate, String category, String off,
+	public OffDto(int off_seq, String id, String off_title, String off_content, String wdate, String category, String off,
 			String odate, Date regdate) {
 		super();
-		this.seq = seq;
+		this.off_seq = off_seq;
 		this.id = id;
 		this.off_title = off_title;
 		this.off_content = off_content;
@@ -41,12 +41,12 @@ public class OffDto {
 		this.regdate = regdate;
 	}
 
-	public int getSeq() {
-		return seq;
+	public int getOff_seq() {
+		return off_seq;
 	}
 
-	public void setSeq(int seq) {
-		this.seq = seq;
+	public void setOff_seq(int seq) {
+		this.off_seq = seq;
 	}
 
 	public String getId() {
@@ -115,7 +115,7 @@ public class OffDto {
 
 	@Override
 	public String toString() {
-		return "offDto [seq=" + seq + ", id=" + id + ", off_title=" + off_title + ", off_content=" + off_content
+		return "offDto [off_seq=" + off_seq + ", id=" + id + ", off_title=" + off_title + ", off_content=" + off_content
 				+ ", wdate=" + wdate + ", category=" + category + ", off=" + off + ", odate=" + odate + ", regdate="
 				+ regdate + "]";
 	}

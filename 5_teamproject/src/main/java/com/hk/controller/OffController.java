@@ -28,7 +28,13 @@ public class OffController extends HttpServlet {
 		String command=request.getParameter("command");
 		HttpSession session=request.getSession();
 		OffDao oDao=new OffDao();
-		if(command.equals("changeschedule")) {			
+		JoinUserDao jDao=new JoinUserDao();
+		
+		if(command.equals("changeschedule")) {	
+			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+			if(ldto==null){
+				response.sendRedirect("index.jsp");
+			} 
 			String year=request.getParameter("year");
 			String month=request.getParameter("month");
 			String date=request.getParameter("date");
@@ -63,13 +69,37 @@ public class OffController extends HttpServlet {
 		
 			boolean isS=oDao.insertOff(new OffDto(id,off_title,off_content,wdate,odate));
 			if(isS) {
-				response.sendRedirect("OffController.do?command=myoffboardlist&id="+id);
+				response.sendRedirect("OffController.do?command=myoffboardlist");
 			}
 		}else if(command.equals("myoffboardlist")) {
-			String id=request.getParameter("id");
-			List<OffDto> list=oDao.getOffList(id);
+			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+			if(ldto==null){
+				response.sendRedirect("index.jsp");
+			} 
+			List<OffDto> list=oDao.getOffList(ldto.getId());//자기 자신이 쓴 리스트
 			request.setAttribute("list", list);
 			dispatch("myoffboardlist.jsp", request, response);
+		}else if(command.equals("selectofflist")) {
+			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+			if(ldto==null){
+				response.sendRedirect("index.jsp");
+			} 
+			
+			List<OffDto> list=oDao.getAllOffList(ldto.getId());//모든 신청 리스트			
+			
+			request.setAttribute("list", list);
+			dispatch("selectofflist.jsp", request, response);
+		}else if(command.equals("detailoff")) {
+			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+			if(ldto==null){
+				response.sendRedirect("index.jsp");
+			} 
+			String seq=request.getParameter("seq");
+			OffDto oDto=oDao.geSelectOff(seq);//모든 신청 리스트	
+			JoinUserDto jDto=jDao.getListOne(oDto.getId());
+			
+			request.setAttribute("oDto", oDto);
+			dispatch("detailoff.jsp", request, response);
 		}
 	}
 

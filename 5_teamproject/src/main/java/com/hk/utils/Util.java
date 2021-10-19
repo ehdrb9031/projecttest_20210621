@@ -147,11 +147,23 @@ public class Util {
 	
 	public static String offChange(String off) {
 		if(off.equals("N")) {
-			off="";
+			off="반려";
 		}else if(off.equals("Y")){
 			off="승인";
+		}else if(off.equals("W")){
+			off="대기";
 		}
 		return off;
+	}
+	
+	//휴가or변경 선택
+	public static String categoryChange(String category) {
+		if(category.equals("CH")) {
+			category="변경";
+		}else if(category.equals("VA")){
+			category="휴가";
+		}
+		return category;
 	}
 }
 

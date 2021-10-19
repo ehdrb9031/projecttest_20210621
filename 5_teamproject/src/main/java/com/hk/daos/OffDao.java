@@ -32,7 +32,7 @@ public class OffDao extends SqlMapConfig {
 		return count>0?true:false;
 	}
 	
-	//근무변경 조회
+	//자신이 쓴 근무변경 조회
 	public List<OffDto> getOffList(String id) {
 		List<OffDto> list=new ArrayList<OffDto>();
 		SqlSession sqlSession=null;
@@ -48,5 +48,41 @@ public class OffDao extends SqlMapConfig {
 			sqlSession.close();
 		}
 		return list;
+	}
+	
+	//근무변경 전체 조회
+	public List<OffDto> getAllOffList(String id) {
+		List<OffDto> list=new ArrayList<OffDto>();
+		SqlSession sqlSession=null;
+
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			list=sqlSession.selectList(namespace+"getAllOffList",id);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:getAllOffList():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return list;
+	}
+	
+	//근무변경글 상세조회
+	public OffDto geSelectOff(String seq) {
+		OffDto dto=new OffDto();
+		SqlSession sqlSession=null;
+
+		try {
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			dto=sqlSession.selectOne(namespace+"geSelectOff",seq);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:geSelectOff():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return dto;
 	}
 }
