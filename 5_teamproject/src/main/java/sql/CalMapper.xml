@@ -32,7 +32,7 @@
 	</select>
 	
 	<update id="updateWork" parameterType="String"> 
-		UPDATE WDATE SET WDATE=#{wdate} FROM TOTALCAL WHERE ID=#{id}
+		UPDATE TOTALCAL SET WDATE=#{wdate} FROM TOTALCAL WHERE ID=#{id}
 	</update> 
 <!-- 	서브 스트링으로 짜르고,  년월일을 조건으로 해서 다중업데이트? -->
 
