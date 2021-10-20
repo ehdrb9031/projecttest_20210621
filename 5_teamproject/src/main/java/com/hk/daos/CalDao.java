@@ -109,4 +109,25 @@ public class CalDao extends SqlMapConfig {
 		return list;
 	}
 	
+	//승인을 눌렀을 때 odate를 가져와 wdate와 바꾼다.
+	public boolean updateWdate(String id, String wdate, String odate) {
+		int count=0;
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			Map<String, String>map=new HashMap<String, String>();
+			map.put("id", id);
+			map.put("wdate", wdate);
+			map.put("odate", odate);
+			count=sqlSession.update(namespace+"updateWdate", map);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:updateWdate():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
+	
 }

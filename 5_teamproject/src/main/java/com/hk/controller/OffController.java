@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hk.daos.CalDao;
 import com.hk.daos.JoinUserDao;
 import com.hk.daos.OffDao;
 import com.hk.dtos.JoinUserDto;
@@ -29,6 +30,7 @@ public class OffController extends HttpServlet {
 		HttpSession session=request.getSession();
 		OffDao oDao=new OffDao();
 		JoinUserDao jDao=new JoinUserDao();
+		CalDao cDao=new CalDao();
 		
 		if(command.equals("changeschedule")) {	
 			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
@@ -102,6 +104,7 @@ public class OffController extends HttpServlet {
 			request.setAttribute("jDto", jDto);
 			dispatch("detailoff.jsp", request, response);
 		}else if(command.equals("muldel")) {
+			
 			String[] chks=request.getParameterValues("chk");
 			boolean isS=oDao.delOffList(chks);
 			if(isS) { 
@@ -110,8 +113,31 @@ public class OffController extends HttpServlet {
 				response.sendRedirect("error.jsp");
 			}
 		}else if(command.equals("offYes")) {
+			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+			if(ldto==null){
+				response.sendRedirect("index.jsp");
+			} 
 			String seq=request.getParameter("seq");
-			boolean isS=oDao.updateOff(seq);
+			String id=request.getParameter("id");
+			String wDate=request.getParameter("wdate");//근무날짜
+			String oDate=request.getParameter("odate");//변경날짜
+			System.out.println(id+oDate+wDate);
+			boolean isS=oDao.updateOffYes(seq);
+			
+			if(isS) {  
+				//승인을 눌렀을 때 odate를 cal DB wdate에 넣어주면 된다.
+				boolean isUp=cDao.updateWdate(id,wDate,oDate);
+				if(isUp) {
+					response.sendRedirect("OffController.do?command=selectofflist");
+				}else {
+					response.sendRedirect("error.jsp");
+				}
+			}else {
+				response.sendRedirect("error.jsp");
+			}
+		}else if(command.equals("offNo")) {
+			String seq=request.getParameter("seq");
+			boolean isS=oDao.updateOffNo(seq);
 			if(isS) { 
 				response.sendRedirect("OffController.do?command=selectofflist");
 			}else {

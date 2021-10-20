@@ -108,15 +108,31 @@ public class OffDao extends SqlMapConfig {
 	}
 	
 	//승인 반려 update
-	public boolean updateOff(String seq) {
+	public boolean updateOffYes(String seq) {
 		SqlSession sqlSession=null;
 		int count=0;
 		try {  
 			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
 			sqlSession=sqlSessionFactory.openSession(true);
-			count=sqlSession.update(namespace+"updateOff",seq);
+			count=sqlSession.update(namespace+"updateOffYes",seq);
 		} catch (Exception e) {
-			System.out.println("JDBC실패:updateOff():"+getClass());
+			System.out.println("JDBC실패:updateOffYes():"+getClass());
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
+	
+	//승인 반려 update
+	public boolean updateOffNo(String seq) {
+		SqlSession sqlSession=null;
+		int count=0;
+		try {  
+			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
+			sqlSession=sqlSessionFactory.openSession(true);
+			count=sqlSession.update(namespace+"updateOffNo",seq);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:updateOffNo():"+getClass());
 		}finally {
 			sqlSession.close();
 		}

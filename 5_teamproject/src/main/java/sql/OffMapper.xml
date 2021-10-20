@@ -22,7 +22,11 @@
 		DELETE FROM OFFBOARD WHERE OFF_SEQ=#{seq}
 	</delete>
 	
-	<update id="updateOff" parameterType="String">
+	<update id="updateOffYes" parameterType="String">
 		UPDATE OFFBOARD SET OFF ='Y' WHERE OFF_SEQ =#{seq}
+	</update>
+	
+	<update id="updateOffNo" parameterType="String">
+		UPDATE OFFBOARD SET OFF ='N' WHERE OFF_SEQ =#{seq}
 	</update>
 </mapper>

@@ -64,8 +64,18 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<button class="btn btn-outline-success me-2" type="button" onclick="location.href='OffController.do?command=offYes&seq=<%=oDto.getOff_seq() %>'">승인</button>
-			<button class="btn btn-outline-success me-2" type="button" onclick="location.href='OffController.do?command=offNo'">반려</button>
+		<%
+				if(ldto.getRole().equals("HEAD")){
+				%>					
+					<button class="btn btn-outline-success me-2" type="button" onclick="location.href='OffController.do?command=offYes&seq=<%=oDto.getOff_seq() %>&id=<%=oDto.getId()%>&odate=<%=oDto.getOdate()%>&wdate=<%=oDto.getWdate()%>'">승인</button>
+					<button class="btn btn-outline-success me-2" type="button" onclick="location.href='OffController.do?command=offNo&seq=<%=oDto.getOff_seq()%>'">반려</button>
+				<%
+				}else{
+				%>
+					<button onclick="location.href='OffController.do?command=myoffboardlist'">목록</button>
+				<%
+				}
+			%>
 		</td>
 	</tr>
 </table>

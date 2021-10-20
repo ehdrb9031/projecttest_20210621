@@ -35,4 +35,8 @@
 		UPDATE WDATE SET WDATE=#{wdate} FROM TOTALCAL WHERE ID=#{id}
 	</update> 
 <!-- 	서브 스트링으로 짜르고,  년월일을 조건으로 해서 다중업데이트? -->
+
+	<update id="updateWdate" parameterType="Map">
+		UPDATE TOTALCAL SET WDATE=#{odate} WHERE SUBSTR(WDATE,0,8)=#{wdate} AND ID =#{id}; 
+	</update>
 </mapper>
