@@ -257,8 +257,9 @@ public class CalController extends HttpServlet {
 			request.setAttribute("year", year);
 			request.setAttribute("month", month);
 			dispatch("perintschedule.jsp", request, response);
+		}else if(command.equals("updateschedule")) {
+			
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

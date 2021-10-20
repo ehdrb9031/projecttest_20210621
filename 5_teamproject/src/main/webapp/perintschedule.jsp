@@ -216,9 +216,8 @@
 	
 	<tr>
       <td colspan="<%=lastDay+1%>">
-         <input class="btn btn-primary" type="submit" value="저장"/>
+         <input class="btn btn-primary" type="submit" value="저장" onclick="location.href='CalController.do?command=updateschedule'"/>
 		 <button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=allschedule'">근무표 보기</button>
-		
       </td>
    </tr>
 </table>

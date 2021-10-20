@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.hk.config.SqlMapConfig;
 import com.hk.dtos.CalDto;
 import com.hk.dtos.JoinUserDto;
+import com.hk.dtos.NoticeDto;
 
 public class CalDao extends SqlMapConfig {
 	
@@ -123,6 +124,22 @@ public class CalDao extends SqlMapConfig {
 			count=sqlSession.update(namespace+"updateWdate", map);
 		} catch (Exception e) {
 			System.out.println("JDBC실패:updateWdate():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
+	
+	//근무일 업데이트 
+	public boolean updateWork(CalDto dto) {
+		int count=0;
+		SqlSession sqlSession=null;
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.update(namespace+"updateWork",dto);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:updateWork()"+getClass());
 			e.printStackTrace();
 		}finally {
 			sqlSession.close();
