@@ -67,14 +67,14 @@
 	
 	
 	String name = (String)request.getAttribute("name");
+	String id = (String)request.getAttribute("id");
 	List<String> calList=(List<String>)request.getAttribute("calList");
 	
 	JoinUserDto ldto=(JoinUserDto)session.getAttribute("ldto"); 
 	if(ldto==null){
 		pageContext.forward("index.jsp");
 	}
-	String dname="";
-	String rname="";
+	
 %>
 <script type="text/javascript">
 	$(function(){
@@ -138,7 +138,7 @@
  
 <form action="CalController.do" method="post">
 <input type="hidden" name="command" value="updateschedule" >
-<input type="hidden" name="id" value="<%=name%>" >
+<input type="hidden" name="id" value="<%=id%>" >
 <table border="1" class="table table-hover">
 	<caption> 
 		<a href="CalController.do?command=insertschedule&year=<%=year-1%>&month=<%=month%>">◁</a>
@@ -190,7 +190,12 @@
 		%>
 	</tr>
 	<tr>
-		<td><%=name%></td>
+		<td><%
+			if(name==null){
+				name="";
+			}
+		%><%=name%>
+		</td>
 		<%
 		if(calList!=null){
 		for(int j=1;j<=lastDay;j++){ 

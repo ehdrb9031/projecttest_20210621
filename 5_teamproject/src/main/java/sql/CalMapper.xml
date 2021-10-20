@@ -32,11 +32,11 @@
 	</select>
 	
 	<delete id="deleteWork" parameterType="Map"> 
-		DELETE FROM TOTALCAL WHERE SUBSTR(WDATE,0,6)={wdate} AND ID =#{id};
+		DELETE FROM TOTALCAL WHERE SUBSTR(WDATE,0,6)=#{wdate} AND ID =#{id}
 	</delete> 
 
 	<update id="updateWdate" parameterType="Map">
-		UPDATE TOTALCAL SET WDATE=#{odate} WHERE SUBSTR(WDATE,0,8)=#{wdate} AND ID =#{id}; 
+		UPDATE TOTALCAL SET WDATE=#{odate} WHERE SUBSTR(WDATE,0,8)=#{wdate} AND ID =#{id}
 	</update>
 	
 	<delete id="deleteCal" parameterType="Map">

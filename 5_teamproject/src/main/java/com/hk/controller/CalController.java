@@ -256,6 +256,7 @@ public class CalController extends HttpServlet {
 			request.setAttribute("calList", calList);
 			request.setAttribute("year", year);
 			request.setAttribute("month", month);
+			request.setAttribute("id", id);
 			dispatch("perintschedule.jsp", request, response);
 		}else if(command.equals("updateschedule")) {
 			String id=request.getParameter("id");
@@ -266,18 +267,27 @@ public class CalController extends HttpServlet {
 			
 			//year+month -> yyyymm
 			String yyyymm=year+Util.isTwo(month+"");
-			//deleteWork(id,yyyymm) ->결과 boolean true -> insert 
-			boolean isS = CalDao.deleteWork(new CalDto(id,yyyymm)); 
+//			System.out.println(id+yyyymm);
+//			deleteWork(id,yyyymm) ->결과 boolean true -> insert 
+			String []works=new String[wdates.length];
+			for (int i = 0; i < wdates.length; i++) { 
+				works[i]=yyyymm+Util.isTwo(dates)[i]+wdates[i];
+			}
+			for (int i = 0; i < works.length; i++) {
+				System.out.println(works[i]);
+			}
 			
+			boolean isS = cDao.deleteWork(id,yyyymm); 
 			if(isS){ 
-			  response.sendRedirect("perintschedule.jsp");
+				boolean isIns=cDao.insertCal(id, wdates);
+				if(isIns) {
+					response.sendRedirect("perintschedule.jsp");					
+				}else{
+					  response.sendRedirect("error.jsp");
+				}
 			}else{
 			  response.sendRedirect("error.jsp");
 			}
-			
-			//insert : year+month+dates[] (yyyymmdd) + wdates[] ->yyyymmddday
-			//insert  (id,yyyymmddday)
-			
 			
 		}
 	}
