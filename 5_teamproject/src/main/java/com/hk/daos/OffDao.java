@@ -134,6 +134,7 @@ public class OffDao extends SqlMapConfig {
 			count=sqlSession.update(namespace+"updateOffYes",seq);
 		} catch (Exception e) {
 			System.out.println("JDBC실패:updateOffYes():"+getClass());
+			e.printStackTrace();
 		}finally {
 			sqlSession.close();
 		}

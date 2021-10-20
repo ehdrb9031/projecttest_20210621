@@ -81,11 +81,15 @@ public class CalController extends HttpServlet {
 				}
 				
 				String yyyymm=year+Util.isTwo(month+"");//현재의 근무표 작성 년월
+				List<JoinUserDto> list=null;
 //				//근무표 작성된 id를 배열로 가져왔다.
 				List<String>ids=cDao.getGivenId(yyyymm);
-//				//근무표 작성된 id를 제외한 JoinUser 리스트를 가져온다.	
-				List<JoinUserDto> list=jDao.getNotGivenList(ids);				
-				
+				if(ids.size()==0) {
+					list=jDao.getPreUserList();
+				}else {
+					//근무표 작성된 id를 제외한 JoinUser 리스트를 가져온다.	
+					list=jDao.getNotGivenList(ids);				
+				}
 				request.setAttribute("list", list);
 				request.setAttribute("year", year);
 				request.setAttribute("month", month);
@@ -210,9 +214,13 @@ public class CalController extends HttpServlet {
 				String yyyymm=year+Util.isTwo(month+"");//현재의 근무표 작성 년월
 //				//근무표 작성된 id를 배열로 가져왔다.
 				List<String>ids=cDao.getGivenId(yyyymm);
-//				//근무표 작성된 id를 제외한 JoinUser 리스트를 가져온다.	
-				List<JoinUserDto> list=jDao.getIdDnameList(ids,dnames);				
-
+				List<JoinUserDto> list=null;
+				if(ids.size()==0) {
+					list=jDao.getPreUserList();
+				}else {
+	//				//근무표 작성된 id를 제외한 JoinUser 리스트를 가져온다.	
+					list=jDao.getIdDnameList(ids,dnames);				
+				}
 				request.setAttribute("list", list);
 				request.setAttribute("year", year);
 				request.setAttribute("month", month);
@@ -278,16 +286,18 @@ public class CalController extends HttpServlet {
 			}
 			
 			boolean isS = cDao.deleteWork(id,yyyymm); 
-			if(isS){ 
-				boolean isIns=cDao.insertCal(id, wdates);
-				if(isIns) {
-					response.sendRedirect("perintschedule.jsp");					
-				}else{
-					  response.sendRedirect("error.jsp");
-				}
-			}else{
-			  response.sendRedirect("error.jsp");
-			}
+	         if(isS){ 
+	            boolean isIns=cDao.insertCal(id, works);
+	            if(isIns) {
+	               response.sendRedirect("perintschedule.jsp");               
+	            }else{
+	                 response.sendRedirect("error.jsp");
+	            }
+	         }else{
+	           response.sendRedirect("error.jsp");
+	         }
+	         
+	      
 			
 		}
 	}
