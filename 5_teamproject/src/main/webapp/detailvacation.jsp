@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>근무변경 상세조회</title>
+<title>휴가 상세조회</title>
 </head>
 <%
 	OffDto oDto=(OffDto)request.getAttribute("oDto");
@@ -24,7 +24,7 @@
 	
 %>
 <body>
-<h1>공지사항 상세조회</h1>
+<h1>휴가 상세조회</h1>
 <table border="1" class="table table-hover">
 	<tr>
 		<th>글번호</th>
@@ -47,12 +47,12 @@
 		<td><%=Util.rName(jDto)%></td>
 	</tr>
 	<tr>
-		<th>근무일자</th>
-		<td><%=Util.dateForm(oDto.getWdate())%></td>
+		<th>휴가시작일자</th>
+		<td><%=oDto.getWdate()%></td>
 	</tr>
 	<tr>
-		<th>변경일자</th>
-		<td><%=Util.dateForm(oDto.getOdate())%></td>
+		<th>휴가마지막일자</th>
+		<td><%=oDto.getOdate()%></td>
 	</tr>
 	<tr>
 		<th>제목</th>
@@ -67,7 +67,7 @@
 		<%
 				if(ldto.getRole().equals("HEAD")){
 				%>					
-					<button class="btn btn-outline-success me-2" type="button" onclick="location.href='OffController.do?command=offYes&seq=<%=oDto.getOff_seq() %>&id=<%=oDto.getId()%>&odate=<%=oDto.getOdate()%>&wdate=<%=oDto.getWdate()%>'">승인</button>
+					<button class="btn btn-outline-success me-2" type="button" onclick="location.href='OffController.do?command=offva&seq=<%=oDto.getOff_seq() %>&id=<%=oDto.getId()%>&odate=<%=oDto.getOdate()%>&wdate=<%=oDto.getWdate()%>'">승인</button>
 					<button class="btn btn-outline-success me-2" type="button" onclick="location.href='OffController.do?command=offNo&seq=<%=oDto.getOff_seq()%>'">반려</button>
 				<%
 				}else{

@@ -33,6 +33,23 @@ public class OffDao extends SqlMapConfig {
 		return count>0?true:false;
 	}
 	
+	//휴가 insert
+	public boolean insertVa(OffDto dto) {
+		int count = 0;
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			count=sqlSession.insert(namespace+"insertVa", dto);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:insertVa():"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
+	
 	//자신이 쓴 근무변경 조회
 	public List<OffDto> getOffList(String id) {
 		List<OffDto> list=new ArrayList<OffDto>();

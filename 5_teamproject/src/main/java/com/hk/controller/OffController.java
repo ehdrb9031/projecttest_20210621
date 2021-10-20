@@ -96,13 +96,18 @@ public class OffController extends HttpServlet {
 			if(ldto==null){
 				response.sendRedirect("index.jsp");
 			} 
+			String category=request.getParameter("category");
 			String seq=request.getParameter("seq");
 			OffDto oDto=oDao.geSelectOff(seq);//모든 신청 리스트	
 			JoinUserDto jDto=jDao.getListOne(oDto.getId());
-			
+			System.out.println(category);
 			request.setAttribute("oDto", oDto);
 			request.setAttribute("jDto", jDto);
-			dispatch("detailoff.jsp", request, response);
+			if(category.equals("CH")) {
+				dispatch("detailoff.jsp", request, response);
+			}else if(category.equals("VA")) {
+				dispatch("detailvacation.jsp", request, response);
+			}
 		}else if(command.equals("muldel")) {
 			
 			String[] chks=request.getParameterValues("chk");
@@ -117,6 +122,7 @@ public class OffController extends HttpServlet {
 			if(ldto==null){
 				response.sendRedirect("index.jsp");
 			} 
+
 			String seq=request.getParameter("seq");
 			String id=request.getParameter("id");
 			String wDate=request.getParameter("wdate");//근무날짜
@@ -125,7 +131,7 @@ public class OffController extends HttpServlet {
 			boolean isS=oDao.updateOffYes(seq);
 			
 			if(isS) {  
-				//승인을 눌렀을 때 odate를 cal DB wdate에 넣어주면 된다.
+				//승인을 눌렀을 때 odate를 cal DB wdate에 넣어주면 된다.  error
 				boolean isUp=cDao.updateWdate(id,wDate,oDate);
 				if(isUp) {
 					response.sendRedirect("OffController.do?command=selectofflist");
@@ -149,26 +155,50 @@ public class OffController extends HttpServlet {
 				response.sendRedirect("index.jsp");
 			} 
 			response.sendRedirect("insertoffform.jsp");
-		}else if(command.equals("insertoff")) {
+		}else if(command.equals("offva")) {
+			String seq=request.getParameter("seq");
 			String id=request.getParameter("id");
-			String start=request.getParameter("start");
-			String end=request.getParameter("end");
-			String title=request.getParameter("title");
-			String content=request.getParameter("content");
+			String start=request.getParameter("wdate");//휴가 시작일
+			String end=request.getParameter("odate");//휴가 마지막일
 			
 			int a=Math.abs(Integer.parseInt(end.substring(8, 10))-Integer.parseInt(start.substring(8, 10)));//절댓값
-//			System.out.println(start.substring(0, 4)+Integer.toString(Integer.parseInt(start.substring(5, 7))+0)+start.substring(8, 10)+"OFF");
+			System.out.println(start.substring(0, 4)+Integer.toString(Integer.parseInt(start.substring(5, 7))+0)+start.substring(8, 10)+"OFF");
 			
 			String [] sDate = new String[a+1];
 			for (int i = 0; i <= a; i++) {
 				sDate[i]=start.substring(0, 4)+start.substring(5, 7)+Util.isTwo(Integer.toString(Integer.parseInt(start.substring(8, 10))+i))+"OFF";
 			} 
+			
+			boolean isS=true;
 			for (int i = 0; i < sDate.length; i++) {
-				System.out.println(sDate[i]);
-//				isS=cDao.updateCal(id,sDate);
+				isS=cDao.deleteCal(id,sDate[i].substring(0, 8));
 			}
+			if(isS) {
+				boolean isIns=cDao.insertCal(id, sDate);
+				if(isIns) {					
+					response.sendRedirect("admin_main.jsp");
+				}else {
+					response.sendRedirect("error.jsp");
+				}
+			}else {
+				response.sendRedirect("error.jsp");
+			}
+		}else if(command.equals("insertoff")) {
+			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+			if(ldto==null){
+				response.sendRedirect("index.jsp");
+			} 
+			String id=request.getParameter("id");
+			String start=request.getParameter("start");
+			String end=request.getParameter("end");
+			String off_title=request.getParameter("title");
+			String off_content=request.getParameter("content");		
 			
-			
+		
+			boolean isS=oDao.insertVa(new OffDto(id,off_title,off_content,start,end));
+			if(isS) {
+				response.sendRedirect("OffController.do?command=myoffboardlist");
+			}
 		}
 	}
 
