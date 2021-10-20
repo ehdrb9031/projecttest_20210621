@@ -6,6 +6,10 @@
 		INSERT INTO OFFBOARD VALUES (OFFBOARD_OFF_SEQ.NEXTVAL,#{id},#{off_title},#{off_content},#{wdate},'CH','W',#{odate},SYSDATE)
 	</insert>
 	
+	<insert id="insertVa" parameterType="OffDto">
+		INSERT INTO OFFBOARD VALUES (OFFBOARD_OFF_SEQ.NEXTVAL,#{id},#{off_title},#{off_content},#{wdate},'VA','W',#{odate},SYSDATE)
+	</insert>
+	
 	<select id="getOffList" resultType="OffDto" parameterType="String">
 		SELECT * FROM OFFBOARD WHERE ID = #{id}
 	</select>

@@ -98,7 +98,9 @@
 				<td><%=jDto.getName()%></td>
 				<td><%=Util.dName(jDto)%></td>
 				<td><%=Util.rName(jDto)%></td>
-				<td><a href="OffController.do?command=detailoff&seq=<%=dto.getOff_seq()%>"><%=dto.getOff_title()%></td>	
+				<td> 
+				<a href="OffController.do?command=detailoff&seq=<%=dto.getOff_seq()%>&category=<%=dto.getCategory()%>">
+					<%=dto.getOff_title()%></td>
 				<td><%=Util.categoryChange(dto.getCategory())%></td>
 				<td><%=Util.offChange(dto.getOff())%></td>
 			</tr>

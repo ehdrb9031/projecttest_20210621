@@ -80,6 +80,7 @@
       <th>번호</th>
       <th>아이디</th>
       <th>제목</th>
+      <th>카테고리</th>
       <th>승인</th>
    </tr> 
  <%
@@ -91,6 +92,7 @@
 				<td><%=dto.getOff_seq()%></td>
 				<td><%=dto.getId()%></td>
 				<td><a href="OffController.do?command=detailoff&seq=<%=dto.getOff_seq()%>"><%=dto.getOff_title()%></td>	
+				<td><%=Util.categoryChange((dto.getCategory()))%></td>
 				<td><%=Util.offChange(dto.getOff())%></td>
 			</tr>
 	<%

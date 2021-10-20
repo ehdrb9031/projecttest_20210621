@@ -150,4 +150,25 @@ public class CalDao extends SqlMapConfig {
 		return count>0?true:false;
 	}
 	
+	//off를 update하기 위한 delete
+	//sDate는 근무를 잘라온 "20211010"
+	public boolean deleteCal(String id, String sDate) {
+		int count=0;
+		SqlSession sqlSession=null;
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			Map<String, String>map=new HashMap<String, String>();
+			map.put("id", id);
+			map.put("sDate", sDate);
+			count=sqlSession.delete(namespace+"deleteCal",map);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:deleteCal()"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
+	
+
 }

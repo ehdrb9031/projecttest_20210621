@@ -172,9 +172,9 @@ public class Util {
 	//휴가or변경 선택
 	public static String categoryChange(String category) {
 		if(category.equals("CH")) {
-			category="변경";
-		}else if(category.equals("VA")){
-			category="휴가";
+			category="근무변경";
+		}else{
+			category="휴가신청";
 		}
 		return category;
 	}
