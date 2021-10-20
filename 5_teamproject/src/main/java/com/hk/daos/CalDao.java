@@ -132,14 +132,17 @@ public class CalDao extends SqlMapConfig {
 	}
 	
 	//근무일 업데이트 
-	public boolean updateWork(CalDto dto) {
+	public boolean deleteWork(String id, String wdate) {
 		int count=0;
 		SqlSession sqlSession=null;
 		try {
 			sqlSession=getSqlSessionFactory().openSession(true);
-			count=sqlSession.update(namespace+"updateWork",dto);
+			Map<String, String>map=new HashMap<String, String>();
+			map.put("id", id);
+			map.put("wdate", wdate);
+			count=sqlSession.update(namespace+"deleteWork", map);
 		} catch (Exception e) {
-			System.out.println("JDBC실패:updateWork()"+getClass());
+			System.out.println("JDBC실패:deleteWork()"+getClass());
 			e.printStackTrace();
 		}finally {
 			sqlSession.close();

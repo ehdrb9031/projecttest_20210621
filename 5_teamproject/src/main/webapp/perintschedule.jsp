@@ -135,9 +135,10 @@
 
 	 <input class="btn btn-primary" type="submit" value="조회"  />
  </form>
+ 
 <form action="CalController.do" method="post">
-<input type="hidden" name="command" value="addschedule" >
-<input type="hidden" name="lastday" value="<%=lastDay%>" >
+<input type="hidden" name="command" value="updateschedule" >
+<input type="hidden" name="id" value="<%=name%>" >
 <table border="1" class="table table-hover">
 	<caption> 
 		<a href="CalController.do?command=insertschedule&year=<%=year-1%>&month=<%=month%>">◁</a>
@@ -176,8 +177,7 @@
 		<%
 		//공백td출력하는 for문
 		for(int i=0;i<1;i++){
-			out.print("<td id='name2'>&nbsp;</td>");//out은 jsp의 기본객체중에 하나임
-			
+			out.print("<td id='name2'>&nbsp;</td>");//out은 jsp의 기본객체중에 하나임	
 		}
 		//날짜td출력하는 for문
 		for(int i=1;i<=lastDay;i++){
@@ -189,7 +189,6 @@
 		}
 		%>
 	</tr>
-	
 	<tr>
 		<td><%=name%></td>
 		<%
@@ -197,7 +196,7 @@
 		for(int j=1;j<=lastDay;j++){ 
 			%>
 			<td>
-					<%=Util.getCalView(calList,year,month,j) %>			
+					현재근무<%=Util.getCalView(calList,year,month,j) %>			
 			<select class="custom-select d-block w-100" name="wdate" > 
 					<option value="day">데이</option> 
 					<option value="eve">이브</option> 
@@ -209,14 +208,14 @@
 			<input type="hidden" name="month" value="<%=month%>" >
 			<input type="hidden" name="date" value="<%=j%>" >		
 		<%
-		}
+			}
 		}
 		%>
 	</tr>
 	
 	<tr>
       <td colspan="<%=lastDay+1%>">
-         <input class="btn btn-primary" type="submit" value="저장" onclick="location.href='CalController.do?command=updateschedule'"/>
+         <input class="btn btn-primary" type="submit" value="저장" />
 		 <button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=allschedule'">근무표 보기</button>
       </td>
    </tr>

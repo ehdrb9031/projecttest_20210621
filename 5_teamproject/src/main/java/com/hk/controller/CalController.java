@@ -258,6 +258,26 @@ public class CalController extends HttpServlet {
 			request.setAttribute("month", month);
 			dispatch("perintschedule.jsp", request, response);
 		}else if(command.equals("updateschedule")) {
+			String id=request.getParameter("id");
+			String year=request.getParameter("year");
+			String month=request.getParameter("month");
+			String []dates=request.getParameterValues("date");
+			String []wdates=request.getParameterValues("wdate");
+			
+			//year+month -> yyyymm
+			String yyyymm=year+Util.isTwo(month+"");
+			//deleteWork(id,yyyymm) ->결과 boolean true -> insert 
+			boolean isS = CalDao.deleteWork(new CalDto(id,yyyymm)); 
+			
+			if(isS){ 
+			  response.sendRedirect("perintschedule.jsp");
+			}else{
+			  response.sendRedirect("error.jsp");
+			}
+			
+			//insert : year+month+dates[] (yyyymmdd) + wdates[] ->yyyymmddday
+			//insert  (id,yyyymmddday)
+			
 			
 		}
 	}
