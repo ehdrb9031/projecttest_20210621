@@ -54,6 +54,8 @@ public class Util {
 	public static String isTwo(String s) {
 		return s.length()<2?"0"+s:s;
 	}
+	
+	
 
 	//요일별 날짜 색깔 적용하기
 	public static String fontColor(int dayOfWeek,int i){

@@ -143,6 +143,32 @@ public class OffController extends HttpServlet {
 			}else {
 				response.sendRedirect("error.jsp");
 			}
+		}else if(command.equals("insertoffform")) {
+			JoinUserDto ldto = (JoinUserDto)session.getAttribute("ldto");
+			if(ldto==null){
+				response.sendRedirect("index.jsp");
+			} 
+			response.sendRedirect("insertoffform.jsp");
+		}else if(command.equals("insertoff")) {
+			String id=request.getParameter("id");
+			String start=request.getParameter("start");
+			String end=request.getParameter("end");
+			String title=request.getParameter("title");
+			String content=request.getParameter("content");
+			
+			int a=Math.abs(Integer.parseInt(end.substring(8, 10))-Integer.parseInt(start.substring(8, 10)));//절댓값
+//			System.out.println(start.substring(0, 4)+Integer.toString(Integer.parseInt(start.substring(5, 7))+0)+start.substring(8, 10)+"OFF");
+			
+			String [] sDate = new String[a+1];
+			for (int i = 0; i <= a; i++) {
+				sDate[i]=start.substring(0, 4)+start.substring(5, 7)+Util.isTwo(Integer.toString(Integer.parseInt(start.substring(8, 10))+i))+"OFF";
+			} 
+			for (int i = 0; i < sDate.length; i++) {
+				System.out.println(sDate[i]);
+//				isS=cDao.updateCal(id,sDate);
+			}
+			
+			
 		}
 	}
 

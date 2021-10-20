@@ -24,30 +24,28 @@
 		pageContext.forward("index.jsp");
 	}
 	
-	String year=(String)request.getAttribute("year");
-	String month=(String)request.getAttribute("month");
-	String date=(String)request.getAttribute("date");
-	String wdate=(String)request.getAttribute("wdate");
 %>
 <body>
 <div id="tablebox">
 <h1>근무표 변경 신청</h1>
    <form action="OffController.do" method="post">
-      <input type="hidden" name="command" value="mychangelist"> 
+      <input type="hidden" name="command" value="insertoff"> 
       <input type="hidden" name="id" value="<%=ldto.getId()%>" >
-      <input type="hidden" name="year" value="<%=year%>" >
-      <input type="hidden" name="month" value="<%=month%>" >
-      <input type="hidden" name="date" value="<%=date%>" >
-      <input type="hidden" name="dwork" value="<%=wdate%>" >
       <table class="table table-hover">
          <tr>
             <th>작성자</th>
             <td><input type="text" value="<%=ldto.getName()%>" readonly="readonly"></td>
          </tr>
          <tr>
-            <th>휴가날짜</th>
+            <th>휴가시작날짜</th>
             <td>
-            	<input type="date" name="odate" min="<%=year%>-<%=month%>-<%=date%>" max="<%=year%>-<%=month+1%>-<%=date%>" required="required">
+            	<input type="date" name="start" required="required">
+			</td>
+         </tr>
+         <tr>
+            <th>휴가마지막날짜</th>
+            <td>
+            	<input type="date" name="end" required="required">
 			</td>
          </tr>
          <tr>

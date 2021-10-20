@@ -127,7 +127,7 @@
 	</tr>
 	<tr>
 		<td colspan="7">
-			<button>근무변경신청</button>
+			<button class="btn btn-outline-success me-2" type="button" onclick="location.href='OffController.do?command=insertoffform'">휴가신청</button>
 			<button class="btn btn-info" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
 		</td>
 	</tr>
