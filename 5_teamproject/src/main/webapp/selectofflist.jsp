@@ -12,6 +12,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+
+	   
+   h1 {  text-align : center;
+          font-size : 35px; 
+          margin:40px;  
+          font-weight:bold;
+       }
+    
+    h2 {  
+    
+    text-align: center;       
+        background-color : white;  
+       font-size : 15px;           
+        heght : 8%;
+        margin : 20px;
+     }
+     
+   .admin{
+     text-align:center;
+      color : red;}  
+      
+	</style>
 <script type="text/javascript">
 	function allSel(bool){
 		var chks=document.getElementsByName("chk");
@@ -72,7 +95,14 @@
 	List<OffDto>list=(List<OffDto>)request.getAttribute("list");
 %>
 <body>
-<h1>근무변경 휴가 조회</h1>
+<h1>Administrator Page</h1>
+
+<h2>근무변경 휴가조회</h2>
+
+<div class="admin">
+   <span ><%=ldto.getId() %></span>님 반갑습니다.
+</div> 
+
 <form action="OffController.do" method="post" onsubmit="return isChecked()">
 <input type="hidden" name="command" value="muldel">
 <table class="table table-hover">

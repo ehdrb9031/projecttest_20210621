@@ -15,6 +15,27 @@
 	tr{
 		width: 500px;
 	}
+	
+	   
+   h1 {  text-align : center;
+          font-size : 35px; 
+          margin:40px;  
+          font-weight:bold;
+       }
+    
+    h2 {  
+    
+    text-align: center;       
+        background-color : white;  
+       font-size : 15px;           
+        heght : 8%;
+        margin : 20px;
+     }
+     
+   .admin{
+     text-align:center;
+      color : red;}  
+	
 </style>
 <title></title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js" ></script>
@@ -101,12 +122,13 @@
 	}
 %>
 <body>
-<h1>관리자 페이지</h1>
-<h1>근무표작성 페이지</h1>
-<div>
-	<span><%=ldto.getId() %></span>님 반갑습니다.
+<h1>Administrator Page</h1>
+<h2>근무표작성 페이지</h2>
+<div class="admin">
+   <span ><%=ldto.getId() %></span>님 반갑습니다.
 </div> 
-<h1>근무표 작성</h1>
+
+
 <form action="CalController.do" method="post"> 
 <input type="hidden" name="command" value="selectednameins" >
 <div>

@@ -13,7 +13,28 @@
 <style type="text/css">
 	.box{
 		margin : 0 auto;
-		border: 1px solid red;
+		border: 1px solid red;}
+		
+			   
+   h1 {  text-align : center;
+          font-size : 35px; 
+          margin:40px;  
+          font-weight:bold;
+       }
+    
+    h2 {  
+    
+    text-align: center;       
+        background-color : white;  
+       font-size : 15px;           
+        heght : 8%;
+        margin : 20px;
+     }
+     
+   .admin{
+     text-align:center;
+      color : red;}  
+	
 	}
 </style>
 <script type="text/javascript">
@@ -70,8 +91,8 @@
 	List<JoinUserDto>list=(List<JoinUserDto>)request.getAttribute("list");
 %>
 <body>
-<h1>관리자 페이지</h1>
-<h2>재직 간호사 조회</h2>
+<h1>Administrator Page</h1>   
+<h2>재직간호사 전체조회</h2>
 <form action="JoinUserController.do" method="post" onsubmit="return isChecked()">
 <input type="hidden" name="command" value="muldel" >
 <table class="table table-hover">

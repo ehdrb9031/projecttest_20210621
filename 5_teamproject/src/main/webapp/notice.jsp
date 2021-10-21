@@ -10,6 +10,24 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<style type="text/css">
+
+   
+   h1 {  text-align : center;
+          font-size : 35px; 
+          margin:40px;  
+          font-weight:bold;
+       }
+    
+    h2 {  
+    
+    text-align: center;       
+        background-color : white;  
+       font-size : 15px;           
+        heght : 8%;
+        margin : 20px;
+     }
+     </style>
 <script type="text/javascript">
 	function allSel(bool){
 		var chks=document.getElementsByName("chk");
@@ -70,7 +88,8 @@
 	List<NoticeDto>list=(List<NoticeDto>)request.getAttribute("list");
 %>
 <body>
-<h1>공지사항 목록</h1>
+<h1>Administrator Page</h1>
+<h2>공지사항</h2>
 <form action="NoticeController.do" method="post" onsubmit="return isChecked()">
 <input type="hidden" name="command" value="muldel">
 <table class="table table-hover">

@@ -15,6 +15,23 @@
 <head>
 <meta charset="UTF-8">
 <title>나의정보</title>
+<style type="text/css">
+
+  h1 {  text-align : center;
+          font-size : 35px; 
+          margin:40px;  
+          font-weight:bold;
+       }
+    
+    h2 {  
+    
+    text-align: center;       
+        background-color : white;  
+       font-size : 15px;           
+        heght : 8%;
+        margin : 20px;
+     }
+     </style>
 <script type="text/javascript"> 
    </script>
 </head>     
@@ -28,7 +45,9 @@
 %>
 
 <body>
-<h1>나의정보</h1>
+<h1>Administrator Page</h1>
+
+<h2>나의정보</h2>
 <table border="1" class="table table-hover">
    <tr>
       <th>아이디</th>
