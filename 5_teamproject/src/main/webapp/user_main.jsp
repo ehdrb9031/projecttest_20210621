@@ -116,7 +116,6 @@ h3 {
 				<button class="button" type="button" onclick="location.href='OffController.do?command=myoffboardlist'">나의근무변경신청현황</button>
 				<button class="button" type="button" onclick="location.href='NoticeController.do?command=noticelist'">공지사항목록</button>
 				<button class="button" type="button" onclick="location.href='JoinUserController.do?command=userinfo'">나의정보</button>
-				<button class="button" type="button" onclick="location.href='JoinUserController.do?command=logout'">로그아웃</button>
 			</form>
 		</nav>
 		<div>

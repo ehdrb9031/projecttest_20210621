@@ -40,27 +40,6 @@ public class CalDao extends SqlMapConfig {
 		return count>0?true:false;
 	}
 	
-	public boolean insertCalOne(String id,String work) {
-
-		int count=0;
-		SqlSession sqlSession=null;
-		
-		try {
-			SqlSessionFactory sqlSessionFactory=getSqlSessionFactory();
-			sqlSession=getSqlSessionFactory().openSession(true);
-			Map<String, String>map=new HashMap<String, String>();
-			map.put("id", id);
-			map.put("work", work);
-			count=sqlSession.insert(namespace+"insertCalOne", map);
-		} catch (Exception e) {
-			System.out.println("JDBC실패:insertCalOne():"+getClass());
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-		}
-		return count>0?true:false;
-	}
-	
 	//나의 근무표 가져오기
 	public List<String> getCal(String id) {
 		List<String> list=new ArrayList<String>();
@@ -203,6 +182,26 @@ public class CalDao extends SqlMapConfig {
 			count=sqlSession.delete(namespace+"deleteCalOne",map);
 		} catch (Exception e) {
 			System.out.println("JDBC실패:deleteCalOne()"+getClass());
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return count>0?true:false;
+	}
+	
+	public boolean updateOdate(String id, String odate,String subodate) {
+		int count=0;
+		SqlSession sqlSession=null;
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			Map<String, String>map=new HashMap<String, String>();
+			map.put("id", id);
+			map.put("odate", odate);
+			map.put("subodate", subodate);
+			count=sqlSession.update(namespace+"updateOdate", map);
+		} catch (Exception e) {
+			System.out.println("JDBC실패:updateOdate():"+getClass());
 			e.printStackTrace();
 		}finally {
 			sqlSession.close();

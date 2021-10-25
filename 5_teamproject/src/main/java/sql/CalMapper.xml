@@ -51,4 +51,8 @@
 		DELETE FROM TOTALCAL WHERE ID =#{id} AND WDATE =#{sDate}
 	</delete>
 	
+	<update id="updateOdate" parameterType="Map">
+		UPDATE TOTALCAL SET WDATE =#{odate} WHERE ID =#{id} AND SUBSTR(WDATE,1,8)=#{subodate}
+	</update>
+	
 </mapper>

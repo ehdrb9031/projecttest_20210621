@@ -127,13 +127,13 @@ public class OffController extends HttpServlet {
 			String id=request.getParameter("id");
 			String wDate=request.getParameter("wdate");//근무날짜
 			String oDate=request.getParameter("odate");//변경날짜
-			System.out.println(id+oDate+wDate);
+			System.out.println(id+oDate+wDate+oDate.substring(0, 8));
 			boolean isS=oDao.updateOffYes(seq);
 			
 			if(isS) {  
 				boolean isDel=cDao.deleteCalOne(id,wDate); 
 				if(isDel) {
-					boolean isIns=cDao.insertCalOne(id, oDate);
+					boolean isIns=cDao.updateOdate(id, oDate,oDate.substring(0, 8));
 					response.sendRedirect("OffController.do?command=selectofflist");
 				}else {
 					response.sendRedirect("error.jsp");
