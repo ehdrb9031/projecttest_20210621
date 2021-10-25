@@ -71,7 +71,7 @@
 	List<OffDto>list=(List<OffDto>)request.getAttribute("list");
 %>
 <body>
-<h1>나의 근무변경 신청 현황</h1>
+<h1>나의 근무변경/휴가 신청 현황</h1>
 <form action="OffController.do" method="post" onsubmit="return isChecked()">
 <input type="hidden" name="command" value="muldel">
 <table class="table table-hover">

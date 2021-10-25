@@ -104,7 +104,7 @@ h3 {
 <body>
 
 	<a href="JoinUserController.do?command=logout">로그아웃</a>
-	<h1>Administrator Page</h1>
+	<h1>Nurse Page</h1>
 	<div class="admin">
 		<span class="user"><%=ldto.getId() %></span>님 반갑습니다.
 	</div>

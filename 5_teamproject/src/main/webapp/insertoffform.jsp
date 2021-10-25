@@ -27,7 +27,7 @@
 %>
 <body>
 <div id="tablebox">
-<h1>근무표 변경 신청</h1>
+<h1>휴가 신청</h1>
    <form action="OffController.do" method="post">
       <input type="hidden" name="command" value="insertoff"> 
       <input type="hidden" name="id" value="<%=ldto.getId()%>" >

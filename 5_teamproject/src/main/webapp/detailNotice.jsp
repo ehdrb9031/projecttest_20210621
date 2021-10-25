@@ -51,12 +51,12 @@
 				<%
 				}else{
 				%>
-					<button onclick="location.href='NoticeController.do?command=noticelist'">목록</button>
+					<button class="btn btn-secondary" onclick="location.href='NoticeController.do?command=noticelist'">목록</button>
 				<%
 				}
 			%>
 		</td>
-	</tr>
+	</tr> 
 </table>
 <script type="text/javascript">
 	//글삭제하기

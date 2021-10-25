@@ -24,7 +24,7 @@
 	
 %>
 <body>
-<h1>공지사항 상세조회</h1>
+<h1>근무변경 상세조회</h1>
 <table border="1" class="table table-hover">
 	<tr>
 		<th>글번호</th>
