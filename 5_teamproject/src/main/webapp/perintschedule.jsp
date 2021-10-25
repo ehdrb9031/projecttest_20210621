@@ -112,8 +112,9 @@
 					  }, //server로 보낼 값
 				dataType:"json",
 				success:function(obj){//통신성공하면 기능 실행(obj변수는 전달된 데이터를 받는다)
+					document.getElementById("name").innerHTML="";
 				for(var i = 0; i < obj["list"].length; i++){
-	 				document.getElementById("name").innerHTML+="<option id='name'>" +obj['list'][i]['name'] +"</option>";	
+	 				document.getElementById("name").innerHTML+="<option id='name'>" +obj['list'][i]['name'] +"</option>";
 					}		
 				},
 				error:function(){
