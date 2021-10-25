@@ -96,16 +96,16 @@ public class OffController extends HttpServlet {
 			if(ldto==null){
 				response.sendRedirect("index.jsp");
 			} 
-			String category=request.getParameter("category");
+		
 			String seq=request.getParameter("seq");
 			OffDto oDto=oDao.geSelectOff(seq);//모든 신청 리스트	
 			JoinUserDto jDto=jDao.getListOne(oDto.getId());
-			System.out.println(category);
+
 			request.setAttribute("oDto", oDto);
 			request.setAttribute("jDto", jDto);
-			if(category.equals("CH")) {
+			if(oDto.getCategory().equals("CH")) {
 				dispatch("detailoff.jsp", request, response);
-			}else if(category.equals("VA")) {
+			}else if(oDto.getCategory().equals("VA")) {
 				dispatch("detailvacation.jsp", request, response);
 			}
 		}else if(command.equals("muldel")) {
@@ -131,9 +131,9 @@ public class OffController extends HttpServlet {
 			boolean isS=oDao.updateOffYes(seq);
 			
 			if(isS) {  
-				//승인을 눌렀을 때 odate를 cal DB wdate에 넣어주면 된다.  error
-				boolean isUp=cDao.updateWdate(id,wDate,oDate);
-				if(isUp) {
+				boolean isDel=cDao.deleteCalOne(id,wDate); 
+				if(isDel) {
+					boolean isIns=cDao.insertCalOne(id, oDate);
 					response.sendRedirect("OffController.do?command=selectofflist");
 				}else {
 					response.sendRedirect("error.jsp");

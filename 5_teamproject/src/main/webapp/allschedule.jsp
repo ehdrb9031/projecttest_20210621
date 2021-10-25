@@ -228,9 +228,9 @@
 	%>
 	<tr>
       <td colspan="<%=lastDay+3%>">
-      	 <button class="btn btn-outline-success me-2" type="button" onclick="location.href='CalController.do?command=insertschedule'">근무표 작성</button>
-		 <button class="btn btn-info" type="button" onclick="location.href='CalController.do?command=perintschedule'">수정</button>
-         <button class="btn btn-info" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
+      	 <button class="btn btn-primary" type="button" onclick="location.href='CalController.do?command=insertschedule'">근무표작성</button>
+		 <button class="btn btn-success" type="button" onclick="location.href='CalController.do?command=perintschedule'">수정</button>
+         <button class="btn btn-secondary" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
       </td>
    </tr>
 </table>

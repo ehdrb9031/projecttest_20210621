@@ -116,9 +116,9 @@
 	%>
 	<tr>
 		<td colspan="6">
-			<input class="btn btn-primary" type="submit" value="삭제하기" />
-			<button class="btn btn-outline-success me-2" type="button" onclick="location.href='NoticeController.do?command=addnotice'">작성</button>
-			<button type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
+			<button class="btn btn-primary" type="button" onclick="location.href='NoticeController.do?command=addnotice'">등록</button>
+			<input class="btn btn-danger" type="submit" value="삭제" />
+			<button class="btn btn-secondary" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
 		</td>
 	</tr>
 </table>

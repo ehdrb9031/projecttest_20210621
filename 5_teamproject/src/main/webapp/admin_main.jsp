@@ -23,6 +23,7 @@
 	width: 100%;
 	margin: 1px solid black;
 	padding: 10px;
+	text-align: center;
 }
 
 .button {
@@ -142,4 +143,5 @@ h3 {
 			</div>
 		</div>
 	</div>
+</body>
 </html>

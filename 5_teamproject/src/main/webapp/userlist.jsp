@@ -127,8 +127,8 @@
 	%>
 	<tr>
       <td colspan="9">
-         <input class="btn btn-primary" type="submit" value="삭제"/>
-         <button class="btn btn-info" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
+         <input class="btn btn-danger" type="submit" value="삭제"/>
+         <button class="btn btn-secondary" type="button" onclick="location.href='JoinUserController.do?command=main&id=<%=ldto.getId()%>'">메인</button>
       </td>
    </tr>
 </table>

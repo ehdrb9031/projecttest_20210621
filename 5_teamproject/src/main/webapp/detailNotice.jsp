@@ -45,9 +45,9 @@
 			<%
 				if(dto.getId().equals(ldto.getId())){
 				%>					
-					<button onclick="location.href='NoticeController.do?command=updateform&seq=<%=dto.getNo_seq()%>'" class="btn btn-primary">수정</button>
-					<button onclick="delBoard()" >삭제</button>
-					<button onclick="location.href='NoticeController.do?command=noticelist'">목록</button>
+					<button onclick="location.href='NoticeController.do?command=updateform&seq=<%=dto.getNo_seq()%>'" class="btn btn-success">수정</button>
+					<button class="btn btn-danger" onclick="delBoard()" >삭제</button>
+					<button class="btn btn-secondary" onclick="location.href='NoticeController.do?command=noticelist'">목록</button>
 				<%
 				}else{
 				%>

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=UTF-8"); %>
+<%@include file="header.jsp" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,8 +44,8 @@
          </tr>
          <tr>
             <td colspan="2">
-               <input type="submit" value="등록하기" class="btn btn-primary">
-               <input type="button" value="취소" class="btn btn-primary"
+               <input type="submit" value="등록" class="btn btn-primary">
+               <input type="button" value="취소" class="btn btn-secondary"
                onclick="location.href='NoticeController.do?command=noticelist'"/>
             </td>
          </tr>

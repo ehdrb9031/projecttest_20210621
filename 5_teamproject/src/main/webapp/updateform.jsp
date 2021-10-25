@@ -83,10 +83,10 @@ response.setContentType("text/html; charset=UTF-8");
 
 		<tr>
 			<td colspan="2">
-				<button type="submit" class="btn btn-primary">수정완료</button>
+				<button type="submit" class="btn btn-success">수정</button>
 				<button class="btn btn-danger"
 					onclick="deleteUser('<%=dto.getId()%>')">탈퇴</button>
-				<button class="btn btn-info"
+				<button class="btn btn-secondary"
 					onclick="location.href='JoinUserController.do?command=main&id=<%=dto.getId()%>'">메인</button>
 			</td>
 		</tr>

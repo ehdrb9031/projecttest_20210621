@@ -67,12 +67,12 @@
 		<%
 				if(ldto.getRole().equals("HEAD")){
 				%>					
-					<button class="btn btn-outline-success me-2" type="button" onclick="location.href='OffController.do?command=offYes&seq=<%=oDto.getOff_seq() %>&id=<%=oDto.getId()%>&odate=<%=oDto.getOdate()%>&wdate=<%=oDto.getWdate()%>'">승인</button>
-					<button class="btn btn-outline-success me-2" type="button" onclick="location.href='OffController.do?command=offNo&seq=<%=oDto.getOff_seq()%>'">반려</button>
+					<button class="btn btn-primary" type="button" onclick="location.href='OffController.do?command=offYes&seq=<%=oDto.getOff_seq() %>&id=<%=oDto.getId()%>&odate=<%=oDto.getOdate()%>&wdate=<%=oDto.getWdate()%>'">승인</button>
+					<button class="btn btn-danger" type="button" onclick="location.href='OffController.do?command=offNo&seq=<%=oDto.getOff_seq()%>'">반려</button>
 				<%
 				}else{
 				%>
-					<button onclick="location.href='OffController.do?command=myoffboardlist'">목록</button>
+					<button class="btn btn-secondary" onclick="location.href='OffController.do?command=myoffboardlist'">목록</button>
 				<%
 				}
 			%>

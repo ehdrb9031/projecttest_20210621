@@ -70,8 +70,8 @@
          </tr>
          <tr>
             <td colspan="2">
-               <input type="submit" value="등록하기" class="btn btn-primary">
-               <input type="button" value="취소" class="btn btn-primary"
+               <input type="submit" value="등록" class="btn btn-primary">
+               <input type="button" value="취소" class="btn btn-secondary"
                onclick="location.href='CalController.do?command=myschedule'"/>
             </td>
          </tr>

@@ -30,8 +30,7 @@ public class JoinUserController extends HttpServlet {
 			JoinUserDto ldto=dao.getLogin(id, password);
 			
 			if(ldto==null||ldto.getId()==null) {
-				String msg="로그인 오류입니다.";
-				response.sendRedirect("error.jsp?msg="+URLEncoder.encode(msg, "uft-8"));
+				response.sendRedirect("error.jsp");
 			}else {
 				session.setAttribute("ldto", ldto);
 				session.setMaxInactiveInterval(10*60);

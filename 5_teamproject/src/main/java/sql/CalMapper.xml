@@ -15,6 +15,10 @@
 		SELECT * FROM DUAL
 	</insert>
 	
+	<insert id="insertCalOne" parameterType="Map">
+		INSERT INTO TOTALCAL (TO_SEQ ,ID, WDATE) VALUES (totalcal_to_seq.nextval,#{id},#{work});
+	</insert>
+	
 	<select id="getCal" parameterType="String" resultType="String">
 		SELECT WDATE FROM TOTALCAL WHERE ID =#{id}
 	</select>
@@ -41,6 +45,10 @@
 	
 	<delete id="deleteCal" parameterType="Map">
 		DELETE FROM TOTALCAL WHERE ID =#{id} AND SUBSTR(WDATE,1,8) =#{sDate}
+	</delete>
+	
+	<delete id="deleteCalOne" parameterType="Map">
+		DELETE FROM TOTALCAL WHERE ID =#{id} AND WDATE =#{sDate}
 	</delete>
 	
 </mapper>

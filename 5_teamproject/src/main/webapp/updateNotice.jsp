@@ -48,8 +48,8 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="submit" value = "수정" class="btn btn-primary"/>
-			<button class="btn btn-primary" type="button" onclick="noticeList()">목록</button>
+			<input type="submit" value = "수정" class="btn btn-success"/>
+			<button class="btn btn-secondary" type="button" onclick="noticeList()">목록</button>
 		</td>
 	</tr>
 </table>
